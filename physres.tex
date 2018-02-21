@@ -1,0 +1,241 @@
+%% Version 4.3.2, 25 August 2014
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template.tex --  LaTeX-based template for submissions to the 
+% American Meteorological Society
+%
+% Template developed by Amy Hendrickson, 2013, TeXnology Inc., 
+% amyh@texnology.com, http://www.texnology.com
+% following earlier work by Brian Papa, American Meteorological Society
+%
+% Email questions to latex@ametsoc.org.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PREAMBLE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Start with one of the following:
+% DOUBLE-SPACED VERSION FOR SUBMISSION TO THE AMS
+%\documentclass{ametsoc}
+
+% TWO-COLUMN JOURNAL PAGE LAYOUT---FOR AUTHOR USE ONLY
+ \documentclass[twocol]{ametsoc}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% To be entered only if twocol option is used
+
+\journal{mwr}
+
+%  Please choose a journal abbreviation to use above from the following list:
+% 
+%   jamc     (Journal of Applied Meteorology and Climatology)
+%   jtech     (Journal of Atmospheric and Oceanic Technology)
+%   jhm      (Journal of Hydrometeorology)
+%   jpo     (Journal of Physical Oceanography)
+%   jas      (Journal of Atmospheric Sciences)	
+%   jcli      (Journal of Climate)
+%   mwr      (Monthly Weather Review)
+%   wcas      (Weather, Climate, and Society)
+%   waf       (Weather and Forecasting)
+%   bams (Bulletin of the American Meteorological Society)
+%   ei    (Earth Interactions)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Citations should be of the form ``author year''  not ``author, year''
+\bibpunct{(}{)}{;}{a}{}{,}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% To be entered by author:
+
+%% May use \\ to break lines in title:
+
+\title{Physics-dynamics coupling with element-based high-order Galerkin methods: quasi equal-area physics grid}
+
+%%% Enter authors' names, as you see in this example:
+%%% Use \correspondingauthor{} and \thanks{Current Affiliation:...}
+%%% immediately following the appropriate author.
+%%%
+%%% Note that the \correspondingauthor{} command is NECESSARY.
+%%% The \thanks{} commands are OPTIONAL.
+
+    %\authors{Author One\correspondingauthor{Author One, 
+    % American Meteorological Society, 
+    % 45 Beacon St., Boston, MA 02108.}
+% and Author Two\thanks{Current affiliation: American Meteorological Society, 
+    % 45 Beacon St., Boston, MA 02108.}}
+
+\authors{Adam R. Herrington\correspondingauthor{Peter H. Lauritzen, Climate and Global Dynamics, National Center for Atmospheric Research, 1850 Table Mesa Drive, Boulder, Colorado, USA.}}
+
+%% Follow this form:
+    % \affiliation{American Meteorological Society, 
+    % Boston, Massachusetts.}
+
+\affiliation{School of Marine and Atmospheric Sciences, Stony Brook University, State University of New York, Stony Brook, New York.}
+
+%% Follow this form:
+    %\email{latex@ametsoc.org}
+
+\email{pel@ucar.edu}
+
+%% If appropriate, add additional authors, different affiliations:
+\extraauthor{Peter H. Lauritzen}
+\extraaffil{Climate and Global Dynamics, National Center for Atmospheric Research, 1850 Table Mesa Drive, Boulder, Colorado, USA.}
+\extraauthor{Steve Goldhaber}
+\extraaffil{Climate and Global Dynamics, National Center for Atmospheric Research, 1850 Table Mesa Drive, Boulder, Colorado, USA.}
+\extraauthor{Kevin A. Reed}
+\extraaffil{School of Marine and Atmospheric Sciences, Stony Brook University, State University of New York, Stony Brook, New York.}
+
+%% May repeat for a additional authors/affiliations:
+
+%\extraauthor{}
+%\extraaffil{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ABSTRACT
+%
+% Enter your abstract here
+% Abstracts should not exceed 250 words in length!
+%
+% For BAMS authors only: If your article requires a Capsule Summary, please place the capsule text at the end of your abstract
+% and identify it as the capsule. Example: This is the end of the abstract. (Capsule Summary) This is the capsule summary. 
+
+\abstract{Enter the text of your abstract here.}
+
+\begin{document}
+
+%% Necessary!
+\maketitle
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MAIN BODY OF PAPER
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+
+%% In all cases, if there is only one entry of this type within
+%% the higher level heading, use the star form: 
+%%
+\begin{itemize}
+\item We should compute TKE of tendencies and show that we ar removing scales with nc<2
+\end{itemize}
+\section{Introduction}
+
+%this should be included in the next paper (physres)
+%When introducing a physics grid separate from the dynamics grid the question arises of what the resolution of the physics grid should be compared to the dynamics grid. For example, Figure \ref{fig:physgrid-1d} shows physics grids with the same, coarser and finer resolution than the GLL dynamics grid. From linear stability and accuracy analysis of numerical methods, it is a common result that the shortest resolvable wavelengths are not accurately represented. Similar arguments can be made from analyzing total kinetic energy spectra \citep{S2011LNCSE}. One may therefore argue that only believable scales should be passed to the physical parameterizations \citep{LH1997MWR}, i.e. a coarser resolution physics grid. This concept was investigated in a spectral transform model by \cite{W1999T}. On the other hand, computing physics tendencies on a higher-resolution grid compared to the dynamical core may provide a better sampling of the atmospheric state, somewhat similar to the super-parameterization \citep{G2001JAS,GRL:GRL14999,SA2007ASL} and sub-columns{\footnote{\citet{gmdd-8-5041-2015} in the context of CAM}} \citep{subcolumn,JGRD:JGRD10481} concepts. This approach was taken by \cite{M2009T} in the context of vertical refinement. \cite{W2014PTRSL} found improved forecast scores by increasing the grid-point space resolution compared to the resolution in wave-number space for the spectral transform model at ECMWF. 
+
+%Alternatively, one could combine the two ideas and compute the state of the atmosphere on a coarser resolution grid and then use sub-columns or super-parameterization. One thereby passes believable scales to the sub-grid scale model and thereby assumes that a statistical sampling, in the case of sub-columns, or a simplified cloud-resolving model, in the case of super-parameterization, provides a more accurate sub-grid-scale tendency than sampling the Galerkin basis functions over the sub-grid-scale. [Discuss \cite{W2014PTRSL}: spectral truncation and physics (physical) grid (see page 10; conclusions)]
+
+
+
+
+%Separating physics and dynamics grids has been investigated in the context of spectral transform models by \citet{TELA:TELA0009}, in which the separation was performed by truncation in wavenumber space. Parts of the physical parameterizations (microphysics) were separated in \citet{JGRD:JGRD50711} and vertical grid separation was investigated in \citet{TELA:TELA394}. In this study we run all of the parameterization on the physgrid.
+
+
+%In the context of spectral transform model \citet{TELA:TELA0009} held the physics forcing scale fixed while refining the horizontal resolution of the dynamical core. In the context of microphysics \citet{JGRD:JGRD50711} did a scale separation and \citet{TELA:TELA394} separated the vertical grids. While \citet{LH1997MWR} and \citet{TELA:TELA0009} separated scales truncation of the the wave transform, we here separate scales through integrating basis functions over control volumes and , contrary to \citet{JGRD:JGRD50711}, all of the physical parameterization computations are performed on the physgrid. We focus on horizontal separation of scales here.
+
+
+% \subsection*{subsection}
+% text...
+\section{Methods}
+
+% \section{Section title}
+% \subsection{subsection one}
+% text...
+% \subsection{subsection two}
+% \section{Section title}
+
+%%%
+
+\section{Results}
+
+% \subsection{First secondary heading}
+
+% \subsubsection{First tertiary heading}
+
+% \paragraph{First quaternary heading}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ACKNOWLEDGMENTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\acknowledgments
+NCAR is sponsored by the National Science Foundation (NSF).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% APPENDIXES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Use \appendix if there is only one appendix.
+%\appendix
+
+% Use \appendix[A], \appendix}[B], if you have multiple appendixes.
+%\appendix[A]
+
+%% Appendix title is necessary! For appendix title:
+%\appendixtitle{}
+
+%%% Appendix section numbering (note, skip \section and begin with \subsection)
+% \subsection{First primary heading}
+
+% \subsubsection{First secondary heading}
+
+% \paragraph{First tertiary heading}
+
+%% Important!
+%\appendcaption{<appendix letter and number>}{<caption>} 
+%must be used for figures and tables in appendixes, e.g.,
+%
+%\begin{figure}
+%\noindent\includegraphics[width=19pc,angle=0]{figure01.pdf}\\
+%\appendcaption{A1}{Caption here.}
+%\end{figure}
+%
+% All appendix figures/tables should be placed in order AFTER the main figures/tables, i.e., tables, appendix tables, figures, appendix figures.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% REFERENCES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Make your BibTeX bibliography by using these commands:
+\bibliographystyle{ametsoc2014}
+\bibliography{bib}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TABLES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Enter tables at the end of the document, before figures.
+%%
+%
+%\begin{table}[t]
+%\caption{This is a sample table caption and table layout.  Enter as many tables as
+%  necessary at the end of your manuscript. Table from Lorenz (1963).}\label{t1}
+%\begin{center}
+%\begin{tabular}{ccccrrcrc}
+%\hline\hline
+%$N$ & $X$ & $Y$ & $Z$\\
+%\hline
+% 0000 & 0000 & 0010 & 0000 \\
+% 0005 & 0004 & 0012 & 0000 \\
+% 0010 & 0009 & 0020 & 0000 \\
+% 0015 & 0016 & 0036 & 0002 \\
+% 0020 & 0030 & 0066 & 0007 \\
+% 0025 & 0054 & 0115 & 0024 \\
+%\hline
+%\end{tabular}
+%\end{center}
+%\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% FIGURES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Enter figures at the end of the document, after tables.
+%%
+%
+%\begin{figure}[t]
+%  \noindent\includegraphics[width=19pc,angle=0]{figure01.pdf}\\
+%  \caption{Enter the caption for your figure here.  Repeat as
+%  necessary for each of your figures. Figure from \protect\cite{Knutti2008}.}\label{f1}
+%\end{figure}
+
+\end{document}
