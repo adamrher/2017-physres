@@ -1,0 +1,7 @@
+ne30pg2:
+
+-mapping dp and tracers with PCoM from fvm to phys and temperature with SE basis function integration from
+ gll to phys leads to element noise in PRECC
+-mapping dp and tracers with PPM from fvm to phys and temperature with SE basis function integration from
+ gll to phys does not lead to element noise => consistency between T,dp and water tracers seems important
+-mapping phys2fvm with PPM or PCoM does not seem to affect element noise
