@@ -12,9 +12,9 @@ begin
 ;****************************************
   secpday = 60.*60.*24;
   pi = 3.14159265358979
-  g = 9.80616 ;m/s2
-  Re = 6371.22
-  p0 = 1.d5
+  g = 9.80616  ;m/s2
+  Re = 6371.22 ;km
+  p0 = 1.d5    ;Pa
 
   rdir  = "/run/"
   fname = fname1
@@ -26,20 +26,19 @@ begin
   writencdf = True
   fname_out = fname+".globdiags.nc"
 
-  hilat = (/90.d,10.d/)
-  lolat = (/-90.d,-10.d/)
+  hilat = (/ 10.d, 90.d/)
+  lolat = (/-10.d,-90.d/)
 
-  OMG = (/"OMGgl","OMGtr"/)
-  OMGU = (/"OMGUgl","OMGUtr"/)
-  OMGD = (/"OMGDgl","OMGDtr"/)
-  FRACU = (/"FRACUgl","FRACUtr"/)
-  FRACD = (/"FRACDgl","FRACDr"/)
+  OMG   = (/  "OMGtr",  "OMGgl"/)
+  OMGU  = (/ "OMGUtr", "OMGUgl"/)
+  OMGD  = (/ "OMGDtr", "OMGDgl"/)
+  FRACU = (/"FRACUtr","FRACUgl"/)
+  FRACD = (/"FRACDtr","FRACDgl"/)
 
 ;************
 ;main
 ;************
  
- ;load all files
  files = systemfunc ("ls " + dir + fname + rdir + fname + fdate)
  nf = dimsizes(files)
  if (onemnth) then
@@ -69,8 +68,8 @@ begin
  PS  = f[:]->PS
  hyai= f[0]->hyai
  hybi= f[0]->hybi
+ ilevs = dimsizes(hyai)
  lat = f[0]->lat
- lon = f[0]->lon
 
  if (latlon) then
    AREA = f[0]->w
@@ -88,76 +87,66 @@ begin
    if (.not.latlon) then
       omg = VAR(:,:,indx)
       ps = PS(:,indx)
-      print("Computing pressure field...")
+
+      print("  Computing pressure field...")
       pint = se_pressure(ps,p0,hyai,hybi,0)
-      ilevs = dimsizes(hyai)
       dp = pint(:,1:ilevs-1,:) - pint(:,0:ilevs-2,:)
       delete(pint)
+
    else
       omg = VAR(:,:,indx,:)
       ps = PS(:,indx,:)
-      print("Computing pressure field...")
+
+      print("  Computing pressure field...")
       dp = dpres_hybrid_ccm(ps,p0,hyai,hybi)
+
    end if
    tmp = AREA(indx)
    wgt = conform(omg,tmp,2)
    delete(tmp)
 
+   print("  Masking vars...")
 
-   print("Masking vars...")
    omgu = omg
    omgd = omg
    omgu@_FillValue = default_fillvalue("float")
    omgd@_FillValue = default_fillvalue("float")
    omgu = where(omgu.lt.0.,omgu,omgu@_FillValue)
-   omgd = where(omgd.gt.0.,omgd,omgd@_FillValue)
+   omgd = where(omgd.ge.0.,omgd,omgd@_FillValue)
    uvals = omgu/omgu
    dvals = omgd/omgd
 
-   print("Computing space-time fraction...")
+   print("  Computing space-time wgts...")
 
    if (latlon) then
      garea = dim_sum(dim_sum(dim_sum(dim_sum(wgt*dp))))
      uarea = dim_sum(dim_sum(dim_sum(dim_sum(uvals*dp*wgt))))
-     uarea = uarea/garea   
      darea = dim_sum(dim_sum(dim_sum(dim_sum(dvals*dp*wgt))))
-     darea = darea/garea
    else
      garea = dim_sum(dim_sum(dim_sum(wgt*dp)))
      uarea = dim_sum(dim_sum(dim_sum(uvals*dp*wgt)))
-     uarea = uarea/garea
      darea = dim_sum(dim_sum(dim_sum(dvals*dp*wgt)))
-     darea = darea/garea
    end if
 
-   print("Computing global average...")
+   print("  Computing space-time means...")
 
-   vomg = dim_sum_n(omg*dp,1)/dim_sum_n(dp,1)
-   vomgu = dim_sum_n(omgu*dp,1)/dim_sum_n(uvals*dp,1)
-   vomgd = dim_sum_n(omgd*dp,1)/dim_sum_n(dvals*dp,1)
-
-   tomg = dim_avg_0_lowmem(vomg,rank)
-   tomgu = dim_avg_0_lowmem(vomgu,rank)
-   tomgd = dim_avg_0_lowmem(vomgd,rank)
-
-   delete(garea)
    if (latlon) then
-     garea = dim_sum(dim_sum(wgt(0,0,:,:)))
-     gomg = dim_sum(dim_sum(wgt(0,0,:,:)*tomg))
-     gomg = gomg/garea
-     gomgu = dim_sum(dim_sum(wgt(0,0,:,:)*tomgu))
-     gomgu = gomgu/garea
-     gomgd = dim_sum(dim_sum(wgt(0,0,:,:)*tomgd))
-     gomgd = gomgd/garea
+     gomg  = dim_sum(dim_sum(dim_sum(dim_sum(omg*dp*wgt))))
+     gomg  = gomg/garea
+     gomgu = dim_sum(dim_sum(dim_sum(dim_sum(omgu*dp*wgt))))
+     gomgu = gomgu/uarea
+     gomgd = dim_sum(dim_sum(dim_sum(dim_sum(omgd*dp*wgt))))
+     gomgd = gomgd/darea
    else
-     garea = dim_sum(wgt(0,0,:))
-     gomg = dim_sum(wgt(0,0,:)*tomg)
-     gomg = gomg/garea
-     gomgu = dim_sum(wgt(0,0,:)*tomgu)
-     gomgu = gomgu/garea
-     gomgd = dim_sum(wgt(0,0,:)*tomgd)
-     gomgd = gomgd/garea
+     gomg  = dim_sum(dim_sum(dim_sum(omg*dp*wgt)))
+     gomg  = gomg/garea
+     gomgu = dim_sum(dim_sum(dim_sum(omgu*dp*wgt)))
+     gomgu = gomgu/uarea
+     gomgd = dim_sum(dim_sum(dim_sum(omgd*dp*wgt)))
+     gomgd = gomgd/darea
    end if
+   uarea = uarea/garea
+   darea = darea/garea
 
    if (writencdf) then
      if (n.eq.0) then
@@ -171,7 +160,6 @@ begin
      ncdf->$FRACD(n)$ = darea
    end if
 
-  stag = 1. - darea - uarea
   print("  ")
   print("Stats for region " + lolat(n) + " to " + hilat(n))
   print("------------------------------------------------------------------------")
@@ -180,11 +168,10 @@ begin
   print("  Mean downward omega " + gomgd + " (hPa/day)")
   print("  Space-time fraction of upward motion   " + uarea)
   print("  Space-time fraction of downward motion " + darea)
-  print("  Space-time fraction of stagnant motion " + stag)
 dum = (uarea*gomgu) + (darea*gomgd)
-  print("  Check on globav " + dum)
+  print("  Check globav " + dum + " (hPa/day)")
   print("  ")
-  delete([/omg,omgu,omgd,vomg,vomgu,vomgd,tomg,tomgu,tomgd,uvals,dvals,ps,dp,wgt,indx/])
+  delete([/omg,omgu,omgd,uvals,dvals,ps,dp,wgt,indx/])
 
 end do 
 
