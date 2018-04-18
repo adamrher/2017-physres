@@ -24,5 +24,5 @@ else
   echo "NCL directory is "$ncl_dir
 endif
 
-ncl 'dir="'$data_dir'"' 'fname1="'$case1'"' 'fincl1="'$fincl1'"' $ncl_dir/test.ncl #glob-diags-inst.ncl
+ncl 'dir="'$data_dir'"' 'fname1="'$case1'"' 'fincl1="'$fincl1'"' $ncl_dir/glob-diags-inst.ncl
 
