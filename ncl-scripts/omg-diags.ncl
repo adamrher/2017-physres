@@ -24,7 +24,7 @@ begin
   nstart = 1
 
   writencdf = True
-  fname_out = fname+".globdiags.nc"
+  fname_out = fname+".omg-diags.nc"
 
   hilat = (/ 10.d, 90.d/)
   lolat = (/-10.d,-90.d/)
@@ -73,10 +73,8 @@ begin
 
  if (latlon) then
    AREA = f[0]->w
-   rank = 3
  else
    AREA = f[0]->area
-   rank = 2
  end if
  delete(f)
 
@@ -160,6 +158,8 @@ begin
      ncdf->$FRACD(n)$ = darea
    end if
 
+  dum = (uarea*gomgu) + (darea*gomgd)
+
   print("  ")
   print("Stats for region " + lolat(n) + " to " + hilat(n))
   print("------------------------------------------------------------------------")
@@ -168,7 +168,6 @@ begin
   print("  Mean downward omega " + gomgd + " (hPa/day)")
   print("  Space-time fraction of upward motion   " + uarea)
   print("  Space-time fraction of downward motion " + darea)
-dum = (uarea*gomgu) + (darea*gomgd)
   print("  Check globav " + dum + " (hPa/day)")
   print("  ")
   delete([/omg,omgu,omgd,uvals,dvals,ps,dp,wgt,indx/])
