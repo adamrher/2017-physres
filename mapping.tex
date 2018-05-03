@@ -1,0 +1,40 @@
+The mapping algorithm is applied to each element $\Omega$ (with spherical area $\Delta \Omega$) so without loss of generality consider one element. Let $\Delta A^{(pg)}_k$ and $\Delta A^{(cslam)}_\ell$ be the spherical area of the physics grid grid cell $A^{(pg)}_k$ and CSLAM control volume $A^{(cslam)}_\ell$, respectively. The physics grid cells and CSLAM cells respectively span the element without gaps or overlaps
+\begin{eqnarray}
+\cup_{k=1}^{pg^2}A^{(pg)}_k=\Omega \text{ and } A^{(pg)}_k \cap A^{(pg)}_\ell = \emptyset \quad \forall k\ne \ell,\\
+\cup_{k=1}^{nc^2}A^{(cslam)}_k=\Omega \text{ and } A^{(cslam)}_k \cap A^{(cslam)}_\ell = \emptyset \quad \forall k\ne \ell.
+\end{eqnarray}
+The overlap areas between the $k$-th physics grid cell and CSLAM cells is denoted
+\begin{equation}
+A_{k\ell}=A^{(pg)}_k \cap A^{(cslam)}_\ell,
+\end{equation}
+so that
+\begin{equation}
+A^{(pg)}_k=\cup_{k=1}^{nc^2}A_{k\ell}.
+\end{equation}
+The tendencies from the parameterizations are computed on the physics grid. The tracer tendency in physics grid cell $k$ is denoted $\mathcal F_k^{(pg)}$. The problem is how to map $\mathcal F_k^{(pg)}$ to the CSLAM control volumes $\mathcal F^{(cslam)}$ satisfying the following constraints:
+\begin{enumerate}
+\item {\bf{Local mass-conservation}}
+\begin{equation}
+\mathcal F_k^{(pg)}\Delta p^{(pg)}_k=\cup_{\ell=1}^{nc^2}\Delta A_{k\ell}\Delta p^{(cslam)}_\ell \mathcal F^{(cslam)}_\ell,
+\end{equation}
+where $\Delta p^{(pg)}_k$ is the pressure level thickness in physics grid cell $k$ and similarly for $\Delta p^{(cslam)}$.
+\item {\bf{Shape-preservation in mixing ratio}}: The forcing on the CSLAM grid should not produce a value smaller than the new physics grid mixing ratio, $m^{(pg)}_k+\Delta t\mathcal F_k^{(pg)}$ or a value smaller than the existing CSLAM mixing ratios over the overlap areas $m^{(cslam)}_{k\ell}$
+\begin{equation}
+m_k^{(min)}=\min \left( m^{(pg)}_k+\Delta t \mathcal F_k^{(pg)},\left\{ m^{(cslam)}_{k\ell} |\ell=1,nc^2\right\} \right),
+\end{equation}
+where $\Delta t$ is the physics time-step. Similarly for maxima
+\begin{equation}
+m_k^{(max)}=\max \left( m^{(pg)}_k+\Delta t \mathcal F_k^{(pg)},\left\{ m^{(cslam)}_{k\ell} |\ell=1,nc^2\right\} \right),
+\end{equation}
+\item {\bf{Linear correlation preservation}}: The physics forcing must not disrupt linear tracer correlation between species on the CSLAM grid \citep[see, e.g., ][]{LT2011QJR}.
+\item {\bf{Consistency}}: A constant mixing ratio tendency, $cnst$, on the physics grid, $\mathcal F_k^{(pg)}=cnst$ $\forall k$, must result in the same (constant) forcing on the CSLAM grid, $\mathcal F_\ell^{(cslam)}=\mathcal F_k^{(pg)}=cnst$ $\forall \ell$.
+\end{enumerate}
+To motivate the algorithm that will simultaneously satisfy 1-4 it is informative to discuss how `standard' mapping algorithms will violate one or more of the constraints.
+\begin{itemize}
+\item Conservative remapping: 
+\item Interpolation:
+\end{itemize}
+
+{\color{red}{some text about how challenging it is to satisfy 1-3 simultaneously}}\\
+\subsection{Algorithm}
+
