@@ -28,6 +28,10 @@ begin
   res_lines@gsLineThicknessF  = 4.                   ; line thicker
   res_lines@gsLineColor = "Black"
 
+  resb			      = True
+  resb@gsLineColor 	      = "deepskyblue"
+  resb@gsLineDashPattern = 0                    ; solid line
+  resb@gsLineThicknessF  = 4.
 
 ;*****************************************************
 ; define grids
@@ -35,6 +39,11 @@ begin
 
   ;;note xx spans 0.3-0.7
   ;;     yy spans 0.3-0.7
+
+  ;;;Create Frame First
+  ds = 0.
+  xframe = (/ 0.315-ds, 0.315-ds, 0.685+ds, 0.685+ds, 0.315-ds /)
+  yframe = (/ 0.315-ds, 0.685+ds, 0.685+ds, 0.315-ds, 0.315-ds /)
 
   ;;;Create 3x3 physgrid grid with grid id numbers
 
@@ -83,7 +92,7 @@ begin
   overlap = False
 
   if (plottype.eq.0) then
-    res_lines@gsLineColor = "Red"
+    ;;res_lines@gsLineColor = "Red"
     x0 = pg3x0
     y0 = pg3y0
     x1 = pg3x1
@@ -95,7 +104,7 @@ begin
     x4 = pg3x4
     y4 = pg3y4
   else if (plottype.eq.1) then
-    res_lines@gsLineColor = "Blue"
+    ;;res_lines@gsLineColor = "Blue"
     x0 = pg2x0
     y0 = pg2y0
     x1 = pg2x1
@@ -108,7 +117,7 @@ begin
     y4 = pg2y4
   else if (plottype.eq.2) then
     overlap = True
-    res_lines@gsLineColor = "Red"
+    ;;res_lines@gsLineColor = "Red"
     x0 = pg3x0
     y0 = pg3y0
     x1 = pg3x1
@@ -122,6 +131,14 @@ begin
   end if
   end if
   end if
+
+  ;;do frame first
+  do m = 0,11
+    gsn_polyline_ndc(wks,xframe,yframe,resb)
+    ds = ds + 0.003
+    xframe = (/ 0.315-ds, 0.315-ds, 0.685+ds, 0.685+ds, 0.315-ds /)
+    yframe = (/ 0.315-ds, 0.685+ds, 0.685+ds, 0.315-ds, 0.315-ds /)
+  end do
 
   nx = dimsizes(x0)
   do m = 0,nx-1
@@ -143,7 +160,7 @@ begin
     x4 = pg2x4
     y4 = pg2y4
 
-    res_lines@gsLineColor = "Blue"
+    ;;res_lines@gsLineColor = "Blue"
     ;;res_lines@gsLineDashPattern = 2
     nx = dimsizes(x0)
     do m = 0,nx-1
