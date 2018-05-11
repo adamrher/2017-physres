@@ -10,7 +10,7 @@ load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/shea_util.ncl"
 begin
 ;****************************************
 
- plottype = 0 ;0 = 3x3
+ plottype = 1 ;0 = 3x3
 	      ;1 = 2x2
 	      ;2 = exchange grid
  
@@ -29,7 +29,7 @@ begin
   res_lines@gsLineColor = "Black"
 
   resb			      = True
-  resb@gsLineColor 	      = "deepskyblue"
+  resb@gsLineColor 	      = "cadetblue3";;;"deepskyblue"
   resb@gsLineDashPattern = 0                    ; solid line
   resb@gsLineThicknessF  = 4.
 
@@ -133,7 +133,7 @@ begin
   end if
 
   ;;do frame first
-  do m = 0,11
+  do m = 0,10
     gsn_polyline_ndc(wks,xframe,yframe,resb)
     ds = ds + 0.003
     xframe = (/ 0.315-ds, 0.315-ds, 0.685+ds, 0.685+ds, 0.315-ds /)
