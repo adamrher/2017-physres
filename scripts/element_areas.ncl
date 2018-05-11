@@ -10,7 +10,7 @@ load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/shea_util.ncl"
 begin
 ;****************************************
 
- plottype = 1 ;0 = 3x3
+ plottype = 2 ;0 = 3x3
 	      ;1 = 2x2
 	      ;2 = exchange grid
  
