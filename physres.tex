@@ -207,7 +207,9 @@ Experimentation with coarser physics grids have so far been limited to models em
 
 \cite{W1999T} conducted a convergence study using a global-spectral transform model, in which the truncation wave-number of the physics forcing was held fixed, while increasing the resolution of a spectral transform dynamical core. When the physics and dynamics resolution were increased in tandem, the strength of the Hadley Cell increased montonically with resolution. But when the truncation wave-number of physics forcing was held fixed, the Hadley Cell showed very little sensitivity to dynamical core resolution, resembling the solution for which the dynamics truncation is equal to the to the truncated physics forcing. The results of \cite{W1999T} indicate that the dynamical core resolution is aliased to the resolution of the physics forcing. 
 
-It is well known that the equations of motion have implicit scale-dependencies at hydrostatic scales \citep{O1981JAS}. Perhaps the most dramatic scale depedency occurs under gravitational instability, in which the vertical velocity scales as the inverse of the horizontal scale of the Archimedean buoyancy \citep{JR2016QJRMS,HR2017JCLIM,HR2018JAMES}. \cite{HR2018JAMES} have shown that an increase in horizontal resolution leads does lead to a reduction in the horizontal scale of the Archimedean buoyancy. As a result, larger magnitude vertical motion characterizes the model solution, which \cite{HR2017JCLIM} hypothesizes steers the model towards a new equilibrium.
+It is well known that the equations of motion have implicit scale-dependencies at hydrostatic scales \citep{O1981JAS}. Perhaps the most dramatic scale depedency occurs under gravitational instability, in which the vertical velocity scales as the inverse of the horizontal scale of the Archimedean buoyancy \citep{JR2016QJRMS,HR2017JCLIM,HR2018JAMES}. \cite{HR2018JAMES} have shown that an increase in horizontal resolution leads does lead to a reduction in the horizontal scale of the Archimedean buoyancy. As a result, larger magnitude vertical motion characterizes the model solution, which \cite{HR2017JCLIM} hypothesizes this steers the model towards a new equilibrium.
+
+In this study, we develop and implement a coarser physics grid into the Community Atmopshere Model (CAM), with spectral-element dynamics, coupled with the Conservative Semi-Lagrangian Multi-tracer transport scheme \citep[CAM-SE-CSLAM; ][]{LTOUNGK2017MWR}. The grid spacing on this physics grid is 1.5 times larger than the tracer transport and dynamics grid. We test the hypothesis, that the coarser physics grid may be more effective at reducing spurious noise over regions of rough topography. However, any advantages of using a coarser resolution physics grid will be weighed against any potential reduction in a model's effective resolution, which may occur through aliasing of the solution to the coarser physics grid. Section 2 described the implementation of the coarse physics grid into CAM-SE-CSLAM. Section 3 provides the results of a hierarchy of model configurations, in order to test our hypothesis. Seciton 4 provides a discussion of the results and conclusions.
 
 \section{Methods}
 
@@ -234,7 +236,7 @@ A plethora of grids are developed for CAM-SE-CSLAM (Table \ref{table:grids}), an
    {\tt{ne}}120{\tt{pg2}} &  27.8km &  75s  &  41.7km &  450s \\
    {\tt{ne}}120{\tt{pg3}} &  27.8km &  75s  &  27.8km &  450s \\
  \hline
- \multicolumn{2}{l}{$^{a}$Footnote text here.}
+ %\multicolumn{2}{l}{$^{a}$Footnote text here.}
  \end{tabular}
  \label{table:grids}
  \end{table}
@@ -243,23 +245,27 @@ A plethora of grids are developed for CAM-SE-CSLAM (Table \ref{table:grids}), an
 
 \subsection{Held-Suarez with Topography}
 
-Flow over rough topography can facilitate significant grid imprinting using the spectral element method \citep{gmdd-8-4623-2015,HL2018MWR}. A Held-Suarez configuration, modified with real world topography is used to identify grid imprinting over mountains. Figure \ref{fig:} (middle panel) shows the climatological mean vertical pressure velocity, $\omega$, at two different levels in the mid-troposphere, and over the Andes and Himalayan region using the $ne30pg3$ grid. All Held-Suarez simulations are ran for two-years. The figure is displayed as a raster plot on the native physics grid, so that indidual extrema, which characterize the flow over the Andes between about $10^\circ-20^\circ$ S, may be identified as spurious. Similarly, at the foot of the Himalayas, their appears to be spurious oscillatory bands of upward and downward motion aligned with the element boundaries. 
+Flow over rough topography may facilitate significant grid imprinting using the spectral element method \citep{gmdd-8-4623-2015,HL2018MWR}. A Held-Suarez configuration, modified with real world topography is used to identify grid imprinting over mountainous terrain. Figure \ref{fig:fhs-contours} (middle panel) shows the climatological mean vertical pressure velocity, $\omega$, over the Andes and Himalayan region and at two different levels in the mid-troposphere, using the $ne30pg3$ grid. All Held-Suarez simulations are ran for two-years. The figure is displayed as a raster plot on the native physics grid, so that indidual extrema, which characterize the flow over the Andes between about $10^\circ-20^\circ$ S, may be identified as spurious. Similarly, at the foot of the Himalayas, their appears to be spurious oscillatory bands of upward and downward motion aligned with the element boundaries. 
 
-\begin{figure*}[t]
-\noindent\includegraphics[width=37pc,angle=0]{figs/fhstopo_ne30pg2-v-ne30pg3-v-10Xnudiv.pdf}\\
+\begin{figure}[t]
+\begin{center}
+\noindent\includegraphics[width=30pc,angle=0]{figs/fhstopo_ne30pg2-v-ne30pg3-v-10Xnudiv.pdf}\\
+\end{center}
 \caption{Mean $\omega$ at two model levels in the middle troposphere, in a Held-Suarez configuration outfitted with real world topography. (Left) $ne30pg2$ (Middle) $ne30pg3$ and (Right) $ne30pg3$ with the divergence damping coefficient increased by an order of magnitude. The $\omega$ fields are computed a two-year simulation. The data are presented on a raster plot in order to identify individual grid cells}
 \label{fig:fhs-contours}
-\end{figure*}
+\end{figure}
 
-As discussed in \cite{HL2018MWR}, grid imprinting over the mountains tends to occur in regions of weak stability, and the extrema often  manifest as full tropsphere upward/downward couplets. Thus, grid imprinting over mountains can be alleviated through increasing the divergence damping in the model. Figure \ref{fig:} (right panel) repeats the $ne30pg3$ simulation, but increasing trhe divergence damping coefficient by an order of magnitude. The spurious noise over the Andes and the Himalayas are damped, as grid point extrema tends to be diffused into neighboring grid cells. The wave number-power spectrum of the kinetic energy arising from divergent modes is provided in Figure \ref{fig:}, indicating that divergent modes are significantly damped at higher wavenumbers relative to the default $ne30pg3$ simulation. However, requiring the divergence damping coefficient to be so much larger than that required for numerical stability is not ideal from a model development perspective. The hyper-viscosity coefficients are one of the only free-parameters in the dynamical core to tune the kinetic energy spectrum to observations \citep{SPKS2014JAS,LetAl2018JAMES}.
+As discussed in \cite{HL2018MWR}, grid imprinting over the mountains tends to occur in regions of weak stability, and the extrema often  manifest as full tropsphere upward/downward couplets. Thus, grid imprinting over mountains can be alleviated through increasing the divergence damping in the model. Figure \ref{fig:fhs-contours} (right panel) repeats the $ne30pg3$ simulation, but increasing the divergence damping coefficient by an order of magnitude. The spurious noise over the Andes and the Himalayas are damped, as grid point extrema tends to be diffused into neighboring grid cells. The wave number-power spectrum of the kinetic energy arising from divergent modes is provided in Figure \ref{fig:fhs-div}, indicating that divergent modes are significantly damped at higher wavenumbers relative to the default $ne30pg3$ simulation. However, requiring the divergence damping coefficient to be an order of magnitude larger than that required for numerical stability is not ideal from a model development perspective. The hyper-viscosity coefficients are one of the only free-parameters in the dynamical core to tune the kinetic energy spectrum to observations \citep{SPKS2014JAS,LetAl2018JAMES}.
 
-\begin{figure*}[t]
-\noindent\includegraphics[width=37pc,angle=0]{figs/fhstopo_Divergence_ne30pg2-v-ne30pg3-v-10Xnudiv.pdf}\\
+\begin{figure}[t]
+\begin{center}
+\noindent\includegraphics[width=25pc,angle=0]{figs/fhstopo_Divergence_ne30pg2-v-ne30pg3-v-10Xnudiv.pdf}\\
+\end{center}
 \caption{Kinetic energy power spectrum arising from divergent modes in $ne30pg2$, $ne30pg3$ and $ne30pg3$ with the divergence damping coefficient increased by an order of magnitude ($ne30pg3-10X-ne\_div$).}
-\label{fig:fhs-contours}
-\end{figure*}
+\label{fig:fhs-div}
+\end{figure}
 
-The results of a $ne30pg2$ simulation is provided in Figures \ref{fig:} (left panel) and \ref{fig:}. Grid cell extrema over the Andes is less prevalent than in the $ne30pg3$ simulation, as seen by the reduction in large magnitude $\omega$ (red grid cells). The spurious oscillations at the foot of the Himalayas appears to have been entirely eliminated. This improvement in grid imprinting is due to the consistent numerical properties of the $pg2$ grid discussed in the Section \ref{}. The divergent modes are slightly damped relative to the $ne30pg3$ simulations, almost sytematically, but contains greater power than the simulation using the larger divergence damping coefficient.  
+The results of a $ne30pg2$ simulation is provided in Figures \ref{fig:fhs-contours} (left panel) and \ref{fig:fhs-div}. Grid cell extrema over the Andes is less prevalent than in the $ne30pg3$ simulation, as seen by the reduction in large magnitude $\omega$ (red grid cells). The spurious oscillations at the foot of the Himalayas appears to have been entirely eliminated. This improvement in grid imprinting is due to the consistent numerical properties of the $pg2$ grid discussed in Section \ref{}. The divergent modes are slightly damped relative to the $ne30pg3$ simulations, almost sytematically with wavenumber, and much less than the simulation using the larger divergence damping coefficient (Figure \ref{fig:fhs-div}).  
 
 \subsection{Aqua-planets}
 
