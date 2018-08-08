@@ -271,13 +271,19 @@ The $\omega$ field in a $ne30pg2$ simulation is provided in Figure \ref{fig:fhs-
 
 \subsection{Aqua-planets}
 
-The results of the previous section is consistent with our hypothesis, that spurious noise is effectively reduced using a $pg2$ grid. We now turn to the question of whether the coarser resolution physics grid has an impact on the resolved scales of motion.
+The results of the previous section is consistent with our hypothesis, that spurious noise is effectively reduced using a $pg2$ grid. We now turn to the question of whether the coarser resolution physics grid has an impact on the resolved scales of motion. This analysis will make use of aqua-planet configurations \citep{NH2000ASL}, which is an ocean covered planet in perpetual equinox, and fixed sea surface temperature resembling that of Earth.
 
-\cite{HR2017JCLIM} has shown that through assuming the horizontal scale of the Archimedean buoyancy is proportional to the grid spacing, the magnitude of the vertical motion in aqua-planets did not scale like the inverse of the grid-spacing across a set of grid resolutions. The results of \cite{HR2018JAMES} indicate that the scaling may be recovered through a more judicous choice of $\Delta t_{phys}$ (Table \ref{table:grids}). To test this idea, three year-long CAM, version 6 aqua-planets (CAM6; $QPC6$ compset in CESM2.0) are carried out using the $ne30pg3$, $ne60pg3$ and $ne120pg3$ grids. Figure \ref{fig:}a shows the wave-number power spectrum of the moist physics temperature tendencies (referred to as {\em{forcing}} throughout this study) in the upper troposphere, where statiform heating is common \citep{HR2018JAMES}. There is a clear reduction in forcing scale with resolution, which is consistent with the increased magnitude of $\omega$ with resolution, expressed by the probability density distribution (PDF) of upward $\omega$, everywhere in the model (Figure \ref{fig:}b). The PDFs may be scaled to the $ne120pg3$ grid using the scaling of \cite{HR2018JAMES},
+\cite{HR2017JCLIM} has shown that through assuming the horizontal scale of the Archimedean buoyancy is proportional to the grid spacing, the magnitude of the vertical motion in aqua-planets did not scale like the inverse of the grid-spacing across a set of grid resolutions. The results of \cite{HR2018JAMES} indicate that the scaling may be recovered through a more judicous choice of $\Delta t_{phys}$ (Table \ref{table:grids}). To test this idea, three year-long CAM, version 6 aqua-planets (CAM6; $QPC6$ compset in CESM2.0) are carried out using the $ne30pg3$, $ne60pg3$ and $ne120pg3$ grids. 
 
-and shown in Figure \ref{fig:}c. The scaled PDFs do not line up perfectly on top one another, but the scaling explains the change in magnitude of $\omega$ with resolution to first order.
+Figure \ref{fig:pg3panel}a shows the wave-number power spectrum of the moist physics temperature tendencies (referred to as {\em{forcing}} throughout this study) in the upper troposphere, where statiform heating is common \citep{HR2018JAMES}. There is a clear reduction in forcing scale with resolution, which is consistent with the increased magnitude of $\omega$ with resolution, expressed by the probability density distribution (PDF) of upward $\omega$, everywhere in the model (Figure \ref{fig:pg3panel}b). The PDFs may be scaled to the $ne120pg3$ grid using the scaling of \cite{HR2018JAMES}, $P(\omega_{s}) = \alpha \times P(\omega/\alpha)$, where $P(\omega_{s})$ is the scaled PDF of the scaled $\omega$, $\omega_{s}$, and $\alpha$ is the ratio of the vertical velocity scale to the vertical velocity scale of the target grid resolution, and set to $\alpha = \Delta x_{target}/\Delta x$, where $\Delta x$ is the grid spacing and $\Delta x_{target}$ is the grid spacing of the target resolution, after \cite{HR2018JAMES}. The scaled PDFs do not line up perfectly on top one another (Figure \ref{fig:pg3panel}c), but the scaling explains the change in magnitude of $\omega$ with resolution to first order.
 
- 
+\begin{figure}[t]
+\begin{center}
+\noindent\includegraphics[width=30pc,angle=0]{figs/pg3panel.png}\\
+\end{center}
+\caption{(a) Wavenumber-power spectrum of the temperature tendencies from the moist physics, near the 369 hPa level, (b) probanility density distribution and (c) the scaled probability density distribution of upward $\omega$ everywhere in the model, from three year long aqua-planet simulations at different grid resolutions.}
+\label{fig:pg3panel}
+\end{figure}
 
 \section{Conclusions}
 
