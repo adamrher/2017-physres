@@ -84,11 +84,11 @@
 
 %\title{A finite-volume physics grid for coupling to element-based high-order Galerkin dynamical cores; the division of an element}
 
-\title{A finite-volume physics grid for coupling to spectral-element dynamical cores; the division of an element}
+%\title{A finite-volume physics grid for coupling to spectral-element dynamical cores; the division of an element}
 
 %\title{Physical parameterizations, their grid, and element based high-order Galerkin methods}
 
-%\title{Evaluating the physical parameterizations on a coarse grid in the Community Atmosphere Model with spectral-element dynamics}
+\title{Exploring a lower resolution physics grid in CAM-SE-CSLAM}
 
 %% ------------------------------------------------------------------------ %%
 %
@@ -213,15 +213,29 @@ Global atmospheric models fundamentally consist of two components. The dynamical
 
 Experimentation with different physics grid resolutions have so far been limited to models employing the spectral transform method \citep{LH1997MWR,W1999T,W2014PTRSL}. \cite{LH1997MWR} argue that passing under-resolved states to the physics may be problematic in spectral transform models, since the physics are evaluated on a transform grid in grid point space, which contains more degrees of freedom than the spectral representation to prevent aliasing of quadratic quantaties. \cite{W2014PTRSL} have experimented with different transform grid resolutions, and concluded that increasing the resolution in grid-point space relative to the spectral truncation improves forecast skill. \cite{W2014PTRSL} speculates that the spectral truncation may be thought of as an effective filter, mitigtaing any undesireable artifacts arising from passing under-resolved states to the physics, refuting the concerns of \cite{LH1997MWR}. After the physics forcing is transformed into wave-space, it is straightforward to truncate the physics at any desired wavenumber. 
 
+%re-read Lander and Hoskins to clarify this paragraph
+
 \cite{W1999T} conducted a convergence study using a global spectral transform model, in which the truncation wavenumber of the physics forcing was held fixed, while increasing the resolution of the dynamical core. When the physics and dynamics resolution were increased in tandem, the strength of the Hadley Cell increased montonically with resolution. But when the truncation wavenumber of physics forcing was held fixed, the Hadley Cell showed very little sensitivity to dynamical core resolution, resembling the solution for which the dynamics and physics truncation wavenumber are the same. The results of \cite{W1999T} suggest that the dynamical core resolution is aliased to the resolution of the physics forcing. 
 
 It is well known that the equations of motion have implicit scale-dependencies at hydrostatic scales \citep{O1981JAS}. Perhaps the most dramatic scale depedency occurs under gravitational instability, in which the vertical velocity scales as the inverse of the horizontal scale of the Archimedean buoyancy \citep{JR2016QJRMS,HR2017JCLIM,HR2018JAMES}. \cite{HR2018JAMES} have shown that an increase in horizontal resolution does lead to a reduction in the horizontal scale of the temperature tendencies from the physics, which dictates the Archimedean buoyancy. As a result, larger magnitude vertical motion characterizes the model solution, which \cite{HR2017JCLIM} hypothesizes steers the model towards a new equilibrium.
 
 In contrast to spectral-transform methods, high-order element-based Galerkin methods are prone to grid-imprinting \citep{HL2018MWR}, and need be considered when contemplating a particular physics grid. High-order Galerkin methods are becoming increasingly popular in climate and weather applications due to their high-order accuracy (for smooth problems), high-parallel efficiency, high-processor efficiency and geometric flexibility facilitating mesh-refinenment applications. In this study, we develop and implement a coarser physics grid into the Community Atmopshere Model (CAM), with spectral-element dynamics, a high-order Galerkin method, and coupled to the Conservative Semi-Lagrangian Multi-tracer transport scheme \citep[CAM-SE-CSLAM; ][]{LTOUNGK2017MWR}. The grid spacing on the coarse physics grid is 1.5 times larger than the tracer transport and dynamics grids. We test the hypothesis, that the coarser physics grid is effective at reducing spurious noise, particularly over regions of rough topography, in CAM-SE-CSLAM. 
 
+%Reference JAMES dry mass, physics takes up half the cost, and were cutting that in half.
+
 Any advantages of using a coarser resolution physics grid need be weighed against any potential reduction in the model's effective resolution, which may occur through aliasing of the solution to the coarser physics grid \citep{W1999T}. Section 2 describes the implementation of the coarse physics grid into CAM-SE-CSLAM. Section 3 provides the results of a hierarchy of model configurations to test our hypothesis, and an analysis of the impact of the coarser physics grid on the resolved scales of motion. Section 4 provides a discussion of the results and conclusions.
 
 \section{Methods}
+
+%Introduce CAM-SE-CSLAM, the grids, and perhaps the schematics. Talk about pg2, why and how we define it. Share the same number of C0 sides.  
+
+\begin{figure}[t]
+\begin{center}
+\noindent\includegraphics[width=30pc,angle=0]{figs/alg-schematic.png}\\
+\end{center}
+\caption{Make captions stand-alone while being concise}
+\label{fig:alg-schematic}
+\end{figure}
 
 \input{mapping.tex}
 
@@ -253,12 +267,13 @@ A plethora of grids are developed for CAM-SE-CSLAM (Table \ref{table:grids}), an
 
 \subsection{Moist Baroclinic Wave}
 
-{\color{red}Terminator Test of linear-correlation preservation, and tracer mass conservation (just a number showing to within machine precision).}
+{\color{red}Terminator Test of linear-correlation preservation, and tracer mass conservation (just a number showing to within machine precision). Just put it in now, as a reminder for peter to fix the algorithm.}
 
 \subsection{Held-Suarez with Topography}
 
 Flow over rough topography may facilitate significant grid imprinting using the spectral element method \citep{gmdd-8-4623-2015,HL2018MWR}. A Held-Suarez configuration, modified with real world topography is used to identify grid imprinting over mountainous terrain. Figure \ref{fig:fhs-contours} (middle panel) shows the climatological mean vertical pressure velocity, $\omega$, over the Andes and Himalayan region and at two different levels in the mid-troposphere, using the $ne30pg3$ grid. All Held-Suarez simulations are ran for two-years. The figure is displayed as a raster plot on the native physics grid, so that indidual extrema, which characterize the flow over the Andes between about $10^\circ-20^\circ$ S, may be identified as spurious. Similarly, at the foot of the Himalayas, their are spurious oscillatory bands of upward and downward motion aligned with the element boundaries \citep[see also ][]{HL2018MWR}. 
 
+%redo color bar to bring out imprinting
 \begin{figure}[t]
 \begin{center}
 \noindent\includegraphics[width=30pc,angle=0]{figs/fhstopo_ne30pg2-v-ne30pg3-v-10Xnudiv.pdf}\\
