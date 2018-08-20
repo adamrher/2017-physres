@@ -310,11 +310,19 @@ where $P(\omega_{s})$ is the PDF of the scaled $\omega$, $\omega_{s}$, and $\alp
 \begin{center}
 \noindent\includegraphics[width=30pc,angle=0]{figs/pg3panel.png}\\
 \end{center}
-\caption{(a) Wavenumber-power spectrum of the temperature tendencies from the moist physics, near the 369 hPa level, (b) probability density distribution and (c) the scaled probability density distribution of upward $\omega$ everywhere in the model, from three year long aqua-planet simulations at different grid resolutions.}
+\caption{(a) Wavenumber-power spectrum of the temperature tendencies from the moist physics, near the 369 hPa level, (b) probability density distribution and (c) the scaled probability density distribution of upward $\omega$ everywhere in the model, from three year long aqua-planet simulations at different grid resolutions. {\color{red}To do: re-do ne120 pdf using binmin of -20 Pa/s.}}
 \label{fig:pg3panel}
 \end{figure}
 
 When the physics and dynamics grids are of a different resolution, it is not clear which grid determines the forcing scale. If the characteristic forcing scale is determined by the physics grid spacing, $\Delta x_{phys}$, than the $ne30pg2$ solution should more closely resemble the $ne20pg3$ solution, in which both the physics and dynamics grids are equal to the physics grid of $ne30pg2$. Likewise, if the dynamics grid spacing, $\Delta x_{dyn}$, governs the forcing scale than the $ne30pg2$ solution would more closely resemble the $ne30pg3$ solution. Figure \ref{fig:pg2panel}a is the PDF of upward $\omega$ for simluations using the $ne20pg3$, $ne30pg2$ and $ne30pg3$ grids. It is clear that the $ne30pg2$ solution more closely resembles the $ne30pg3$ solution. Scaling the $ne20pg3$ solution to $ne30pg3$ using eqn. \ref{eq:pdf} does a fair job of predicting the $ne30pg3$ magnitudes (Figure \ref{fig:pg2panel}b), again consistent with a linear relation between forcing scale and grid spacing. Scaling the $ne30pg2$ PDF to the $ne30pg3$ grid using $\Delta x_{phys}$ overestimates the magnitude of $\omega$ in the $ne30pg3$ solution, suggesting the characteristic forcing scale can not be proportional to $\Delta x_{phys}$. 
+
+\begin{figure}[t]
+\begin{center}
+\noindent\includegraphics[width=30pc,angle=0]{figs/temp_pdf-omg-panel-degree.pdf}\\
+\end{center}
+\caption{(Left) Wavenumber-power spectrum of the temperature tendencies from the moist physics, near the 369 hPa level, (Middle) probability density distribution and (Right) the scaled probability density distribution of upward $\omega$ everywhere in the model. {\color{red}To do: make legend and re-do 0.25 degree sims using binmin of -20 Pa/s.}}
+\label{fig:pgXpanel}
+\end{figure}
 
 The dynamical core requires explicit numerical damping to increase with $\Delta x_{dyn}$ for numerical stability, the exact relation provided in the appendix of \cite{LetAl2018JAMES}. The hyper-viscosity coefficients are therefore smaller (and equal) in the $ne30pg2$ and $ne30pg3$ simulations, relative to the $ne20pg3$ simulation. Figure \ref{fig:pg2panel}a (green line) shows the PDF of upward $\omega$ for a $ne30pg2$ simulation, in which the hyper-viscosity coefficients are increased to $ne20pg3$ values (referred to as $ne30pg2-hivisc$). The solution now more closely resembles the $ne20pg3$ solution, indicating that an increase in explicit damping results in an increase in characteristic forcing scale. Through scaling the $ne30pg2-hivisc$ solutions to the $ne30pg3$ grid using $\Delta x_{phys}$, the scaled solution lie much closer to the $ne30pg3$ solution, compared wth scaling the default $ne30pg2$ solution using $\Delta x_{phys}$. When using a slightly lower resolution physics grid, $\Delta x_{phys}/\Delta x_{dyn} = 1.5$, it seems the forcing scale is determined by $\Delta x_{dyn}$, primarily a result of $\Delta x_{dyn}$ dependent hyper-viscous damping.
 
