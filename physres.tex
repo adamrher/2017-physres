@@ -115,11 +115,6 @@
  \affiliation{2}{National Center for Atmospheric Research, Boulder, Colorado, USA}
  \affiliation{3}{Sandia National Laboratories, Albuquerque, New Mexico, USA}
 
-% \affiliation{3}{Third Affiliation}
-% \affiliation{4}{Fourth Affiliation}
-
-%(repeat as many times as is necessary)
-
 %% Corresponding Author:
 % Corresponding author mailing address and e-mail address:
 
@@ -132,18 +127,12 @@
 
 \correspondingauthor{Adam R. Herrington}{adam.herrington@stonybrook.edu}
 
-%% Keypoints, final entry on title page.
-
 % Example: 
 % \begin{keypoints}
 % \item	List up to three key points (at least one is required)
 % \item	Key Points summarize the main points and conclusions of the article
 % \item	Each must be 100 characters or less with no special characters or punctuation 
 % \end{keypoints}
-
-%  List up to three key points (at least one is required)
-%  Key Points summarize the main points and conclusions of the article
-%  Each must be 100 characters or less with no special characters or punctuation 
 
 \begin{keypoints}
 \item 
@@ -173,29 +162,6 @@
 %
 %% ------------------------------------------------------------------------ %%
 
-%%% Suggested section heads:
-%\section{Introduction}
-% 
-% The main text should start with an introduction. Except for short
-% manuscripts (such as comments and replies), the text should be divided
-% into sections, each with its own heading. 
-
-% Headings should be sentence fragments and do not begin with a
-% lowercase letter or number. Examples of good headings are:
-
-% \section{Materials and Methods}
-% Here is text on Materials and Methods.
-%
-% \subsection{A descriptive heading about methods}
-% More about Methods.
-% 
-% \section{Data} (Or section title might be a descriptive heading about data)
-% 
-% \section{Results} (Or section title might be a descriptive heading about the
-% results)
-% 
-% \section{Conclusions}
-
 %this should be included in the next paper (physres)
 %When introducing a physics grid separate from the dynamics grid the question arises of what the resolution of the physics grid should be compared to the dynamics grid. For example, Figure \ref{fig:physgrid-1d} shows physics grids with the same, coarser and finer resolution than the GLL dynamics grid. From linear stability and accuracy analysis of numerical methods, it is a common result that the shortest resolvable wavelengths are not accurately represented. Similar arguments can be made from analyzing total kinetic energy spectra \citep{S2011LNCSE}. One may therefore argue that only believable scales should be passed to the physical parameterizations \citep{LH1997MWR}, i.e. a coarser resolution physics grid. This concept was investigated in a spectral transform model by \cite{W1999T}. On the other hand, computing physics tendencies on a higher-resolution grid compared to the dynamical core may provide a better sampling of the atmospheric state, somewhat similar to the super-parameterization \citep{G2001JAS,GRL:GRL14999,SA2007ASL} and sub-columns{\footnote{\citet{gmdd-8-5041-2015} in the context of CAM}} \citep{subcolumn,JGRD:JGRD10481} concepts. This approach was taken by \cite{M2009T} in the context of vertical refinement. \cite{W2014PTRSL} found improved forecast scores by increasing the grid-point space resolution compared to the resolution in wave-number space for the spectral transform model at ECMWF. 
 
@@ -209,11 +175,9 @@
 
 \section{Introduction}
 
-Global atmospheric models fundamentally consist of two components. The dynamical core ({\em{dynamics}}), which advances the adiabatic equations of motion, and the physical parameterizations ({\em{physics}}), which compute the effects of diabatic and subgrid-scale processes (e.g., radiative transfer and moist convection) on the resolved scales. More out of convenience than anything else, the physics are evaluated on the dynamics grid, i.e., the physics grid and dynamics grid coincide. From linear stability and accuracy analysis of numerical methods, it is a common result that the shortest simulated wavelengths are not accurately represented by the dynamical core. Similar arguments can be made through an analysis of the kinetic energy spectra in model simulations \citep{S2011LNCSE}. The grid-scale is therefore under-resolved, leading some to speculate whether the physics should be evaluated on a grid that is more reflective of the scales actually resolved by the dynamical core \citep{LH1997MWR,W2007JMSJ,S2011LNCSE}.
+Global atmospheric models fundamentally consist of two components. The dynamical core ({\em{dynamics}}), which numerically integrate the adiabatic equations of motion, and the physical parameterizations ({\em{physics}}), which compute the effects of diabatic and subgrid-scale processes (e.g., radiative transfer and moist convection) on the grid-scale. More out of convenience than anything else, the physics are evaluated on the dynamics grid, i.e., the physics grid and dynamics grid coincide. From linear stability and accuracy analysis of numerical methods, it is a common result that the shortest simulated wavelengths are not accurately represented by the dynamical core. Additionally, simulated downscale cascades result in an unrealistic collection of energy and/or enstrophy near the truncation scale, which can be observed from kinetic energy spectra in model simulations \citep{S2011LNCSE}. Some form of dissipation must therefore be incroporated into models to ameliorate the unrealistic nature of the grid scale \citep{JW2010LNCSE}. The grid-scale is therefore under-resolved, as it is a culmination of numerous unphysical processes, leading \cite{LH1997MWR} to speculate whether the physics should be evaluated on a grid that is more reflective of the scales actually resolved by the dynamical core.
 
-Experimentation with different physics grid resolutions have so far been limited to models employing the spectral transform method \citep{W1999T,W2014PTRSL}. \cite{LH1997MWR} argue that passing under-resolved states to the physics may be problematic in spectral transform models, since the physics are evaluated on a transform grid in grid point space, which contains more degrees of freedom than the spectral representation to prevent aliasing of quadratic quantaties. \cite{W2014PTRSL} have experimented with different transform grid resolutions, and concluded that increasing the resolution in grid-point space relative to the spectral truncation improves forecast skill. \cite{W2014PTRSL} speculates that the spectral truncation may be thought of as an effective filter, mitigtaing any undesireable artifacts arising from passing under-resolved states to the physics, refuting the concerns of \cite{LH1997MWR}. After the physics forcing is transformed into wave-space, it is straightforward to truncate the physics at any desired wavenumber. 
-
-%re-read Lander and Hoskins to clarify this paragraph
+Experimentation with different physics grid resolutions have so far been limited to models employing the spectral transform method \citep{W1999T,W2014PTRSL}. \cite{LH1997MWR} argue that passing under-resolved states to the physics may be especially problematic in spectral transform models, since the physics are evaluated on a transform grid in grid point space, which contains more degrees of freedom than the spectral representation to prevent aliasing of quadratic quantaties. However, through analyzing an idealized moist baroclinic wave simulation, \cite{LH1997MWR} were not able to attribute any grid-scale noise to the use of the higher-resolution transform grid, which they attribute to the filtering resulting from spectral truncation. After the physics tendencies are transformed into spectral space, it is straightforward to truncate the forcing ay any particular wavelength. \cite{W2014PTRSL} have experimented with different transform grid resolutions, and concluded that the standard higher-resolution quadratic grid actually improves forecast skill over the use of a lower-resolution, linear grid. \cite{W2014PTRSL} suggest that increasing the resolution of the transform grid allows for greater spatial variability, with the spectral truncation mitigtaing any undesireable grid-scale artifacts arising from passing under-resolved states to the physics. 
 
 \cite{W1999T} conducted a convergence study using a global spectral transform model, in which the truncation wavenumber of the physics forcing was held fixed, while increasing the resolution of the dynamical core. When the physics and dynamics resolution were increased in tandem, the strength of the Hadley Cell increased montonically with resolution. But when the truncation wavenumber of physics forcing was held fixed, the Hadley Cell showed very little sensitivity to dynamical core resolution, resembling the solution for which the dynamics and physics truncation wavenumber are the same. The results of \cite{W1999T} suggest that the dynamical core resolution is aliased to the resolution of the physics forcing. 
 
