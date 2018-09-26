@@ -191,7 +191,9 @@ In this study, a finite-volume physics grid is developed for CAM-SE-CSLAM which 
 
 \section{Methods}
 
-\cite{HL2018MWR} documents the alogrithms used to separate the physics and dynamics grids, and discusses how the use of a finite-volume physics grid is more consistent with approximations made by the physics, and in the coupling to other model components. mainly that   A finite-volume physics grid was chosen such that their are equal degrees of freedom on both
+\cite{HL2018MWR} documents the alogrithms used to separate the physics and dynamics grids, and discusses how the use of a finite-volume physics grid is more consistent with approximations made by the physics, and in the coupling to other model components. The physics grid was defined to have the same degrees of freedom as the cubed-sphere quadrature grid used by the dynamical core. This is through dividing each element into $3\times 3$ approximately equal area control volumes, with boundaries of the control volumes aligned parallel to the element boundaries. This the same grid used by the semi-Lagrangian advection scheme, and was preferred at the time as so not introduce any additional mapping errors induced by mapping the tracer quantaties to the physics grid. This grid is depicted in \ref{fig:area-schematic}b. 
+
+Here it is argued that dividing the element with $2\times 2$ approximiately equal area control volumes should entirely alleviate grid imprinting on the physics grid. 
 
 %Introduce CAM-SE-CSLAM, the grids, and perhaps the schematics. Talk about pg2, why and how we define it. Share the same number of C0 sides.  
 
