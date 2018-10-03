@@ -21,13 +21,14 @@ For mapping tracer state from the CSLAM grid to any physics grid can be done usi
 
 In mathemtical terms the remapping is given by
 \begin{eqnarray}
-\Delta M^{(pg)}_{\ell}\Delta A_{\ell} &=\sum_{k=1}^{nc^2}\overline{\Delta M}^{(nc)}_{k\ell} \Delta A_{k\ell},\\
-m^{(pg)}_{\ell}\Delta A_{\ell}&=\frac{1}{\Delta M^{(pg)}_{\ell}}\sum_{k=1}^{nc^2}\overline{\Delta M\, m}^{(nc)}_{k\ell} \Delta A_{k\ell},
+\Delta M^{(pg)}_{\ell}\Delta A_{\ell} &=\sum_{k=1}^{nc^2}\Delta M^{(nc)}_{k\ell} \Delta A_{k\ell},\\
+\Delta M^{(pg)}_{\ell}\, m^{(pg)}_{\ell}\Delta A_{\ell}&=\frac{1}{\Delta M^{(pg)}_{\ell}}\sum_{k=1}^{nc^2}\left[ \Delta M \, m\right]^{(nc)}_{k\ell} \Delta A_{k\ell},
 \end{eqnarray}
 where 
-\begin{equation}
-\frac{1}{\Delta A_{k\ell}}\int_{A_{k\ell}}(\Delta M m)^{(nc)}(x,y)dA.
-\end{equation}
+\begin{eqnarray}
+\Delta M^{(nc)}_{k\ell} &= \frac{1}{\Delta A_{k\ell}}\int_{A_{k\ell}}\Delta M(x,y)dA.\\
+{\left[ \Delta M\, m\right]}^{(nc)}_{k\ell} &=\frac{1}{\Delta A_{k\ell}}\int_{A_{k\ell}}\left[ \Delta M\, m\right] (x,y)\, dA.
+\end{eqnarray}
 
 
 The tendencies from the parameterizations are computed on the physics grid. The tracer tendency in physics grid cell $k$ is denoted $f_k^{(pg)}$. The problem is how to map $f_k^{(pg)}$ to the CSLAM control volumes $f^{(nc)}$ satisfying the following constraints:
