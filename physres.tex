@@ -296,21 +296,13 @@ When the physics and dynamics grids are of a different resolution, it is not cle
 
 \begin{figure}[t]
 \begin{center}
-\noindent\includegraphics[width=30pc,angle=0]{figs/temp_pdf-omg.pdf}\\
+\noindent\includegraphics[width=30pc,angle=0]{figs/panel_ne20pg2-ne30pg2-ne30pg3.pdf}\\
 \end{center}
 \caption{(Left) Wavenumber-power spectrum of the temperature tendencies from the moist physics, near the 369 hPa level, (Middle) probability density distribution and (Right) the scaled probability density distribution of upward $\omega$ everywhere in the model. {\color{red}To do: make legend and re-do 0.25 degree sims using binmin of -20 Pa/s.}}
 \label{fig:pgXpanel}
 \end{figure}
 
 The dynamical core requires explicit numerical damping to increase with $\Delta x_{dyn}$ for numerical stability, the exact relation provided in the appendix of \cite{LetAl2018JAMES}. The hyper-viscosity coefficients are therefore smaller (and equal) in the $ne30pg2$ and $ne30pg3$ simulations, relative to the $ne20pg3$ simulation. Figure \ref{fig:pg2panel}a (green line) shows the PDF of upward $\omega$ for a $ne30pg2$ simulation, in which the hyper-viscosity coefficients are increased to $ne20pg3$ values (referred to as $ne30pg2-hivisc$). The solution now more closely resembles the $ne20pg3$ solution, indicating that an increase in explicit damping results in an increase in characteristic forcing scale. Through scaling the $ne30pg2-hivisc$ solutions to the $ne30pg3$ grid using $\Delta x_{phys}$, the scaled solution lie much closer to the $ne30pg3$ solution, compared wth scaling the default $ne30pg2$ solution using $\Delta x_{phys}$. When using a slightly lower resolution physics grid, $\Delta x_{phys}/\Delta x_{dyn} = 1.5$, it seems the forcing scale is determined by $\Delta x_{dyn}$, primarily a result of $\Delta x_{dyn}$ dependent hyper-viscous damping.
-
-\begin{figure}[t]
-\begin{center}
-\noindent\includegraphics[width=30pc,angle=0]{figs/pdf-panel-hypervisc.png}\\
-\end{center}
-\caption{(a) Probability density distribution and (b) the scaled probability density distribution of upward $\omega$ everywhere in the model, from four different year long aqua-planet simulations at different grid resolutions. {\color{red}To do: make this a two panel plot with a clear legend.}}
-\label{fig:pg2panel}
-\end{figure}
 
 The vertical velocity scale is determined by the characteristic forcing scale on the dynamical core grid. Mapping the physics forcing to the dynamics grid using a high-order reconstruction may introduce some fine scale features that the physics grid is unable to support, potentially increasing the vertical velocity scale. A $ne30pg2$ simulation using low-order reconstruction (bilinear interpolation from $pg2$ to $GLL$, and piecewise-constant mapping between $pg2$ and $CSLAM$ grids; referred to as $ne30pg2-loworder$) is carried out. The wavenumber-power spectrum of the physics forcing in the upper-troposphere on the physics grid (Figure \ref{fig:loworder}a), and after the forcing is mapped to the dynamics grid (Figure \ref{fig:loworder}b) is provided for the $ne30pg2-loworder$, $ne30pg2$ and $ne30pg3$ simulations. 
 
