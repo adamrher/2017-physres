@@ -269,14 +269,6 @@ The $\omega$ field in a $ne30pg2$ simulation is provided in Figure \ref{fig:fhs-
 
 The results of the previous section are consistent with our hypothesis, that spurious noise is effectively reduced, and visibly eliminated using a $pg2$ grid. We now turn to the question of whether the coarser resolution physics grid has an impact on the resolved scales of motion. This analysis will make use of an aqua-planet configuration \citep{NH2000ASL,MWO2016JAMES}; an ocean covered planet in perpetual equinox, and fixed, zonally-symmetric sea surface temperatures idealized after present day Earth. The aqua-planets are run for one simulated year, using CAM, version 6 physics (CAM6; $QPC6$ compset in CESM2.0).
 
-\begin{figure}[t]
-\begin{center}
-\noindent\includegraphics[width=30pc,angle=0]{figs/panel_pdf_dtphys}\\
-\end{center}
-\caption{Probability density distribution of upward $\omega$ everywhere in the model in the aqua-planets for the $ne20pg3$ grid (Left) and the $ne80pg3$ grid (Right). Figure computed for one year of 6-hourly data. The different colors indicate the physics time-steps used in the runs.}
-\label{fig:pdf-dtphys}
-\end{figure}
-
 \subsubsection{Low Resolution}\label{sec:lowres}
 
 \begin{figure}[t]
@@ -284,7 +276,7 @@ The results of the previous section are consistent with our hypothesis, that spu
 \noindent\includegraphics[width=30pc,angle=0]{figs/panel_ne20pg2-ne30pg2-ne30pg3.pdf}\\
 \end{center}
 \caption{(Left) Wavenumber-power spectrum of the temperature tendencies from the moist physics, near the 369 hPa level, (Middle) probability density distribution and (Right) the scaled probability density distribution of upward $\omega$ everywhere in the model. The scaled distributions are scaled to $ne30pg3$ using $\Delta x_{phys}$.}
-\label{fig:pgXpanel}
+\label{fig:pgXpanel-lores}
 \end{figure}
 
 \begin{figure}[t]
@@ -296,6 +288,22 @@ The results of the previous section are consistent with our hypothesis, that spu
 \end{figure}
 
 \subsubsection{High Resolution}\label{sec:highres}
+
+\begin{figure}[t]
+\begin{center}
+\noindent\includegraphics[width=30pc,angle=0]{figs/panel_pdf_dtphys}\\
+\end{center}
+\caption{Probability density distribution of upward $\omega$ everywhere in the model in the aqua-planets for the $ne20pg3$ grid (Left) and the $ne80pg3$ grid (Right). Figure computed for one year of 6-hourly data. The different colors indicate the physics time-steps used in the runs.}
+\label{fig:pdf-dtphys}
+\end{figure}
+
+\begin{figure}[t]
+\begin{center}
+\noindent\includegraphics[width=30pc,angle=0]{figs/panel_ne80pg3_ne120pg2_ne120pg3.pdf}\\
+\end{center}
+\caption{As in Figure~\ref{fig:pgXpanel-lores}, but for the high resolution simulations. Asterisks indicate that the physics time-step in these simulations are $\Delta t_{phys} = 675 s$, which is larger than those used in the default $ne120$ grid of $\Delta t_{phys} = 450 s$ (see Table \ref{table:grids2}).}
+\label{fig:pgXpanel-hires}
+\end{figure}
 
 \subsubsection{Across Resolutions}\label{sec:allres}
 
