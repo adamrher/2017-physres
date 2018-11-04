@@ -248,15 +248,25 @@ As discussed in \cite{HL2018MWR}, grid imprinting over mountainous terrain tend 
 
 The $\omega$ field in a $ne30pg2$ simulation is provided in Figure \ref{fig:fhs-contours} (left panel). Grid cell extrema over the Andes is less prevalent than in the $ne30pg3$ simulation, as seen by the reduction in large magnitude $\omega$ (e.g., red grid cells). The spurious oscillations at the foot of the Himalayas appear to have been entirely eliminated. This improvement in grid imprinting is due to the consistent numerical properties of the control volumes in the $pg2$ configuration discussed in Section \ref{sec:intro}. The divergent modes are slightly damped relative to the $ne30pg3$ simulations only at large wavenumbers (greater than 50), and much less damped compared to the simulation with large divergence damping (Figure \ref{fig:fhs-div}).
 
+\subsection{Moist bubble test}\label{sec:bubble}
+
+The results of the previous section are consistent with our hypothesis, that spurious noise is effectively reduced, and visibly eliminated using a $pg2$ grid. We now turn to the question of whether the coarser resolution physics grid has an impact on the resolved scales of motion. Here, the concept of forcing scale is introduced. If one considers a cylinder of height, $H$, diameter, $D$, and constant Archimedean buoyancy, $B_0$, throughout, the vertical velocity scale due to the buoyancy, $W$, may be derived from the Poission equation at hydrostatics scales, $W = \sqrt{B_0H}*H/D$ \citep{JR2016QJRMS,HR2018JAMES}. The buoyancy is determined primarily by the temperature tendencies from the physics (e.g., latent heating due to cloud formation), and hereafter referred to as the {\em{forcing}}. In global atmospheric models, where the unresolved scales are both important and vast, the horizontal forcing scale, or $D$, is related to the resolution the grid is able to support \citep[see Supplementary Figure 1 in][]{HR2018JAMES}.
+
+\begin{figure}[t]
+\begin{center}
+\noindent\includegraphics[width=25pc,angle=0]{figs/bubble_test.pdf}\\
+\end{center}
+\caption{}
+\label{fig:bubble}
+\end{figure}
+
 \subsection{Aqua-planets}\label{sec:aquaplanet}
 
-The results of the previous section are consistent with our hypothesis, that spurious noise is effectively reduced, and visibly eliminated using a $pg2$ grid. We now turn to the question of whether the coarser resolution physics grid has an impact on the resolved scales of motion. This analysis will make use of an aqua-planet configuration \citep{NH2000ASL,MWO2016JAMES}; an ocean covered planet in perpetual equinox, and fixed, zonally-symmetric sea surface temperatures idealized after present day Earth. The aqua-planets are run for one simulated year, using CAM, version 6 physics (CAM6; $QPC6$ compset in CESM2.0).
+This analysis will make use of an aqua-planet configuration \citep{NH2000ASL,MWO2016JAMES}; an ocean covered planet in perpetual equinox, and fixed, zonally-symmetric sea surface temperatures idealized after present day Earth. The aqua-planets are run for one simulated year, using CAM, version 6 physics (CAM6; $QPC6$ compset in CESM2.0).
 
 \subsubsection{Low Resolution}\label{sec:lowres}
 
 When the physics and dynamics grids are of a different resolution, it is not clear which grid determines the resolved scales of motion. This may be tested through comparing $ne30pg2$, which has a physics grid spacing of approximately $166.8 km$, to a simulation with a $ne20pg3$ grid, in which the physics and the dynamics both have an approximate grid spacing of $166.8 km$ (see Table~\ref{table:grids-lo}). The probability density function (PDF) of upward $\omega$ everywhere in the simulations is shown in Figure~\ref{fig:pgXpanel-lores}b. While in practice the model state `lives' on the physics grid, $\omega$ here is shown on the $GLL$ grid. It is clear that larger magnitude $\omega$ is more frequent in $ne30pg2$, as compared with $ne20pg3$, and is actually more similar to the $ne30pg3$ distribution.
-
-To further understand the changes in vertical motion between the simulations, the concept of forcing scale is introduced. If one considers a cylinder of height, $H$, diameter, $D$, and constant Archimedean buoyancy, $B_0$, throughout, the vertical velocity scale due to the buoyancy, $W$, may be derived from the Poission equation at hydrostatics scales, $W = B_0*H/D$ \citep{JR2016QJRMS,HR2018JAMES}. The buoyancy is determined primarily by the temperature tendencies from the physics (e.g., latent heating due to cloud formation), and hereafter referred to as the {\em{forcing}}. In global atmospheric models, where the unresolved scales are both important and vast, the horizontal forcing scale, or $D$, is related to the resolution the grid is able to support \citep[see Supplementary Figure 1 in][]{HR2018JAMES}. 
 
 Figure~\ref{fig:pgXpanel-lores}a shows the wave-number power spectrum of the forcing on the $GLL$ grid in the middle-to-upper troposphere, where stratiform heating is common due to detrainment of moisture by the deep convections scheme \citep{ZM1995AO}. The variance is larger for higher wavenumbers in $ne30pg3$ and $ne30pg2$, as compared with $ne20pg3$, supporting the notion that $D$ is larger in $ne20pg3$. The larger $D$ in $ne20pg3$ is consistent with the scale analysis in that the frequency of large magnitude $\omega$ is lower, compared with the $ne30pg2$ and $ne30pg3$ simulations.
 
