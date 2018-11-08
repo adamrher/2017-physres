@@ -197,9 +197,13 @@ In this study, we test the hypothesis that the coarser, $pg2$ physics grid is ef
 
 \input{mapping.tex}
 
-In the $pg2$ configuration, mapping the fields to and from the quadrature grid and $pg2$ grid is identical to that described in HL18. As discussed above above, in mapping to the physics grid, CAM-SE's Lagrange basis functions are integrated over the $pg2$ control volumes to provide the physics with a volume averaged state. The procedure is accurate to machine precision, conserves thermal energy and dry air mass, and is consistent (i.e., the mapping preserves a constant). The reverse mapping, from the physics grid to the quadrature grid, is done using a tensor-product Lagrange interpolation (see Appendix A in HL18). The Lagrange interpolation is consistent, conserves dry air mass ({\color{red}{Peter, is this true?}}), but does not conserve thermal energy. Errors arising from the lack of energy conservation were estimated to be small; about two orders of magnitude less than the energy dissipation due to the dynamical core alone.
-
-The semi-Lagrangian advection of tracers in our $pg2$ configuration is solved on the $pg3$ grid (hereafter referred to as the CSLAM grid). Preserving linear correlations in mapping to and from the CSLAM and $pg2$ grids requires additional considerations; one such problem is depicted schematically in Figure~\ref{fig:alg-schematic}. Consider a single element of CSLAM control volumes, containing only a single cell with mixing ratio $1.0$, and $0.0$ everywhere else ($m_l$; Figure ~\ref{fig:alg-schematic}a). Assume that the mixing ratios mapped to the $pg2$ grid ($m_k$; Figure~\ref{fig:alg-schematic}b) result in a negative tracer tendency from the physics ($f_k$; Figure~\ref{fig:alg-schematic}c). The non-zero values of the tendencies for $pg2$ areas overlapping CSLAM grid cells originally containing a value of zero ($f_{k,l}$; Figure~\ref{fig:alg-schematic}d), are driven negative by the mapped tendency (Figure~\ref{fig:alg-schematic}e). Preserving linear correlations is therefore difficult since the mapping between CSLAM and $pg2$ is not reversible. Simulations performed without addressing this artifact were found to be in serious error.
+\begin{figure}[t]
+\begin{center}
+\noindent\includegraphics[width=30pc,angle=0]{figs/area-schematic.png}\\
+\end{center}
+\caption{Indice notation for the (a) $pg2$ grid, (b), $pg3$ grid and (c) their exchange grid. {\color{red}Peter - do you think you will use this figure?}}
+\label{fig:area-schematic}
+\end{figure}
 
 \begin{figure}[t]
 \begin{center}
@@ -209,59 +213,33 @@ The semi-Lagrangian advection of tracers in our $pg2$ configuration is solved on
 \label{fig:alg-schematic}
 \end{figure}
 
+In the $pg2$ configuration, mapping the fields to and from the quadrature grid and $pg2$ grid is identical to that described in HL18. As discussed above above, in mapping to the physics grid, CAM-SE's Lagrange basis functions are integrated over the $pg2$ control volumes to provide the physics with a volume averaged state. The procedure is accurate to machine precision, conserves thermal energy and dry air mass, and is consistent (i.e., the mapping preserves a constant). The reverse mapping, from the physics grid to the quadrature grid, is done using a tensor-product Lagrange interpolation (see Appendix A in HL18). The Lagrange interpolation is consistent, conserves dry air mass ({\color{red}{Peter, is this true?}}), but does not conserve thermal energy. Errors arising from the lack of energy conservation were estimated to be small; about two orders of magnitude less than the energy dissipation due to the dynamical core alone.
 
-\begin{figure}[t]
-\begin{center}
-\noindent\includegraphics[width=30pc,angle=0]{figs/area-schematic.png}\\
-\end{center}
-\caption{Indice notation for the (a) $pg2$ grid, (b), $pg3$ grid and (c) their exchange grid.}
-\label{fig:area-schematic}
-\end{figure}
+The semi-Lagrangian advection of tracers in our $pg2$ configuration is solved on the CSLAM grid. Preserving linear correlations in mapping to and from the CSLAM and $pg2$ grids requires additional considerations; one such problem is depicted schematically in Figure~\ref{fig:alg-schematic}. Consider a single element of CSLAM control volumes, containing only a single cell with mixing ratio $1.0$, and $0.0$ everywhere else ($m_l$; Figure ~\ref{fig:alg-schematic}a). Assume that the mixing ratios mapped to the $pg2$ grid ($m_k$; Figure~\ref{fig:alg-schematic}b) result in a negative tracer tendency from the physics ($f_k$; Figure~\ref{fig:alg-schematic}c). The non-zero values of the tendencies for $pg2$ areas overlapping CSLAM grid cells originally containing a value of zero ($f_{k,l}$; Figure~\ref{fig:alg-schematic}d), are driven negative by the mapped tendency (Figure~\ref{fig:alg-schematic}e). Preserving linear correlations is therefore difficult since the mapping between CSLAM and $pg2$ is not reversible. Simulations performed without addressing this artifact were found to be in serious error.
 
-\subsection{Model Configurations}\label{sec:bubble}
+{\color{red}Describe algorithm here}
 
-Two model configurations using CESM2.1 (\url{https://doi.org/10.5065/D67H1H0V}) are chosen to carry out the objectives discussed in Section~\ref{sec:intro}. To test the hypothesis, that the $pg2$ grid reduces spurious grid-noise over mountainous regions, a Held-Suarez configuration \citep[$FHS94$ compset;][]{HS1994} modified to include real world topography is analyzed. HL18 indicate that this configuration tends to have more grid-noise over steep terrain than in more complex configurations using CAM, version 6 moist physics package \citep[CAM6;][]{}, and is therefore a conservative choice for evaluating any change in grid imprinting between $pg3$ and $pg2$. 
+{\color{red}Peter -  I think the results of the terminator tests should be mentioned here. We could just put in a sentence saying it passes. But I'm assuming that if we don't use the algorithm that weights the tendency by the amount of available mixing ratio, it will fail. If that's the case, we could just do a two panel plot showing the iCLy at day 15 for with and without the algorithm.}
+
+\subsubsection{Model Configurations}\label{sec:config}
+
+Two model configurations using CESM2.1 (\url{https://doi.org/10.5065/D67H1H0V}) are chosen to carry out the objectives discussed in Section~\ref{sec:intro}. To test the hypothesis, that the $pg2$ grid reduces spurious grid-noise over mountainous regions, a Held-Suarez configuration \citep[$FHS94$ compset;][]{HS1994} modified to include real world topography is analyzed. HL18 indicate that this configuration tends to have more grid-noise over steep terrain than in a more complex configuration using CAM, version 6 moist physics \citep[CAM6;][]{}, and is therefore a conservative choice for evaluating any change in grid imprinting between $pg3$ and $pg2$. 
 
 To understand whether the resolved scales of motion are influenced by the use of a coarser resolution physics grid, a suite of aqua-planet simulations \citep{NH2000ASL,MWO2016JAMES} are carried out over a range of spectral-element grid resolutions, using CAM6 physics ($QPC6$ compset). An aqua-planet is an ocean covered planet in perpetual equinox, with fixed, zonally-symmetric sea surface temperatures idealized after present day Earth. In CAM, their is a strong sensitivity of solutions to the physics time-step \citep[$\Delta t_{phys}$; ][]{WO2003QJR,W2013QJRMS,HR2018JAMES} and it is unclear how $\Delta t_{phys}$ should vary across resolutions.
 
- \cite{HR2018JAMES} developed a moist bubble test, which indicate that time-truncation errors are large at high resolution (about $50km$ or less), and may provide incite on a reasonable scaling of $\Delta t_{phys}$ across resolutions. In the moist bubble test a set of non-rotating simulations are performed, in which the grid spacing and bubble radius are simultaneously reduced by the same factor in each run through varying the planetary radius. The test was designed to mimic the reduction in buoyancy length scales that occur when the model resolution is increased in more complex configurations \citep{HETAL2006JCLIM,HR2018JAMES}. 
-
-Here, a scaling for $\Delta t_{phys}$ across resolutions is proposed, based on results of the moist bubble test using CAM-SE-CSLAM coupled to the simple condensation routine of \cite{K1969MM}. The scaling is linear in $\Delta x_{dyn}$ and analogous to a CFL criterion,
+Here, a scaling for $\Delta t_{phys}$ across resolutions is proposed, based on results of the moist bubble test \citep{HR2018JAMES} using CAM-SE-CSLAM and detailed in the Appendix. The scaling is linear in $\Delta x_{dyn}$ and analogous to a CFL criterion,
 \begin{equation}
 \Delta t_{phys} = \Delta t_{phys,0} \times \Delta x_{dyn} / \Delta x_{dyn,0}~,\label{eq:dt-scale}
 \end{equation}
-where $\Delta t_{phys,0}$ is taken to be the standard $1800 s$ used in CAM-SE-CSLAM at low resolution, $\Delta x_{dyn,0} = 111.2km$. Hereafter, $\Delta x_{dyn}$ will be expressed using standard CAM-SE notation, e.g., $\Delta x_{dyn} = 111.2km$ is referred to as $ne30$, which denotes that each face of the cube-sphere grid consists of $30 \times 30$ elements. 
+where $\Delta t_{phys,0}$ is taken to be the standard $1800 s$ used in CAM-SE-CSLAM at low resolution, $\Delta x_{dyn,0} = 111.2km$.
 
-The results of the moist bubble test, displayed as the minimum $\omega$ throughout each one day simulation, is shown in Figure~\ref{fig:bubble} with $\Delta t_{phys}$ determined by equation~\ref{eq:dt-scale}, and an equivalent set of simulations with $\Delta t_{phys} = \Delta t_{phys,0}$ for all resolutions. \cite{HR2018JAMES} has shown that $\omega$ converges to the scaling of,
-\begin{equation}
-\omega = \omega_0 \times \Delta x_{dyn,0}/\Delta x_{dyn}~,\label{eq:w-scale}
-\end{equation}
-in the limit of small $\Delta t_{phys}$. Equation~\ref{eq:w-scale} is plotted as grey lines in Figure~\ref{fig:bubble} and is derived from a scale analysis of the Poisson equation \cite{JR2016QJRMS} at hydrostatic scales. The solutions using $\Delta t_{phys}$ from equation~\ref{eq:dt-scale} follow the scaling, whereas fixing $\Delta t_{phys} = 1800s$ across resolutions damps the solution relative to the analytical solution. It should be noted that equation~\ref{eq:w-scale} is only strictly valid for the dry anelastic equations, and that the scaling is maintained when including moist processes is not proven through theory. Regardless, if  
-$\Delta t_{phys}$ is too large, the solution has a sizable error.
-
-\begin{figure}[t]
-\begin{center}
-\noindent\includegraphics[width=25pc,angle=0]{figs/bubble_test.pdf}\\
-\end{center}
-\caption{}
-\label{fig:bubble}
-\end{figure}
-
-Figure~\ref{fig:bubble} shows the results of the moist bubble test, for a range of spectral element grid resolutions, using both the $pg2$ and $pg3$ grids. The tests were carried out through fixing $\Delta t_{phys}$ across resolutions, and through varying it in proportion to the dynamics grid spacing, $\Delta x_{dyn}$. The magnitude of $\omega$ in the $pg3$ solutions are systematically larger than the $pg2$ solutions, which is primarily a result of the damping effect of integrating the basis functions over a larger control volume.
+\subsection{Model Configurations}\label{sec:config}
 
 \section{Results}\label{sec:results}
 
-%A plethora of grids are developed for CAM-SE-CSLAM, and used to understand the sensitivity to physics grid resolution, across a wide range of spectral-element grid resolutions. A hierarchy of idealized model configurations are presented (available from CESM2.0; \url{https://doi.org/10.5065/D67H1H0V}) to illuminate the differences between $pg2$ and $pg3$.
-
-%\subsection{Moist Baroclinic Wave}\label{sec:baroclinic}
-
-%{\color{red}Terminator Test of linear-correlation preservation, and tracer mass conservation (just a number showing to within machine precision). Just put it in now, as a reminder for peter to fix the algorithm.}
-
 \subsection{Held-Suarez with Topography}\label{sec:hs94}
 
-Flow over rough topography can result in significant grid imprinting using the spectral element method \citep{gmdd-8-4623-2015,HL2018MWR}. Figure \ref{fig:fhs-contours} (middle panel) shows the vertical pressure velocity, $\omega$, averaged over two years, over the Andes and Himalayan region at two different levels in the mid-troposphere, and using the $ne30pg3$ grid. The fields are displayed as a raster plot on the physics grid, so that individual extrema, which characterize the flow over the Andes between about $10^\circ-20^\circ$ S, and the Himalayas between $20^\circ-30^\circ$ N, may be identified as spurious. 
-
-%A Held-Suarez configuration, modified with real world topography is used to identify grid imprinting over mountainous terrain, as in \cite{HL2018MWR}. 
+Flow over rough topography can result in significant grid imprinting using the spectral element method \citep{gmdd-8-4623-2015,HL2018MWR}. Figure \ref{fig:fhs-contours} shows the results of the Held-Suarez with topography simulations. The middle panel is the vertical pressure velocity, $\omega$, averaged over two years, over the Andes and Himalayan region at two different levels in the mid-troposphere, using the $ne30pg3$ grid. The fields are displayed as a raster plot on the physics grid, so that individual extrema, which characterize the flow over the Andes between about $10^\circ-20^\circ$ S, and the Himalayas between $20^\circ-30^\circ$ N, may be identified as spurious. 
 
 \begin{figure}[t]
 \begin{center}
@@ -285,11 +263,7 @@ The $\omega$ field in a $ne30pg2$ simulation is provided in Figure \ref{fig:fhs-
 
 \subsection{Aqua-planets}\label{sec:aquaplanet}
 
-%This analysis will make use of an aqua-planet configuration \citep{NH2000ASL,MWO2016JAMES}; an ocean covered planet in perpetual equinox, and fixed, zonally-symmetric sea surface temperatures idealized after present day Earth. The aqua-planets are run for one simulated year, using CAM, version 6 physics (CAM6; $QPC6$ compset in CESM2.0).
-
-\subsubsection{Low Resolution}\label{sec:lowres}
-
-When the physics and dynamics grids are of a different resolution, it is not clear which grid determines the resolved scales of motion. This may be tested through comparing $ne30pg2$, which has a physics grid spacing of approximately $166.8 km$, to a simulation with a $ne20pg3$ grid, in which the physics and the dynamics both have an approximate grid spacing of $166.8 km$. Further, these two solutions are compared against an $ne30pg3$ simulation, which acts as an upper bound on the resolution of $ne30pg2$ solution; the $ne20pg3$ solution then being the lower bound (see Table~\ref{table:grids-lo}). The probability density function (PDF) of upward $\omega$ everywhere in the simulations is shown in Figure~\ref{fig:pgXpanel-lores}b. While in practice the model state `lives' on the physics grid, $\omega$ here it is shown on the $GLL$ grid. It is clear that larger magnitude $\omega$ is more frequent in $ne30pg2$, as compared with $ne20pg3$, and is actually more similar to the $ne30pg3$ distribution.
+When the physics and dynamics grids are of a different resolution, it is not clear which grid determines the resolved scales of motion. This may be tested through comparing $ne30pg2$, which has a physics grid spacing of approximately $166.8 km$, to a $ne20pg3$ simulation, in which the physics and the dynamics both have an approximate grid spacing of $166.8 km$. Further, these two solutions are compared against an $ne30pg3$ simulation, which acts as an upper bound on the $ne30pg2$ solution; the $ne20pg3$ solution then being a lower bound (see Table~\ref{table:grids-lo}). The probability density function (PDF) of upward $\omega$ everywhere in the simulations is shown in Figure~\ref{fig:pgXpanel-lores}b. While in practice the model state is defined to be the physics grid, $\omega$ here is shown on the $GLL$ grid. It is clear that larger magnitude $\omega$ is more frequent in $ne30pg2$, as compared with $ne20pg3$, and is actually more similar to the $ne30pg3$ distribution.
 
 Figure~\ref{fig:pgXpanel-lores}a shows the wave-number power spectrum of the forcing on the $GLL$ grid in the middle-to-upper troposphere, where stratiform heating is common due to detrainment of moisture by the deep convections scheme \citep{ZM1995AO}. The variance is larger for higher wavenumbers in $ne30pg3$ and $ne30pg2$, as compared with $ne20pg3$, supporting the notion that buoyancy length scales (hereafter referred to as $D$) are larger in $ne20pg3$. The larger $D$ in $ne20pg3$ is consistent with the scale analysis in that the frequency of large magnitude $\omega$ is lower, compared with the $ne30pg2$ and $ne30pg3$ simulations.
 
@@ -341,14 +315,6 @@ Through using the low-order mapping in $ne30pg2$, and by increasing the hypervis
 \subsubsection{High Resolution}\label{sec:highres}
 
 The physics time-step, $\Delta t_{phys}$, used for each grid is scaled by the dynamics time-step to prevent time truncation errors at higher resolutions \citep{HR2018JAMES}. 
-
-\begin{figure}[t]
-\begin{center}
-\noindent\includegraphics[width=30pc,angle=0]{figs/panel_pdf_dtphys}\\
-\end{center}
-\caption{Probability density distribution of upward $\omega$ everywhere in the model in the aqua-planets for the $ne20pg3$ grid (Left) and the $ne80pg3$ grid (Right). Figure computed for one year of 6-hourly data. The different colors indicate the physics time-steps used in the runs.}
-\label{fig:pdf-dtphys}
-\end{figure}
 
 \begin{figure}[t]
 \begin{center}
@@ -408,8 +374,6 @@ The physics time-step, $\Delta t_{phys}$, used for each grid is scaled by the dy
 
 Mitigating grid-imprinting through increasing the divergence damping coefficient an order of magnitude greater than is required for numerical stability is not ideal from a model development perspective. The hyper-viscosity coefficients are one of the only a handful of free-parameters in CAM-SE to tune the kinetic energy spectrum to match observations \citep{SPKS2014JAS,LetAl2018JAMES}. 
 
-%Text here ===>>>
-
 %%
 
 %  Numbered lines in equations:
@@ -418,78 +382,6 @@ Mitigating grid-imprinting through increasing the divergence damping coefficient
 %  \begin{equation}
 %  \end{equation}
 %  \end{linenomath*}
-
-%% Enter Figures and Tables near as possible to where they are first mentioned:
-%
-% DO NOT USE \psfrag or \subfigure commands.
-%
-% Figure captions go below the figure.
-% Table titles go above tables;  other caption information
-%  should be placed in last line of the table, using
-% \multicolumn2l{$^a$ This is a table note.}
-%
-%----------------
-% EXAMPLE FIGURE
-%
-% \begin{figure}[h]
-% \centering
-% when using pdflatex, use pdf file:
-% \includegraphics[width=20pc]{figsamp.pdf}
-%
-% when using dvips, use .eps file:
-% \includegraphics[width=20pc]{figsamp.eps}
-%
-% \caption{Short caption}
-% \label{figone}
-%  \end{figure}
-%
-% ---------------
-% EXAMPLE TABLE
-%
-% \begin{table}
-% \caption{Time of the Transition Between Phase 1 and Phase 2$^{a}$}
-% \centering
-% \begin{tabular}{l c}
-% \hline
-%  Run  & Time (min)  \\
-% \hline
-%   $l1$  & 260   \\
-%   $l2$  & 300   \\
-%   $l3$  & 340   \\
-%   $h1$  & 270   \\
-%   $h2$  & 250   \\
-%   $h3$  & 380   \\
-%   $r1$  & 370   \\
-%   $r2$  & 390   \\
-% \hline
-% \multicolumn{2}{l}{$^{a}$Footnote text here.}
-% \end{tabular}
-% \end{table}
-
-%% SIDEWAYS FIGURE and TABLE 
-% AGU prefers the use of {sidewaystable} over {landscapetable} as it causes fewer problems.
-%
-% \begin{sidewaysfigure}
-% \includegraphics[width=20pc]{figsamp}
-% \caption{caption here}
-% \label{newfig}
-% \end{sidewaysfigure}
-% 
-%  \begin{sidewaystable}
-%  \caption{Caption here}
-% \label{tab:signif_gap_clos}
-%  \begin{tabular}{ccc}
-% one&two&three\\
-% four&five&six
-%  \end{tabular}
-%  \end{sidewaystable}
-
-%% If using numbered lines, please surround equations with \begin{linenomath*}...\end{linenomath*}
-%\begin{linenomath*}
-%\begin{equation}
-%y|{f} \sim g(m, \sigma),
-%\end{equation}
-%\end{linenomath*}
 
 %%% End of body of article
 
@@ -500,54 +392,42 @@ Mitigating grid-imprinting through increasing the divergence damping coefficient
 %
 % After typing \appendix
 %
-%\section{Here Is Appendix Title}
 % will show
 % A: Here Is Appendix Title
 %
-%\appendix
+\appendix
+\section{Defining $\Delta t_{phys}$ across resolutions}\label{sec:appendix}
+ \cite{HR2018JAMES} developed a moist bubble test, which indicate that time-truncation errors are large at high resolution (roughly $50km$ and less), and may provide incite on a reasonable scaling of $\Delta t_{phys}$ across resolutions in more complex configurations. In the moist bubble test a set of non-rotating simulations are performed, in which the grid spacing and bubble radius are simultaneously reduced by the same factor in each run through varying the planetary radius. The test was designed to mimic the reduction in buoyancy length scales that occur when the model resolution is increased in more complex configurations \citep{HETAL2006JCLIM,HR2018JAMES}. 
+ 
+The moist bubble test is performed with CAM-SE-CSLAM and coupled to the simple condensation routine of \cite{K1969MM} across five different resolutions ($ne30$, $ne40$, $ne60$, $ne80$, and $ne120$). The results are expressed as the minimum $\omega$ throughout each one day simulation, and shown in Figure~\ref{fig:bubble}. Two sets of simulations are performed with both $pg3$ and $pg2$, one with $\Delta t_{phys}$ determined by equation~\ref{eq:dt-scale}, and an equivalent set of simulations with $\Delta t_{phys} = \Delta t_{phys,0}$ for all resolutions. 
 
-%\section{Here is a sample appendix}
+\begin{figure}[t]
+\begin{center}
+\noindent\includegraphics[width=25pc,angle=0]{figs/bubble_test.pdf}\\
+\end{center}
+\caption{}
+\label{fig:bubble}
+\end{figure}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% Optional Glossary, Notation or Acronym section goes here:
-%
-%%%%%%%%%%%%%%  
-% Glossary is only allowed in Reviews of Geophysics
-%  \begin{glossary}
-%  \term{Term}
-%   Term Definition here
-%  \term{Term}
-%   Term Definition here
-%  \term{Term}
-%   Term Definition here
-%  \end{glossary}
+\cite{HR2018JAMES} has shown that $\omega$ converges to the scaling of,
+\begin{equation}
+\omega = \omega_0 \times \Delta x_{dyn,0}/\Delta x_{dyn}~,\label{eq:w-scale}
+\end{equation}
+in the limit of small $\Delta t_{phys}$ (small $\Delta t_{phys}$ is defined here as $\Delta t_{phys}$ = $\Delta t_{dyn}$, where $\Delta t_{dyn}$ is the CFL limiting time-step). Equation~\ref{eq:w-scale} is plotted as grey lines in Figure~\ref{fig:bubble}, derived from a scale analysis of the Poisson equation \citep{JR2016QJRMS} at hydrostatic scales. The solutions using $\Delta t_{phys}$ from equation~\ref{eq:dt-scale} follow the scaling, whereas fixing $\Delta t_{phys} = 1800s$ across resolutions damps the solution relative to the analytical solution, progressively more so at higher resolutions. The magnitude of $\omega$ in the $pg3$ solutions are systematically larger than the $pg2$ solutions, which is primarily a result of the damping effect of integrating the basis functions over a larger control volume.
 
-%
-%%%%%%%%%%%%%%
-% Acronyms
-%   \begin{acronyms}
-%   \acro{Acronym}
-%   Definition here
-%   \acro{EMOS}
-%   Ensemble model output statistics 
-%   \acro{ECMWF}
-%   Centre for Medium-Range Weather Forecasts
-%   \end{acronyms}
+It should be noted that equation~\ref{eq:w-scale} is only strictly valid for the dry anelastic equations, and that the scaling is maintained when including moist processes is not proven through theory. Regardless, if $\Delta t_{phys}$ is too large, the solution has non-negligible error, which is avoided through scaling $\Delta t_{phys}$ using equation~\ref{eq:dt-scale}.
 
-%
-%%%%%%%%%%%%%%
-% Notation 
-%   \begin{notation}
-%   \notation{$a+b$} Notation Definition here
-%   \notation{$e=mc^2$} 
-%   Equation in German-born physicist Albert Einstein's theory of special
-%  relativity that showed that the increased relativistic mass ($m$) of a
-%  body comes from the energy of motion of the body—that is, its kinetic
-%  energy ($E$)—divided by the speed of light squared ($c^2$).
-%   \end{notation}
+The results of the idealized test may not extend to the results of more complex configurations. To get a a handle on whether the test is useful for understanding more realistic configurations, four aqua-planet simulations are performed with CAM6 physics. A pair of $ne30pg2$ simulations, one in which $\Delta t_{phys}$ is determined by the scaling of equation~\ref{eq:w-scale}, and one where it is set to the $\Delta t_{phys}$ appropriate for the $ne20$ resolution. Figure~\ref{fig:pdf-dtphys}a shows a pair of PDFs of $\omega$, computed from one year of 6-hourly data of the entire model domain. The curves are barely discernible from one another, and indicate that at lower resolution, the solutions are not that sensitive to $\Delta t_{phys}$. Figure~\ref{fig:pdf-dtphys}b shows the PDFs of a pair of $ne120pg2$ simulations, similarly, with $\Delta t_{phys}$ determined by equation~\ref{eq:w-scale}, and one with $\Delta t_{phys}$ set to the $ne80$ value. Large values of $\omega$ (less then $1 Pa/s$) are much more frequent in the smaller $\Delta t_{phys}$ simulation. 
 
+\begin{figure}[t]
+\begin{center}
+\noindent\includegraphics[width=30pc,angle=0]{figs/panel_pdf_dtphys}\\
+\end{center}
+\caption{Probability density distribution of upward $\omega$ everywhere in the model in the aqua-planets for the $ne20pg3$ grid (Left) and the $ne80pg3$ grid (Right). Figure computed for one year of 6-hourly data. The different colors indicate the physics time-steps used in the runs.}
+\label{fig:pdf-dtphys}
+\end{figure}
 
+The results in Figure~\ref{fig:pdf-dtphys} are similar to the CAM, version 5 aqua-planet results of \cite{HR2018JAMES}, showing that solutions are more sensitive to $\Delta t_{phys}$ at higher-resolutions. This behavior also manifests in the moist bubble tests, indicating that the time-truncation errors arising from large $\Delta t_{phys}$ also exist in more complex configurations.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
