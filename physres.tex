@@ -306,7 +306,7 @@ Figure~\ref{fig:transx} shows a snapshot of the $\omega$ field in the Inter-Trop
 \begin{center}
 \noindent\includegraphics[width=30pc,angle=0]{figs/panel_transGLL.pdf}\\
 \end{center}
-\caption{}
+\caption{Snapshots in the longitude-pressure plane of $\omega_{gll}$ through the ITCZ region in the $ne20pg3$, $ne30pg2$ and $ne30pg3$ configurations. Black is the $\pm 15 K/day$ contour of the physics tendencies, and the white contour is the $0.0075 kg/m^2/s$ contour of the parameterized deep convective mass fluxes.}
 \label{fig:transx}
 \end{figure}
 
@@ -316,7 +316,7 @@ It is not obvious from the snapshots in Figure~\ref{fig:transx} whether the char
 \begin{center}
 \noindent\includegraphics[width=30pc,angle=0]{figs/panel_ne20pg2-ne30pg2-ne30pg3.pdf}\\
 \end{center}
-\caption{(Left) Wavenumber-power spectrum of the temperature tendencies from the moist physics, near the 369 hPa level, (Middle) probability density distribution and (Right) the scaled probability density distribution of upward $\omega$ everywhere in the model. The scaled distributions are scaled to $ne30pg3$ using $\Delta x_{phys}$.}
+\caption{(Left) Wavenumber-power spectrum of the temperature tendencies from the moist physics, near the 369 hPa level, (Middle) probability density distribution and (Right) the scaled probability density distribution of upward $\omega$ everywhere in the model. The scaled distributions are scaled to $ne30pg3$ using $\Delta x_{phys}$. {\color{red}{need to add a, b, c labels}}}
 \label{fig:pgXpanel-lores}
 \end{figure}
 
@@ -336,7 +336,7 @@ The other reason the forcing scale is determined by the $GLL$ grid, is that high
 \begin{center}
 \noindent\includegraphics[width=30pc,angle=0]{figs/panel_loworder.pdf}\\
 \end{center}
-\caption{(Left) Wavenumber-power spectrum of the temperature tendencies from the moist physics, near the 369 hPa level, and (right) probability density distribution of upward $\omega$, everywhere in the model, for three year-long aqua-planet simulations.  Solid lines refer to values of on the dynamics grid, and dashed lines, the values on the physics grid. See text for details regarding the three simulations.}
+\caption{(Left) Wavenumber-power spectrum of the temperature tendencies from the moist physics, at the 369 hPa level, and (right) probability density distribution of upward $\omega$, everywhere in the model, for three year-long aqua-planet simulations. Solid lines refer to values of on the $GLL$ grids, and dashed lines, the fields on the $pg$ grids. See text for details regarding the three simulations.}
 \label{fig:loworder}
 \end{figure}
 
@@ -344,7 +344,7 @@ The importance of the high-order mapping can be shown with an additional $ne30pg
 
 The dotted lines in Figure~\ref{fig:loworder}b show the PDF of $\omega$ on the $pg$ grids. The frequency of large magnitude $\omega$ is reduced on the $pg$ grids, compared to the state on the $GLL$ grids. This is primarily due to the smothing effect of integrating the nodal point values over control volumes (H18). The larger $\omega$ values are even less frequent on the $pg2$ grid due to integrating over control volumes $\frac{9}{4}$ times greater than the $pg3$ control volumes. 
 
-In sum, at low resolution, the default $pg2$ configuration does not degrade the resolution of the model since (1) the $GLL$ resolution is unchanged and (2) the high-order mapping is able to reproduce a state similar to what occurs in a $pg3$ configuration. Increasing the hyper-viscosity coefficients is akin to reducing the resolution of $GLL$ solution. The combined effect of these two factors can be illustrated through an $ne30pg2$ simulation that uses low-order mapping, and with hyper-viscosity coefficients set to $ne20$ values ($ne30pg2-ne20visc-loworder$ in Figure~\ref{fig:pgXpanel-lores}). The simulation more closely resembles the $ne20pg3$ run. In this case, the forcing scale is more accurately determined by $\Delta x_{phys}$, since the scaled PDF matches the $ne30pg3$ simulation quite well (Figure~\ref{fig:pgXpanel-lores}c).
+In sum, at low resolution, the default $pg2$ configuration does not degrade the resolution of the model since (1) the $GLL$ resolution is unchanged and (2) the high-order mapping is able to reproduce a state similar to what occurs in a $pg3$ configuration. Increasing the hyper-viscosity coefficients is akin to reducing the resolution of the $GLL$ solution. The combined effect of these two factors can be illustrated through an $ne30pg2$ simulation that uses low-order mapping, and with hyper-viscosity coefficients set to $ne20$ values ($ne30pg2-ne20visc-loworder$ in Figure~\ref{fig:pgXpanel-lores}). The simulation more closely resembles the $ne20pg3$ run. In this case, the forcing scale is more accurately determined by $\Delta x_{phys}$, since the scaled PDF matches the $ne30pg3$ simulation quite well (Figure~\ref{fig:pgXpanel-lores}c).
 
 
 
@@ -370,7 +370,7 @@ In sum, at low resolution, the default $pg2$ configuration does not degrade the 
 \begin{center}
 \noindent\includegraphics[width=30pc,angle=0]{figs/panel_ne80pg3_ne120pg2_ne120pg3.pdf}\\
 \end{center}
-\caption{As in Figure~\ref{fig:pgXpanel-lores}, but for the high resolution simulations. Asterisks indicate that the physics time-step in these simulations are $\Delta t_{phys} = 675 s$, which is larger than those used in the default $ne120$ grid of $\Delta t_{phys} = 450 s$ (see Table \ref{table:grids2}).}
+\caption{As in Figure~\ref{fig:pgXpanel-lores}, but for the high resolution simulations. Asterisks indicate that the physics time-step in these simulations are $\Delta t_{phys}=675 s$, which is larger than that used for the default $ne120$ runs (see Table \ref{table:grids-hi}). {\color{red}{need to add a, b, c labels. And why is there so many spaces around the equal sign?}}}
 \label{fig:pgXpanel-hires}
 \end{figure}
 
@@ -380,7 +380,7 @@ In sum, at low resolution, the default $pg2$ configuration does not degrade the 
 \begin{center}
 \noindent\includegraphics[width=30pc,angle=0]{figs/panel_diags.pdf}\\
 \end{center}
-\caption{Year long mean values, averaged over +/-$10^{\circ}$ latitude.}
+\caption{Global mean, time-mean (a) CLUBB precipitation rate, (b) parameterized deep convective precipitation rate and (c) upward $\omega$. All computed from the final 11 months of one-year simulations, and upward $\omega$ is computed using 6-hourly output.}
 \label{fig:diags}
 \end{figure}
 
