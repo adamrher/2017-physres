@@ -135,9 +135,9 @@
 % \end{keypoints}
 
 \begin{keypoints}
-\item 
-\item 
-\item 
+\item Each control volume has the same numerical properties
+\item Grid imprinting is ameliorated, even in regions with steep terrain
+\item The coarser physics grid does not degrade the effective resolution of the model
 \end{keypoints}
 
 %% ------------------------------------------------------------------------ %%
@@ -153,6 +153,7 @@
 %% \begin{abstract} starts the second page 
 
 \begin{abstract}
+The effects of using a different resolution grid for evaluating the physical parameterizations in global atmospheric models has long been discussed, but very few studies have actually experimented with such a configuration. Here, the implementation of a coarser resolution physics grid into CAM-SE-CSLAM is described, and the results are compared to the conventional method where the physics and dynamics grid resolutions are the same, in an aqua-planet configuration and in a Held-Suarez configuration augmented with real world topography. Through dividing up the elements into $2 \times 2$ equi-angular control volumes, all the control volumes have the same numerical properties, essentially eliminating grid-imprinting that so often plagues the spectral-element method, especially over regions of steep topography. The impact of the coarser resolution physics grid on the resolved scales of motion is analyzed across a range of spectral-element grid resolutions typical of present-day models. It is found that the effective resolution of the model is not appreciably degraded through the use of coarser resolution physics grid. As the physics makes-up about half the cost of the model in the more conventional set-up, a potential 25\% cost savings is achievable using the coarser resolution physics grid, an attractive property of computationally burdensome global models.
 \end{abstract}
 
 
