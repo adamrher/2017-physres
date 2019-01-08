@@ -197,29 +197,6 @@ In this study, we test the hypothesis that the coarser, $pg2$ physics grid is ef
 \section{Methods}\label{sec:methods}
 
 \input{mapping.tex}
-
-\begin{figure}[t]
-\begin{center}
-\noindent\includegraphics[width=30pc,angle=0]{figs/area-schematic.png}\\
-\end{center}
-\caption{Indice notation for (a) the $pg2$ grid, (b) the $pg3$ grid and (c) their exchange grid. {\color{red}Peter - do you think you will use this figure?}}
-\label{fig:area-schematic}
-\end{figure}
-
-\begin{figure}[t]
-\begin{center}
-\noindent\includegraphics[width=30pc,angle=0]{figs/alg-schematic.png}\\
-\end{center}
-\caption{Make captions stand-alone while being concise}
-\label{fig:alg-schematic}
-\end{figure}
-
-%In the $pg2$ configuration, mapping the fields to and from the quadrature grid and $pg2$ grid is identical to that described in H18. As discussed above above, in mapping to the physics grid, CAM-SE's Lagrange basis functions are integrated over the $pg2$ control volumes to provide the physics with a volume averaged state. The procedure is accurate to machine precision, conserves thermal energy and dry air mass, and is consistent (i.e., the mapping preserves a constant). The reverse mapping, from the physics grid to the quadrature grid, is done using a tensor-product Lagrange interpolation (see Appendix A in H18). The Lagrange interpolation is consistent, conserves dry air mass ({\color{red}{Peter, is this true?}}), but does not conserve thermal energy. Errors arising from the lack of energy conservation were estimated to be small; about two orders of magnitude less than the energy dissipation due to the dynamical core alone.
-
-%The semi-Lagrangian advection of tracers in our $pg2$ configuration is solved on the CSLAM grid. 
-
-Preserving linear correlations in mapping to and from the CSLAM and $pg2$ grids requires additional considerations; one such problem is depicted schematically in Figure~\ref{fig:alg-schematic}. Consider a single element of CSLAM control volumes, containing only a single cell with mixing ratio $1.0$, and $0.0$ everywhere else ($m_l$; Figure ~\ref{fig:alg-schematic}a). Assume that the mixing ratios mapped to the $pg2$ grid ($m_k$; Figure~\ref{fig:alg-schematic}b) results in a negative tracer tendency from the physics ($f_k$; Figure~\ref{fig:alg-schematic}c). The non-zero values of the tendencies for $pg2$ areas overlapping CSLAM grid cells originally containing a mixing ratio of zero ($f_{k,l}$; Figure~\ref{fig:alg-schematic}d), are driven negative by the mapped tendency (Figure~\ref{fig:alg-schematic}e). Preserving linear correlations in mapping to and from grids with different degrees of freedom can not be guaranteed without additional modifications to the mapping procedure.
-
 {\color{red}Describe algorithm here}
 
 {\color{red}Peter -  I think the results of the terminator tests should be mentioned here. We could just put in a sentence saying it passes. But I'm assuming that if we don't use the algorithm that weights the tendency by the amount of available mixing ratio, it will fail. If that's the case, we could just do a two panel plot showing the iCLy at day 15 for with and without the algorithm.}
