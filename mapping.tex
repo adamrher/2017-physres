@@ -1,4 +1,4 @@
-Separating dynamics, tracer and physics grids introduces the added complexity of having to map the state from dynamics and tracer grids to the physics grid; and mapping physics tracer tendencies back to the tracer grid and physics tendencies needed by the dynamical core to the dynamics grid. The dynamics grid refers to the Gauss-Lobatto-Legendre (GLL) quadrature nodes by the spectral-element method to solve the momentum equations for the momentum vector $(u,v)$, thermodynamics equation for temperature ($T$), continuity equation for dry air ($M$), and continuity equations for water vapor and condensates thermodynamically active \citep[see, e.g., ][ for details]{LetAl2018JAMES}. By tracer grid we refer to the $pg3$ grid on which CSLAM performs tracer transport of water vapor, condensates and other tracers. The GLL value for water vapor and condensates is overwritten by the CSLAM values every physics time-step so that the spectral-element advection of water species does not become decoupled from the the CSLAM advection of the same water species. Mapping velocity components, dry air mass and temperature from the GLL grid to the $pg2$ grid is done by using the internal degree 3 Lagrange basis functions in CAM-SE \citep[ as described in  ][ for pg3; exactly the same methods can be used for $pg2$]{HL2018MWR}.
+Separating dynamics, tracer and physics grids introduces the added complexity of having to map the state from dynamics and tracer grids to the physics grid; and mapping physics tracer tendencies back to the tracer grid and physics tendencies needed by the dynamical core to the dynamics grid. The dynamics grid refers to the Gauss-Lobatto-Legendre (GLL) quadrature nodes by the spectral-element method to solve the momentum equations for the momentum vector $(u,v)$, thermodynamics equation for temperature ($T$), continuity equation for dry air ($p$), and continuity equations for water vapor and condensates thermodynamically active \citep[see, e.g., ][ for details]{LetAl2018JAMES}. By tracer grid we refer to the $pg3$ grid on which CSLAM performs tracer transport of water vapor, condensates and other tracers. The GLL value for water vapor and condensates is overwritten by the CSLAM values every physics time-step so that the spectral-element advection of water species does not become decoupled from the the CSLAM advection of the same water species. Mapping velocity components, dry air mass and temperature from the GLL grid to the $pg2$ grid is done by using the internal degree 3 Lagrange basis functions in CAM-SE \citep[ as described in  ][ for pg3; exactly the same methods can be used for $pg2$]{HL2018MWR}.
 
 As compared to the $pg3$ configuration, the extra complication of the $pg2$ setup is that tracer state needs to be mapped from the tracer grid to the physics grid and tracer tendencies need to the mapped from the physics grid to CSLAM grid. In order to describe the algorithm some notation needs to be introduced.
 
@@ -15,20 +15,33 @@ so that
 \begin{equation}
 A^{(pg)}_k=\cup_{l=1}^{nc^2}A_{k\ell}.
 \end{equation}
-This overlap grid is also referred to as an exhange grid.
+This overlap grid is also referred to as an exchange grid.
 \subsection{Mapping tracers from CSLAM to $pg$}
 For mapping tracer state from the CSLAM grid to any physics grid can be done using exising CSLAM technology, i.e. do a high-order shape-preserving reconstruction of mixing ratio and dry air mass inside each CSLAM control volume and integrate those reconstruction functions over the overlap areas \citep{LNU2010JCP,NL2010JCP}. This algorithm retains the properties of CSLAM: inherent mass-conservation, mixing ratio shape-preservation and linear-correlation preservation. 
 
-In mathemtical terms the remapping is given by
-\begin{eqnarray}
-\Delta M^{(pg)}_{\ell}\Delta A_{\ell} &=\sum_{k=1}^{nc^2}\widetilde{\Delta M}^{(nc)}_{k\ell} \Delta A_{k\ell},\\
-\Delta M^{(pg)}_{\ell}\, m^{(pg)}_{\ell}\Delta A_{\ell}&=\frac{1}{\Delta M^{(pg)}_{\ell}}\sum_{k=1}^{nc^2}\left[ \widetilde{\Delta M \, m}\right]^{(nc)}_{k\ell} \Delta A_{k\ell},
-\end{eqnarray}
-where 
-\begin{eqnarray}
-\Delta M^{(nc)}_{k\ell} &= \frac{1}{\Delta A_{k\ell}}\int_{A_{k\ell}}\Delta M(x,y)dA.\\
-{\left[ \Delta M\, m\right]}^{(nc)}_{k\ell} &=\frac{1}{\Delta A_{k\ell}}\int_{A_{k\ell}}\left[ \Delta M\, m\right] (x,y)\, dA.
-\end{eqnarray}
+In mathematical terms, the dry pressure level thickness integrated over the $k$'th physics grid cell is given by
+\begin{equation}
+\overline{\Delta p}^{(pg)}_k=\sum_{\ell=1}^{nc^2}\langle \Delta p\rangle_{k\ell},
+\end{equation}
+where $\langle \Delta p\rangle_{k\ell}$ is the integral over the high-order reconstruction of $\Delta p$ over the overlap area $A_{k\ell}$ divided by the area of the overlap
+\begin{equation}
+\langle \Delta p\rangle_{k\ell}=\frac{1}{\delta A_{k\ell}}\int_{A_{k\ell}}\left[ \sum_{i+j\le 2}C^{(ij)}_\ell x^{i}y^{j}\right] dA,
+\end{equation}
+where the reconstruction coefficients $C^{(ij)}_\ell$ in CSLAM cell $\ell$ are computed from the cell average pressure level thicknesses on the CSLAM grid $\Delta p^{(nc)}$ and the numerical integration over overlap areas is done by line-integral quadrature. The details are given in \cite{LNU2010JCP} and not repeated here.
+
+The tracer mass per unit area on the physics grid is given by
+\begin{equation}
+\overline{m\Delta p}^{(pg)}_k=\sum_{\ell=1}^{nc^2}\langle m\Delta p\rangle_{k\ell},
+\end{equation}
+where $\langle m\Delta p\rangle_{k\ell}$ is the integral over the high-order reconstruction of $\Delta p$ and $m$ combined using the approach outlined in Appendix B of \cite{NL2010JCP} over the overlap area $A_{k\ell}$
+\begin{equation}
+\langle m\Delta p\rangle_{k\ell}=\frac{1}{\delta A_{k\ell}}\int_{A_{k\ell}}\left[ \overline{\Delta p}_\ell^{(nc)}\sum_{i+j\le 2}c^{(ij)}_\ell x^{i}y^{j}+{\overline{m}}_\ell^{(nc)}\sum_{i+j\le 2}{\tilde{C}}^{(ij)}_\ell x^{i}y^{j}\right] dA,
+\end{equation}
+where ${\tilde{C}}^{(00)}_\ell=C^{(00)}_\ell-\overline{\Delta p}^{(nc)}_\ell$ and ${\tilde{C}}^{(ij)}_\ell=C^{(ij)}_\ell$ for $i,j>0$. The mixing ratio on the physics grid is then
+\begin{equation}
+\overline{m}^{(pg)}_k=\frac{\overline{m\Delta p}^{(pg)}_k}{\overline{\Delta p}^{(pg)}_k}.
+\end{equation}
+
 
 
 The tendencies from the parameterizations are computed on the physics grid. The tracer tendency in physics grid cell $k$ is denoted $f_k^{(pg)}$. The problem is how to map $f_k^{(pg)}$ to the CSLAM control volumes $f^{(nc)}$ satisfying the following constraints:
