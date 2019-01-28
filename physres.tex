@@ -313,11 +313,7 @@ The combined effect of these two factors on the forcing scale is illustrated thr
 
 \subsubsection{High Resolution}\label{sec:hires}
 
-The experiment described in the previous section is repeated here for a $ne120pg2$ aqua-planet simulation, which corresponds to an approximate grid spacing of $\Delta x_{dyn} = 27.8km$ and $\Delta x_{phys} = 41.7km$. $ne80pg3$ refers to the grid in which the physics and dynamics are the same resolution as the physics of the $ne120pg2$ grid, and $ne120pg3$, the grid in which the physics and dynamics are the same resolution as the dynamics of $ne120pg2$. At these higher resolutions, the solutions are sensitive to $\Delta t_{phys}$ (Figure~\ref{fig:pdf-dtphys}), and so the $ne80$ grid uses a larger time-step than that of the $ne120$ grids (see Table~\ref{table:grids-hi}), following equation~\ref{eq:dt-scale}.
-
-Figure~\ref{fig:pgXpanel-hires} is the same plot as Figure~\ref{fig:pgXpanel-lores}, but for the high resolutions simulations. While the $ne80pg3$ forcing spectra begins to drop off just prior to wavenumber 100, the $ne120pg2$ and $ne120pg3$ drop off at higher wavenumbers, and their spectra lie on top of one another (Figure~\ref{fig:pgXpanel-hires}a). This is consistent with the PDF's of (upward) $\omega_{gll}$, which show that the $ne120$ distributions lie on top of one another, and while not a perfect match, both $ne120$ runs have substantially more frequent large magnitude vertical motion than in the $ne80pg3$ run (Figure~\ref{fig:pgXpanel-hires}b). Similar to the low resolution runs, the similarity of the $ne120$ forcing spectra and $\omega_{gll}$ distributions indicate that the forcing scale of the $ne120pg2$ run is not determined by the physics grid spacing, but rather the dynamics grid spacing. This is also evident from the over-prediction of the frequency of large magnitude $\omega_{gll}$ compared with the $ne120pg3$ run, through scaling the $ne120pg2$ PDF and setting the forcing scale proportional to $\Delta x_{phys}$ in equation~\ref{eq:pdf} (Figure~\ref{fig:pgXpanel-hires}c). 
-
-
+The experiment described in the previous section is repeated here for a $ne120pg2$ aqua-planet simulation, which corresponds to an approximate grid spacing of $\Delta x_{dyn} = 27.8km$ and $\Delta x_{phys} = 41.7km$. $ne80pg3$ refers to the grid in which the physics and dynamics are the same resolution as the physics of the $ne120pg2$ grid, and $ne120pg3$, the grid in which the physics and dynamics are equal to the resolution of the dynamics of $ne120pg2$. At these higher resolutions, the solutions are sensitive to $\Delta t_{phys}$ (Figure~\ref{fig:pdf-dtphys}), and so the $ne80$ grid uses a larger time-step than that of the $ne120$ grids (see Table~\ref{table:grids-hi}), following equation~\ref{eq:dt-scale}.
 
  \begin{table}
  \caption{$\Delta x$ and $\Delta t$ for the physics and dynamics in the high resolution simulations}
@@ -333,14 +329,18 @@ Figure~\ref{fig:pgXpanel-hires} is the same plot as Figure~\ref{fig:pgXpanel-lor
  \end{tabular}
  \label{table:grids-hi}
  \end{table}
-
-\begin{figure}[t]
+ 
+ \begin{figure}[t]
 \begin{center}
 \noindent\includegraphics[width=30pc,angle=0]{figs/panel_ne80pg3_ne120pg2_ne120pg3.pdf}\\
 \end{center}
 \caption{As in Figure~\ref{fig:pgXpanel-lores}, but for the high resolution simulations. Asterisks indicate that $\Delta t_{phys}=675 s$, which is larger than that used for the default $ne120$ runs (see Table \ref{table:grids-hi}). {\color{red}{why is there so many spaces around the equal sign?}}}
 \label{fig:pgXpanel-hires}
 \end{figure}
+
+Figure~\ref{fig:pgXpanel-hires} is the same as Figure~\ref{fig:pgXpanel-lores}, but for the high resolutions simulations. While the $ne80pg3$ forcing spectra begins to drop off just near wavenumber 100, the $ne120pg2$ and $ne120pg3$ drop off closer to wavenumber 200, and their spectra lie on top of one another (Figure~\ref{fig:pgXpanel-hires}a). The PDF's of (upward) $\omega_{gll}$ show that the $ne120$ distributions lie on top of one another, and while not a perfect match, both $ne120$ runs have substantially more frequent large magnitude vertical motion than in the $ne80pg3$ run (Figure~\ref{fig:pgXpanel-hires}b). As in the low resolution runs, the similarity of the $ne120$ forcing spectra and $\omega_{gll}$ distributions indicate that the forcing scale of the $ne120pg2$ run is not determined by the physics grid spacing, but rather the dynamics grid spacing. This is also evident from the over-prediction of the frequency of large magnitude $\omega_{gll}$ compared with the $ne120pg3$ run, through scaling the $ne120pg2$ PDF and setting the forcing scale proportional to $\Delta x_{phys}$ in equation~\ref{eq:pdf} (Figure~\ref{fig:pgXpanel-hires}c).
+
+In the $ne120pg2$ simulation, the dynamics grid determines the forcing scale for the same two reasons found in the low resolution runs. The high-order mapping of the physics to the dynamics is important for reconstructing scales not supported on the $pg2$ grid, and scaling the viscosity coefficients by the dynamics grid spacing is also important. But in order to recreate the $ne80pg3$ solution using the $ne120pg2$ grid, the physics time-steps must be the same for these two grids. Combining all three modifications leads to an $ne120pg2$ solution that resembles the $ne80pg3$ run ($ne120pg2-ne80visc-loworder*$ in Figure~\ref{fig:pgXpanel-hires}). The forcing spectrum and distribution of $\omega_{gll}$ match that of the $ne80pg3$ run, and scaling the PDF by $\Delta x_{phys}$ closely resembles the $ne120pg3$ distribution.
 
 \subsubsection{Across Resolutions}\label{sec:allres}
 
