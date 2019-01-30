@@ -1,4 +1,4 @@
-[DEFINE INCREMENT VERSUS TENDENCY CLEARLY; STRAIGHTEN OUT NOTATION FOR CSLAM GRID AND PG3 - ALSO IN FIGURES]\\
+{\color{red}{[DEFINE INCREMENT VERSUS TENDENCY CLEARLY; STRAIGHTEN OUT NOTATION FOR CSLAM GRID AND PG3 - ALSO IN FIGURES]}}\\
 
 Separating dynamics, tracer and physics grids introduces the added complexity of having to map the state from dynamics and tracer grids to the physics grid; and mapping physics tracer increments back to the tracer grid and physics increments needed by the dynamical core to the dynamics grid. The dynamics grid refers to the Gauss-Lobatto-Legendre (GLL) quadrature nodes used by the spectral-element method to solve the momentum equations for the momentum vector $(u,v)$, thermodynamics equation for temperature ($T$), continuity equation for dry air ($p$), and continuity equations for water vapor and condensates thermodynamically active \citep[see, e.g., ][ for details]{LetAl2018JAMES}. By tracer grid we refer to the $pg3$ grid on which CSLAM performs tracer transport of water vapor, condensates and other tracers. The GLL value for water vapor and condensates is overwritten by the CSLAM values every physics time-step so that the spectral-element advection of water species does not become decoupled from the the CSLAM advection of the same water species. Mapping velocity components, dry air mass and temperature from the GLL grid to the $pg2$ grid is done by using the internal degree 3 Lagrange basis functions in CAM-SE \citep[as described in  ][ for pg3; exactly the same methods can be used for $pg2$]{HL2018MWR}.
 
@@ -33,10 +33,12 @@ where the reconstruction coefficients ${\mathcal{P}}^{(ij)}_\ell$ in CSLAM cell 
 
 The tracer mass per unit area on the physics grid is given by
 \begin{equation}
+\label{eq:mp}
 \overline{m\Delta p}^{(pg)}_k=\sum_{\ell=1}^{nc^2}\langle m\Delta p\rangle_{k\ell},
 \end{equation}
 where $\langle m\Delta p\rangle_{k\ell}$ is the integral over the high-order reconstruction of $\Delta p$ and $m$ combined using the approach outlined in Appendix B of \cite{NL2010JCP} over the overlap area $A_{k\ell}$
 \begin{equation}
+\label{eq:mp2}
 \langle m\Delta p\rangle_{k\ell}=\frac{1}{\delta A_{k\ell}}\int_{A_{k\ell}}\left[ \overline{\Delta p}_\ell^{(nc)}\sum_{i+j\le 2}{\mathcal{M}}^{(ij)}_\ell x^{i}y^{j}+{\overline{m}}_\ell^{(nc)}\sum_{i+j\le 2}{\widetilde{{\mathcal{P}}}}^{(ij)}_\ell x^{i}y^{j}\right] dA,
 \end{equation}
 where ${\widetilde{{\mathcal{P}}}}^{(00)}_\ell={\mathcal{P}}^{(00)}_\ell-\overline{\Delta p}^{(nc)}_\ell$ and ${\widetilde{{\mathcal{P}}}}^{(ij)}_\ell={\mathcal{P}}^{(ij)}_\ell$ for $i,j>0$, and ${\mathcal{M}}^{(ij)}_\ell$ are the reconstruction coefficients for the mixing ratio in CSLAM cell $A^{(nc)}_\ell$. The mixing ratio on the physics grid is then
@@ -65,7 +67,7 @@ m_k^{(max)}=\max \left( m^{(pg)}_k+f_k^{(pg)},\left\{ m^{(nc)}_{k\ell} |\ell=1,n
 \end{enumerate}
 To motivate the algorithm that will simultaneously satisfy 1-4 it is informative to discuss how `standard' mapping algorithms will violate one or more of the constraints:
 \subsubsection{Why conservative remapping won't work!}
-It is helpful to analyze in detail why conventional remapping can not satisfy properties 1-4 above. Assume that one remaps the mass-increments in exactly the same way as the mapping of mixing ratio state from the CSLAM grid to the physics grid described in section \ref{sec:nctopg}. That is, replace $m$ with $f$ and map from physics grid to the CSLAM grid instead of the other way around. The mapped mass-increment is $\overline{f\Delta p}^{(pg)}_k$ and due to the properties of the mapping algorithm the mass-increment is conserved, linear correlation between mass-increments are conserved and shape in mass-increment is preserved.
+It is helpful to analyze in detail why conventional remapping can not satisfy properties 1-4 above. Assume that one remaps the mass-increments in exactly the same way as the mapping of mixing ratio state from the CSLAM grid to the physics grid described in section \ref{sec:nctopg}. That is, replace $m$ with $f$ and map from physics grid to the CSLAM grid instead of the other way around. {\color{red}{explain algorithm with math ... need it for high-order preallocation!}} The mapped mass-increment is $\overline{f\Delta p}^{(pg)}_k$ and due to the properties of the mapping algorithm the mass-increment is conserved, linear correlation between mass-increments are conserved and shape in mass-increment is preserved.
 
 That said, this approach is problematic. The issue is that the dry pressure level thickness mapped from $pg$ to $nc$, call it $\widetilde{\overline{\Delta p}}^{(nc)}$, differs from $\overline{\Delta p}^{(nc)}$. During physics-dynamics coupling the dry pressure level thickness should remain constant. So when converting the mass-increments to mixing ratio increments through, e.g.,
 \begin{equation}
@@ -81,7 +83,7 @@ instead, but now mass-conservation is lost since $\widetilde{\overline{\Delta p}
 \begin{center}
 \noindent\includegraphics[width=30pc,angle=0]{figs/area-schematic.png}\\
 \end{center}
-\caption{Indice notation for (a) the $pg2$ grid, (b) the $pg3$ grid and (c) their exchange grid.}
+\caption{Indices notation for (a) the $pg2$ grid, (b) the $pg3$ grid and (c) their exchange grid.}
 \label{fig:area-schematic}
 \end{figure}
 
@@ -95,7 +97,7 @@ instead, but now mass-conservation is lost since $\widetilde{\overline{\Delta p}
 
 Even if one could derive a reversible map for mapping $\Delta p$ from physics grid to the CSLAM grid there could still be problems with driving mixing ratios negative on the CSLAM grid (we refer to this as the `negativity problem'). This problem is depicted schematically in Figure~\ref{fig:alg-schematic}. Consider a single element of CSLAM control volumes, containing only a single cell with mixing ratio $1.0$, and $0.0$ everywhere else ($m_l$; Figure ~\ref{fig:alg-schematic}a). Assume that the mixing ratios mapped to the $pg2$ grid ($m_k$; Figure~\ref{fig:alg-schematic}b) results in a negative tracer increment from the physics ($f_k$; Figure~\ref{fig:alg-schematic}c). The non-zero values of the increments for $pg2$ areas overlapping CSLAM grid cells originally containing a mixing ratio of zero ($f_{k,l}$; Figure~\ref{fig:alg-schematic}d), are driven negative by the mapped increment (Figure~\ref{fig:alg-schematic}e). 
 
-The negativity issue could be avoided if one remaps the physics updated state instead of mapping increments/tendencies. In that case a shape-preserving filter will make sure that the state on the CSLAM grid is not negative (and does not overshoot). That said, if physics does not change the state and it is mapped back to the CSLAM grid then spurious tendencies (proportional to the errors introduced by mapping state from the CSLAM grid to the physics grid and back again) are introduced. Hence it is advantagous to map increments/tendencies since any reasoanble algorithm will preserve a zero function.
+The negativity issue could be avoided if one remaps the physics updated state instead of mapping increments/tendencies. In that case a shape-preserving filter will make sure that the state on the CSLAM grid is not negative (and does not overshoot). That said, if physics does not change the state and it is mapped back to the CSLAM grid then spurious tendencies (proportional to the errors introduced by mapping state from the CSLAM grid to the physics grid and back again) are introduced. Hence it is advantageous to map increments/tendencies since any reasonable algorithm will preserve a zero function.
 
 %In the $pg2$ configuration, mapping the fields to and from the quadrature grid and $pg2$ grid is identical to that described in H18. As discussed above above, in mapping to the physics grid, CAM-SE's Lagrange basis functions are integrated over the $pg2$ control volumes to provide the physics with a volume averaged state. The procedure is accurate to machine precision, conserves thermal energy and dry air mass, and is consistent (i.e., the mapping preserves a constant). The reverse mapping, from the physics grid to the quadrature grid, is done using a tensor-product Lagrange interpolation (see Appendix A in H18). The Lagrange interpolation is consistent, conserves dry air mass ({\color{red}{Peter, is this true?}}), but does not conserve thermal energy. Errors arising from the lack of energy conservation were estimated to be small; about two orders of magnitude less than the energy dissipation due to the dynamical core alone.
 
@@ -109,10 +111,38 @@ The negativity issue could be avoided if one remaps the physics updated state in
 
 As illustrated above a standard remapping method will NOT simultaneously satisfy 1-4 and hence a new algorithm has been derived.
 \subsection{Algorithm}
-{\color{red}{mention that the reason we map increment and not state is to avoid spurious increments solely due to interpolation errors, i.e. zero increment on physics grid would transform into increments on the CSLAM grid.}}
-Define the $\Delta m_{k\ell}$ is the amount of mixing ratio that can be removed without producing new extrema in $m_{k\ell}$
+The problem is how to map the mass-tendency $f^{(pg)}\Delta A^{(pg)}$ to the CSLAM cells that overlap with $\Delta A^{(pg)}$; these exchange grid cells we refer to as $A_{k\ell}$. To maintain shape-preservation and to avoid the negativity problem it advantageous to define a mass excess function $\Delta m_{k\ell}^{(excess)}$ which is the amount of mixing ratio that can be removed without producing new extrema in $m_{k\ell}$
 \begin{equation}
-\Delta m_{k\ell}=\overline{m}_{k\ell}-m^{(min)},
+\Delta m^{(excess)}_{k\ell}=\langle m\rangle_{k\ell}-m^{(min)},
 \end{equation}
-where $\overline{m}_{k\ell}$ has been computed using higher-order mapping ....
+where $\langle m\rangle_{k\ell}$ is a higher-order representation of the mixing ratio representation over each overlap area computed during the mapping of tracer mass to from the CSLAM grid to the physics grid (see equations \eqref{eq:mp} and \eqref{eq:mp2}). 
+
+The maximum amount of mass that we can remove from the CSLAM cells overlapping with the $k$th physics grid cell is
+\begin{equation}
+\sum_\ell \Delta m^{(excess)}_{k\ell}\langle \Delta p\rangle_{k\ell} \delta A_{k\ell}.
+\end{equation}
+We distribute the physics mass-forcing (assuming $f^{(pg)}<0$) according to the mass excess in each overlap area by solving this equation for $\gamma_k$
+\begin{equation}
+\Delta A_k^{(pg)}\Delta p_k^{(pg)}f^{(pg)}=\gamma_k \sum_\ell \Delta m^{(excess)}_{k\ell}\langle \Delta p\rangle_{k\ell} \delta A_{k\ell},
+\end{equation}
+and add mass increment {\color{red}{[check signs!]}}
+\begin{equation}
+\gamma_k \Delta m^{(excess)}_{k\ell}\langle \Delta p\rangle_{k\ell} \delta A_{k\ell},
+\end{equation}
+to the $\ell$th CSLAM cell state $m^{(c)}\Delta A^{(nc)}_\ell \Delta p^{(nc)}_\ell$. This is a well-posed problem since physics can not remove more mass than is available; hence the negativity problem is avoided. Mass is conserved by design and shape-preservation is obtained by using the excess function.
+
+If the physics increment is positive (assuming $f^{(pg)}<0$) we define a `lack' function
+\begin{equation}
+\Delta m^{(lack)}_{k\ell}=\langle m\rangle_{k\ell}-m^{(max)},
+\end{equation}
+and solve
+\begin{equation}
+\Delta A_k^{(pg)}\Delta p_k^{(pg)}f^{(pg)}=\gamma_k \sum_\ell \Delta m^{(lack)}_{k\ell}\langle \Delta p\rangle_{k\ell} \delta A_{k\ell},
+\end{equation}
+for $\gamma_k$ and follow the same procedure as for mass excess. Since positive and negative forcing is treated in exactly the same way, linear correlations are preserved. With the definition of the excess/lack function linear correlations would not be preserved; for example, if one would prevent negative values and not do anything about overshoots then linear correlations would not be preserved.
+
+%Similarly we define a mass lack function
+
+%which is the maximum amount of mixing ratio that can be added without creating new maxima.
+
 {\color{red}{mention why the problem is well-posed}}
