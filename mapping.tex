@@ -28,6 +28,7 @@ Denote the known cell averaged values of dry pressure-level thickness and mixing
 \end{equation}
 where $\overline{\delta p}_{k\ell}$ is the average pressure-level thickness over overlap area $A_{k\ell}$. It is computed by integrating a high-order (2D polynomial of degree 2) reconstruction of pressure-level thickness in each CSLAM cell over the overlap area $A_{k\ell}$
 \begin{equation}
+\label{eq:pg3dp}
 \overline{\delta p}_{k\ell}=\frac{1}{\delta A_{k\ell}}\int_{A_{k\ell}}\left[ \sum_{i+j\le 2}{\mathcal{P}}^{(ij)}_\ell x^{i}y^{j}\right] dA.
 \end{equation}
 The reconstruction coefficients ${\mathcal{P}}^{(ij)}_\ell$ in CSLAM cell $\ell$ are computed from the cell average pressure level thicknesses on the CSLAM grid $\overline{\Delta p}^{(pg3)}$ and the numerical integration over overlap areas is done by line-integrals. The details are given in \cite{LNU2010JCP} and not repeated here.
@@ -162,20 +163,35 @@ for $\gamma_k$ and follow the same procedure as for mass excess. Since positive 
 %which is the maximum amount of mixing ratio that can be added without creating new maxima.
 
 \subsection{High-order (non-conservative) pre-allocation of tracer tendencies}
-A high-order estimate of the physics increment in the $A_{k\ell}$th overlap cell, that is not mass-conserving, can be computed as
+The tracer mass increment in overlap area $A_{k\ell}$ is computed using the following formula
 \begin{equation}
 \label{eq:mp3}
-\overline{f}_{k\ell}=\frac{1}{\delta A_{k\ell}}\int_{A_{k\ell}}\left[ \sum_{i+j\le 2}{\mathcal{F}}^{(ij)}_k x^{i}y^{j}\right] dA,
+\overline{\left( f\delta p\right)}_{k\ell}=\frac{1}{\delta A_{k\ell}}\int_{A_{k\ell}}\left[ \overline{\Delta p}_\ell^{(pg3)}\sum_{i+j\le 2}{\mathcal{F}}^{(ij)}_k x^{i}y^{j}+{\overline{f}}_k^{(pg2)}\sum_{i+j\le 2}{\widetilde{{\mathcal{P}}}}^{(ij)}_\ell x^{i}y^{j}\right] dA,
 \end{equation}
-where $\mathcal{F}^{(ij)}_k$ are the recontruction coefficients for the physics increment $f$ in the $k$th physics grid cell. For reasons that will become clear a shape-preserving limiter is not applied when computing $\mathcal{F}^{(ij)}_k$. Each overlap increment is added to the CSLAM opverlap state $\overline{m}_{k\ell}$ 
+where $\mathcal{F}^{(ij)}_k$ is the forcing increment $f$ reconstruction coefficients in the $k$th physics grid cell and ${\overline{f}}_k^{(pg2)}$ is the average physics increment in the $k$th physics grid cell. Note that we are using the known dry pressure reconstruction coefficients on the $pg3$ grid instead of reconstructing sub-grid-scale pressure variations from the physics grid cell averaged values. We can do that since the dry pressure is not modified by physics. This highlights the importance of a dry-pressure formulation of the dynamical core when separating physics and dynamics grids \citep{LetAl2018JAMES}. If the physics forcing is constant then $\overline{\left( f\delta p\right)}_{k\ell}$ exactly equals $\overline{\delta p}_{k\ell}$ from \eqref{eq:pg3dp}; in other words, the mapping is designed to be reversible in dry pressure. The physics increment in terms of mixing ratio change is given by
 \begin{equation}
-\overline{m}_{k\ell}+\tilde{\overline{f}}_{k\ell},
+\label{eq:pg3fq}
+\overline{f}_{k\ell}=\frac{\overline{\left( f\delta p\right)}_{k\ell}}{\overline{\delta p}_{k\ell}},
 \end{equation}
-where $\tilde{\overline{f}}_{k\ell}$ is $\overline{f}_{k\ell}$ `cropped' so that shape-preservation is not violated locally
+where the denominator is given by \eqref{eq:pg3dp}.
+
+Shape-preservation, as defined by \eqref{eq:min} and \eqref{eq:max}, is enforced by eliminating under and overshoots in the overlap areas by modifying the forcing increment $\overline{f}_{k\ell}$ so that shape-preservation is not violated in the overlap areas
 \begin{equation}
-m_k^{(min)} \ge \overline{m}_{k\ell}+\tilde{\overline{f}}_{k\ell} \le m_k^{(max)} .
+m_k^{(min)} \le \overline{m}_{k\ell}+\widetilde{\overline{f}}_{k\ell} \le m_k^{(max)} .
 \end{equation}
 {\footnote{In the computation of $\overline{m}_{k\ell}$ there can be small overshoots and undershoots compared to the CSLAM cell average values $\overline{m}^{(pg3)}_\ell$ that it overlaps with so we set
 \begin{equation}
 m_k^{(min)}=\min \left( m_k^{(min)},\left\{ \overline{m}^{(pg)}\ell)|\ell=1,nc^2\right\} \right)
 \end{equation}}}
+While this algorithm preserves linear correlations, shape, and is consistent, is it not mass-conservative. Hence the remaining physics increment not allocated in the algorithm above is allocated according to the mass-fixing algorithm.
+
+%A high-order estimate of the physics increment in the $A_{k\ell}$th overlap cell, that is not mass-conserving, can be computed as
+%\begin{equation}
+%\label{eq:mp3}
+%\overline{f}_{k\ell}=\frac{1}{\delta A_{k\ell}}\int_{A_{k\ell}}\left[ \sum_{i+j\le 2}{\mathcal{F}}^{(ij)}_k x^{i}y^{j}\right] dA,
+%\end{equation}
+%where $\mathcal{F}^{(ij)}_k$ are the recontruction coefficients for the physics increment $f$ in the $k$th physics grid cell. For reasons that will become clear a shape-preserving limiter is not applied when computing $\mathcal{F}^{(ij)}_k$. Each overlap increment is added to the CSLAM opverlap state $\overline{m}_{k\ell}$ 
+%\begin{equation}
+%\overline{m}_{k\ell}+\tilde{\overline{f}}_{k\ell},
+%\end{equation}
+%where $\tilde{\overline{f}}_{k\ell}$ is $\overline{f}_{k\ell}$ `cropped' so that shape-preservation is not violated locally
