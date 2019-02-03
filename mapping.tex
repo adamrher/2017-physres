@@ -43,7 +43,7 @@ where $\overline{\left( m\delta p\right)}_{k\ell}$ is the average tracer mass ov
 \label{eq:mp2}
 \overline{\left( m\delta p\right)}_{k\ell}=\frac{1}{\delta A_{k\ell}}\int_{A_{k\ell}}\left[ \overline{\Delta p}_\ell^{(pg3)}\sum_{i+j\le 2}{\mathcal{M}}^{(ij)}_\ell x^{i}y^{j}+{\overline{m}}_\ell^{(pg3)}\sum_{i+j\le 2}{\widetilde{{\mathcal{P}}}}^{(ij)}_\ell x^{i}y^{j}\right] dA,
 \end{equation}
-where ${\widetilde{{\mathcal{P}}}}^{(00)}_\ell={\mathcal{P}}^{(00)}_\ell-\overline{\Delta p}^{(pg3)}_\ell$ and ${\widetilde{{\mathcal{P}}}}^{(ij)}_\ell={\mathcal{P}}^{(ij)}_\ell$ for $i,j>0$, and ${\mathcal{M}}^{(ij)}_\ell$ are the reconstruction coefficients for the mixing ratio in CSLAM cell $A^{(pg3)}_\ell$. A shape-preserving limiter is applied to the reconstruction of mixing raio $m$ \citep{BJ1989} and not $\Delta p$. This way of combining the reconstruction function for $\Delta p$ and $m$ \eqref{eq:mp2} ensures that a constant mixing ratio is preserved (consistency), tracer mass is conserved, linear-correlations are preserved and tracer shape-preservation is retained. The mixing ratio on the physics grid is then
+where ${\widetilde{{\mathcal{P}}}}^{(00)}_\ell={\mathcal{P}}^{(00)}_\ell-\overline{\Delta p}^{(pg3)}_\ell$ and ${\widetilde{{\mathcal{P}}}}^{(ij)}_\ell={\mathcal{P}}^{(ij)}_\ell$ for $i,j>0$, and ${\mathcal{M}}^{(ij)}_\ell$ are the reconstruction coefficients for the mixing ratio in CSLAM cell $A^{(pg3)}_\ell$. A shape-preserving limiter is applied to the reconstruction of mixing ratio $m$ \citep{BJ1989} and not $\Delta p$. This way of combining the reconstruction function for $\Delta p$ and $m$ \eqref{eq:mp2} ensures that a constant mixing ratio is preserved (consistency), tracer mass is conserved, linear-correlations are preserved and tracer shape-preservation is retained. The mixing ratio on the physics grid is then
 \begin{equation}
 {\overline{m}}^{(pg2)}_k=\frac{\overline{\left( m\Delta p\right)}^{(pg2)}_k}{\overline{\Delta p}^{(pg2)}_k},
 \end{equation}
@@ -61,7 +61,7 @@ where $\overline{\Delta p}^{(pg2)}_k$ is the pressure level thickness in physics
 \item {\bf{Local shape-preservation in mixing ratio}}: The increments mapped to the CSLAM grid and added to the previous CSLAM state should not produce values smaller than the updated physics grid mixing ratios, ${\overline{m}}^{(pg2)}_k+\overline{f}_k^{(pg2)}$, or values smaller than the existing CSLAM mixing ratios that overlap with physics grid cell $A_\ell$
 \begin{equation}
 \label{eq:min}
-{\overline{m}}^{(pg3)}_\ell+{\overline{f}}^{(pg3)}_\ell \ge {\overline{m}}^{(min)}_k=\min \left( {\overline{m}}^{(pg2)}_k+{\overline{f}}_k^{(pg2)},\left\{ {\overline{m}}_{k\ell} |\ell=1,nc^2\right\} \right),
+\overline{m}^{(pg3)}_\ell+{\overline{f}}^{(pg3)}_\ell \ge \overline{m}^{(min)}_k=\min \left( {\overline{m}}^{(pg2)}_k+{\overline{f}}_k^{(pg2)},\left\{ {\overline{m}}_{k\ell} |\ell=1,nc^2\right\} \right),
 \end{equation}
 where
 \begin{equation}
@@ -71,14 +71,14 @@ where
 The nominator and denominator \eqref{eq:moverlap2} are defined in \eqref{eq:mp} and \eqref{eq:mp2}, respectively. Similarly for maxima
 \begin{equation}
 \label{eq:max}
-{\overline{m}}^{(pg3)}_\ell+{\overline{f}}^{(pg3)}_\ell \le m_k^{(max)}=\max \left( {\overline{m}}^{(pg2)}_k+\overline{f}_k^{(pg2)},\left\{ {\overline{m}}_{k\ell} |\ell=1,nc^2\right\} \right),
+{\overline{m}}^{(pg3)}_\ell+{\overline{f}}^{(pg3)}_\ell \le \overline{m}_k^{(max)}=\max \left( {\overline{m}}^{(pg2)}_k+\overline{f}_k^{(pg2)},\left\{ {\overline{m}}_{k\ell} |\ell=1,nc^2\right\} \right),
 \end{equation}
 \item {\bf{Linear correlation preservation}}: The physics forcing must not disrupt linear tracer correlation between species on the CSLAM grid \citep[see, e.g., ][]{LT2011QJR}.
 \item {\bf{Consistency}}: A constant mixing ratio increment from physics, $cnst$, on the physics grid, $\overline{f}_k^{(pg2)}=cnst$ $\forall k$, must result in the same (constant) forcing on the CSLAM grid, $\overline{f}_\ell^{(pg3)}=\overline{f}_k^{(pg2)}=cnst$ $\forall \ell$.
 \end{enumerate}
 To motivate the algorithm that will simultaneously satisfy 1-4 it is informative to discuss how `standard' mapping algorithms will violate one or more of the constraints:
 \subsubsection{Why `conventional' conservative remapping won't work!}
-It is helpful to analyze in detail why conventional remapping can not satisfy properties 1-4 above. Assume that one remaps the mass-increments in exactly the same way as the mapping of mixing ratio state from the CSLAM grid to the physics grid described in section \ref{sec:nctopg}. That is, replace $m$ with $f$ and map from physics grid to the CSLAM grid instead of the other way around. {\color{red}{explain algorithm with math ... need it for high-order preallocation!}} The mapped mass-increment is $\overline{f\Delta p}^{(pg2)}_k$ and due to the properties of the mapping algorithm the mass-increment is conserved, linear correlation between mass-increments are conserved and shape in mass-increment is preserved. The problems arise when converting from mass to mixing ratio.
+It is helpful to analyze in detail why conventional remapping can not satisfy properties 1-4 above. Assume that one remaps the mass-increments in exactly the same way as the mapping of mixing ratio state from the CSLAM grid to the physics grid described in section \ref{sec:nctopg}. That is, replace $m$ with $f$ and map from physics grid to the CSLAM grid instead of the other way around. The mapped mass-increment is $\overline{f\Delta p}^{(pg2)}_k$ and due to the properties of the mapping algorithm the mass-increment is conserved, linear correlation between mass-increments are conserved and shape in mass-increment is preserved. The problems arise when converting from mass to mixing ratio.
 
 The issue is that the dry pressure level thickness mapped from $pg2$ to $nc$, call it $\widetilde{\overline{\Delta p}}^{(pg3)}$, differs from $\overline{\Delta p}^{(pg3)}$ since the mapping is not reversible. During physics-dynamics coupling the dry pressure level thickness should remain constant. So when converting the mass-increments to mixing ratio increments through, e.g.,
 \begin{equation}
@@ -123,47 +123,52 @@ The negativity issue could be avoided if one remaps the physics updated state in
 
 As illustrated above a standard remapping method will NOT simultaneously satisfy 1-4 and hence a new algorithm has been derived.
 \subsection{New tendency mapping algorithm}
-Although this algorithm is explained and examined for $pg2$ grid, it is general for any $pgX$ resolution. The problem is how to map the mass-tendency ${\overline{f}}^{(pg2)}\Delta A^{(pg2)}$ to the CSLAM cells that overlap with $\Delta A^{(pg2)}$; these exchange grid cells we refer to as $A_{k\ell}$. To maintain shape-preservation and to avoid the negativity problem, it advantageous to define a mass excess function $\Delta m_{k\ell}^{(excess)}$ which is the amount of mixing ratio that can be removed without producing new extrema in the overlap mixing ratio $m_{k\ell}$
+Although this algorithm is explained and examined for a $pg2$ grid, it is general for any $pgX$ resolution. The problem is how to map the mass-increment on the physics grid, ${\overline{f}}^{(pg2)}\Delta A^{(pg2)}$, to the CSLAM cells that overlap with $\Delta A^{(pg2)}$. The overlap grid, $\sum_\ell \Delta A_{k\ell}$, is referred to as the exchange grid. To maintain shape-preservation, linear correlations and to avoid the negativity problem locally, it is advantageous to define a mass excess function on the exchange grid $\Delta m_{k\ell}^{(excess)}$. It is basically the maximum amount of mixing ratio that can be removed (in the case ${\overline{f}}^{(pg2)}<0$) without producing new minima in the exchange grid mixing ratio $m_{k\ell}$
 \begin{equation}
-\Delta m^{(excess)}_{k\ell}=\overline{m}_{k\ell}-m^{(min)},
+\Delta m^{(excess)}_{k\ell}=\overline{m}_{k\ell}-\overline{m}_k^{(min)},
 \end{equation}
-where $\overline{m}_{k\ell}$ is a higher-order representation of the mixing ratio representation integrated over each overlap area $A_{k\ell}$ diving by $\delta A_{k\ell}$ computed during the mapping of tracer mass from the CSLAM grid to the physics grid:
+where $\overline{m}_{k\ell}$ is a higher-order representation of the mixing ratio representation integrated over each overlap area $A_{k\ell}$ divided by $\delta A_{k\ell}$ that is computed during the mapping of tracer mass from the CSLAM grid to the physics grid:
 \begin{equation}
 \label{eq:moverlap}
 \overline{m}_{k\ell}=\frac{\overline{m\delta p}_{k\ell}}{\overline{\delta p}_{k\ell}}
 \end{equation}
 where the nominator and denominator are defined in \eqref{eq:mp} and \eqref{eq:mp2}, respectively. 
 
-The maximum amount of mass that we can remove from the overlap cells (overlap area between $k$th physics grid cell and CSLAM cells) without violating the shape-preservation constraint (\eqref{eq:min} and \eqref{eq:max}) is
+So the maximum amount of mass that we can be removed from the exchange grid cells that span physics grid cell $A_k$ without violating the shape-preservation constraint (\eqref{eq:min} and \eqref{eq:max}) is
 \begin{equation}
 \sum_\ell \Delta m^{(excess)}_{k\ell}\overline{\Delta p}_{k\ell} \delta A_{k\ell}.
+\end{equation}
+If physics is designed not to remove more mass than available in $A_k$ (which should be the case for a carefully designed physics package) then it is guaranteed that
+\begin{equation}
+\label{eq:well-posed}
+\sum_\ell \Delta m^{(excess)}_{k\ell}\overline{\Delta p}_{k\ell} \delta A_{k\ell}\ge {\overline{f}}^{(pg2)}\Delta p_k\Delta A^{(pg2)}.
 \end{equation}
 We distribute the physics mass-forcing (assuming ${\overline{f}}^{(pg2)}<0$) according to the mass excess in each overlap area by solving this equation for $\gamma_k$
 \begin{equation}
 \Delta A_k^{(pg2)}\overline{\Delta p}_k^{(pg2)}{\overline{f}}^{(pg2)}=\gamma_k \sum_\ell \Delta m^{(excess)}_{k\ell}\overline{\Delta p}_{k\ell} \delta A_{k\ell},
 \end{equation}
-and add mass increment {\color{red}{[check signs!]}}
+and add mass increment (which in this case is negative)
 \begin{equation}
 \gamma_k \Delta m^{(excess)}_{k\ell}\overline{\Delta p}_{k\ell} \delta A_{k\ell},
 \end{equation}
-to the $\ell$th CSLAM cell state ${\overline{m}}^{(pg3)} \overline{\Delta p}^{(pg3)}_\ell \Delta A^{(pg3)}_\ell$. This process is repeated for all physics cells. Note that this problem is a well-posed ($\gamma_k>0$) since physics will not remove more mass than is locally available. The way in which the mass-forcing is distributed to the CSLAM cells using the excess function insures that the negativity problem is avoided. Mass is conserved by design and shape-preservation is obtained by using the excess function.
+to the $\ell$th CSLAM cell state ${\overline{m}}^{(pg3)} \overline{\Delta p}^{(pg3)}_\ell \Delta A^{(pg3)}_\ell$. This process is repeated for all physics cells. Note that this problem is a well-posed, i.e. $\gamma_k>0$, since physics will not remove more mass than is locally available \eqref{eq:well-posed}. The way in which the mass-forcing is distributed to the CSLAM cells using the excess function insures that the negativity problem is avoided. Mass is conserved by design and shape-preservation is obtained by using the excess function.
 
 If the physics increment is positive (assuming ${\overline{f}}^{(pg2)}>0$) we define a `lack' function
 \begin{equation}
-\Delta m^{(lack)}_{k\ell}=\overline{m}_{k\ell}-m^{(max)},
+\Delta m^{(lack)}_{k\ell}=\overline{m}_{k\ell}-\overline{m}^{(max)},
 \end{equation}
 and solve
 \begin{equation}
 \overline{\Delta p}_k^{(pg2)}{\overline{f}}^{(pg2)}\Delta A_k^{(pg2)}=\gamma_k \sum_\ell \left[ \Delta m^{(lack)}_{k\ell}\overline{\Delta p}_{k\ell} \delta A_{k\ell}\right],
 \end{equation}
-for $\gamma_k$ and follow the same procedure as for mass excess. Since positive and negative forcing is treated in exactly the same way, linear correlations are preserved. With the definition of the excess/lack function linear correlations would not be preserved; for example, if one would prevent negative values and not do anything about overshoots then linear correlations would not be preserved.
+for $\gamma_k$ and follow the same procedure as for mass excess. Since positive and negative forcing is treated in exactly the same way, linear correlations are preserved. Note how the definition of the excess/lack function insures linear correlation preservation; for example, if one would prevent negative values and not do anything about overshoots then linear correlations would not be preserved since the minima and maxima are not treated in the same way.
 
 %Similarly we define a mass lack function
 
 %which is the maximum amount of mixing ratio that can be added without creating new maxima.
 
 \subsection{High-order (non-conservative) pre-allocation of tracer tendencies}
-The tracer mass increment in overlap area $A_{k\ell}$ is computed using the following formula
+A high-order tracer mass increment in overlap area $A_{k\ell}$ can be computed using the following formula
 \begin{equation}
 \label{eq:mp3}
 \overline{\left( f\delta p\right)}_{k\ell}=\frac{1}{\delta A_{k\ell}}\int_{A_{k\ell}}\left[ \overline{\Delta p}_\ell^{(pg3)}\sum_{i+j\le 2}{\mathcal{F}}^{(ij)}_k x^{i}y^{j}+{\overline{f}}_k^{(pg2)}\sum_{i+j\le 2}{\widetilde{{\mathcal{P}}}}^{(ij)}_\ell x^{i}y^{j}\right] dA,
@@ -175,14 +180,13 @@ where $\mathcal{F}^{(ij)}_k$ is the forcing increment $f$ reconstruction coeffic
 \end{equation}
 where the denominator is given by \eqref{eq:pg3dp}.
 
-Shape-preservation, as defined by \eqref{eq:min} and \eqref{eq:max}, is enforced by eliminating under and overshoots in the overlap areas by modifying the forcing increment $\overline{f}_{k\ell}$ so that shape-preservation is not violated in the overlap areas
+Shape-preservation, as defined by \eqref{eq:min} and \eqref{eq:max}, is enforced by eliminating under and overshoots on the exchange grid by modifying the forcing increment $\overline{f}_{k\ell}$ so that shape-preservation is not violated in the overlap areas{\footnote{In the computation of $\overline{m}_{k\ell}$ there can be small overshoots and undershoots (due to numerical integration errors) compared to the CSLAM cell average values $\overline{m}^{(pg3)}_\ell$ that it overlaps with so we set
 \begin{equation}
-m_k^{(min)} \le \overline{m}_{k\ell}+\widetilde{\overline{f}}_{k\ell} \le m_k^{(max)} .
-\end{equation}
-{\footnote{In the computation of $\overline{m}_{k\ell}$ there can be small overshoots and undershoots compared to the CSLAM cell average values $\overline{m}^{(pg3)}_\ell$ that it overlaps with so we set
-\begin{equation}
-m_k^{(min)}=\min \left( m_k^{(min)},\left\{ \overline{m}^{(pg)}\ell)|\ell=1,nc^2\right\} \right)
+\overline{m}_k^{(min)}=\min \left( \overline{m}_k^{(min)},\left\{ \overline{m}^{(pg)}\ell)|\ell=1,nc^2\right\} \right)
 \end{equation}}}
+\begin{equation}
+\overline{m}_k^{(min)} \le \overline{m}_{k\ell}+\widetilde{\overline{f}}_{k\ell} \le \overline{m}_k^{(max)}.
+\end{equation}
 While this algorithm preserves linear correlations, shape, and is consistent, is it not mass-conservative. Hence the remaining physics increment not allocated in the algorithm above is allocated according to the mass-fixing algorithm.
 
 %A high-order estimate of the physics increment in the $A_{k\ell}$th overlap cell, that is not mass-conserving, can be computed as
