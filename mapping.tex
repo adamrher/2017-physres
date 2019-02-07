@@ -21,6 +21,14 @@ This overlap grid is also referred to as the exchange grid.
 \subsection{Mapping tracers from $A^{(pg3)}$ to $A^{(pg2)}$ (CSLAM to physics grid)}\label{sec:nctopg}
 The CSLAM and physics grids are both finite-volume grids so existing CSLAM technology can be used, i.e. perform a high-order shape-preserving reconstruction of mixing ratio $m$ and dry air mass  $\frac{1}{g}\Delta p$ per unit area inside each CSLAM control volume and integrate those reconstruction functions over the overlap areas \citep{LNU2010JCP,NL2010JCP}. This algorithm retains the properties of CSLAM: inherent mass-conservation, consistency (constant mixing ratio is preserved), mixing ratio shape-preservation and linear-correlation preservation. 
 
+\begin{figure}[t]
+\begin{center}
+\noindent\includegraphics[width=30pc,angle=0]{figs/area-schematic.png}\\
+\end{center}
+\caption{Indices notation for (a) the $pg2$ grid, (b) the $pg3$ grid and (c) their exchange grid.}
+\label{fig:area-schematic}
+\end{figure}
+
 Denote the known cell averaged values of dry pressure-level thickness and mixing ratio $\overline{\Delta p}^{(pg3)}$ and $\overline{m}^{(pg3)}$, respectively. The unknowns we would like to compute is the cell-averaged values of the same quantities on the physics grid; $\overline{\Delta p}^{(pg2)}$ and $\overline{m}^{(pg2)}$, respectively. The dry pressure level thickness integrated over the $k$'th physics grid cell is given by
 \begin{equation}
 \label{eq:p}
@@ -93,17 +101,9 @@ instead, but now mass-conservation is lost since, again, $\widetilde{\overline{\
 
 \begin{figure}[t]
 \begin{center}
-\noindent\includegraphics[width=30pc,angle=0]{figs/area-schematic.png}\\
-\end{center}
-\caption{Indices notation for (a) the $pg2$ grid, (b) the $pg3$ grid and (c) their exchange grid. {\color{red}{[change superscript in (a) to pg2. superscript in (b) to pg3]}}}
-\label{fig:area-schematic}
-\end{figure}
-
-\begin{figure}[t]
-\begin{center}
 \noindent\includegraphics[width=30pc,angle=0]{figs/alg-schematic.png}\\
 \end{center}
-\caption{Make captions stand-alone while being concise}
+\caption{Schematic illustration of the `negativity problem' in a single element. (a.) Initial CSLAM tracer values, (b.) mapped to $pg2$, (c) produces a tracer increment on $pg2$, (d.) with negative increments on the exchange grid overlying CSLAM cells in (a) that were initially zero and (e) driving those mixing ratios negative.}
 \label{fig:alg-schematic}
 \end{figure}
 
@@ -123,7 +123,7 @@ The negativity issue could be avoided if one remaps the physics updated state in
 
 As illustrated above a standard remapping method will NOT simultaneously satisfy 1-4 and hence a new algorithm has been derived.
 \subsection{New tendency mapping algorithm}
-Although this algorithm is explained and examined for a $pg2$ grid, it is general for any $pgX$ resolution. The problem is how to map the mass-increment on the physics grid, ${\overline{f}}^{(pg2)}\Delta A^{(pg2)}$, to the CSLAM cells that overlap with $\Delta A^{(pg2)}$. The overlap grid, $\sum_\ell \Delta A_{k\ell}$, is referred to as the exchange grid. To maintain shape-preservation, linear correlations and to avoid the negativity problem locally, it is advantageous to define a mass excess function on the exchange grid $\Delta m_{k\ell}^{(excess)}$. It is basically the maximum amount of mixing ratio that can be removed (in the case ${\overline{f}}^{(pg2)}<0$) without producing new minima in the exchange grid mixing ratio $m_{k\ell}$
+Although this algorithm is explained and examined for a $pg2$ grid, it is general for any $pgX$ resolution. The problem is how to map the mass-increment on the physics grid, ${\overline{f}}^{(pg2)}\Delta A^{(pg2)}$, to the CSLAM cells that overlap with $\Delta A^{(pg2)}$. The overlap grid, $\sum_\ell \Delta A_{k\ell}$, is referred to as the exchange grid {\color{red}{edit - you equated overlap grid and exchange grid earlier}}. To maintain shape-preservation, linear correlations and to avoid the negativity problem locally, it is advantageous to define a mass excess function on the exchange grid $\Delta m_{k\ell}^{(excess)}$. It is basically the maximum amount of mixing ratio that can be removed (in the case ${\overline{f}}^{(pg2)}<0$) without producing new minima in the exchange grid mixing ratio $m_{k\ell}$
 \begin{equation}
 \Delta m^{(excess)}_{k\ell}=\overline{m}_{k\ell}-\overline{m}_k^{(min)},
 \end{equation}
