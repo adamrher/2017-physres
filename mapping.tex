@@ -1,15 +1,16 @@
-{\color{red}{[DEFINE INCREMENT VERSUS TENDENCY CLEARLY; STRAIGHTEN OUT NOTATION FOR CSLAM GRID AND PG3 - ALSO IN FIGURES]}}\\
+Separating dynamics, tracer and physics grids introduces the added complexity of having to map the state from dynamics and tracer grids to the physics grid; and mapping physics tracer increments back to the tracer grid and physics increments needed by the dynamical core to the dynamics grid. The dynamics grid in the case of CAM-SE-CSLAM refers to the Gauss-Lobatto-Legendre (GLL) quadrature nodes used by the spectral-element method to solve the momentum equations for the momentum vector $(u,v)$, thermodynamics equation for temperature ($T$), continuity equation for dry air mass ($\frac{1}{g}p$), and continuity equations for water vapor and thermodynamically and inertially active condensates \citep[see, e.g., ][ for details]{LetAl2018JAMES}. By tracer grid we refer to the $pg3$ grid on which CSLAM performs tracer transport of water vapor, condensates and other tracers. Although water vapor and condensates are advecting by CSLAM on the $pg3$ grid, these quantities are also needed on the GLL grid for the momentum equations and thermodynamic equation. Transport of water variables is also performed by the spectral-element method on the GLL grid. To avoid decoupling of water species on the CSLAM and GLL grids, the GLL water species are overwritten by the CSLAM every physics time-step. This is explained in detail on H18.
 
-Separating dynamics, tracer and physics grids introduces the added complexity of having to map the state from dynamics and tracer grids to the physics grid; and mapping physics tracer increments back to the tracer grid and physics increments needed by the dynamical core to the dynamics grid. The dynamics grid refers to the Gauss-Lobatto-Legendre (GLL) quadrature nodes used by the spectral-element method to solve the momentum equations for the momentum vector $(u,v)$, thermodynamics equation for temperature ($T$), continuity equation for dry air ($p$), and continuity equations for water vapor and thermodynamically active condesnates \citep[see, e.g., ][ for details]{LetAl2018JAMES}. By tracer grid we refer to the $pg3$ grid on which CSLAM performs tracer transport of water vapor, condensates and other tracers. The GLL value for water vapor and condensates is overwritten by the CSLAM values every physics time-step so that the spectral-element advection of water species does not become decoupled from the the CSLAM advection of the same water species. Mapping velocity components, dry air mass and temperature from the GLL grid to the $pg2$ grid is done by using the internal degree 3 Lagrange basis functions in CAM-SE [as described in H18 for pg3; exactly the same methods can be used for $pg2$].
+Similarly to the CAM-SE-CSLAM $pg3$ configuration, the dynamics state (momentum vector, temperature, dry pressure) must be mapped from the $GLL$ grid to the physics grid. Exactly the same algorithms as used in the $pg3$ configuration apply, i.e. momentum components are interpolated by evaluating the internal Lagrange basis functions (used in the spectral-element method) at the gnomonic center of the $pg2$ cells and the Lagrange basis function representations of temperature and pressure are integrated over the $pg2$ control volumes. See H18 for details.
 
-As compared to the $pg3$ configuration, the extra complication of the $pg2$ setup is that tracer state needs to be mapped from the CSLAM grid to the physics grid{\color{red}{, to compute a tracer increment from the phyiscs. This tracer increment then needs to be mapped from the physics grid to the CSLAM grid}}. In order to describe the algorithm some notation needs to be introduced.
+As compared to the $pg3$ configuration, the extra complication with the $pg2$ setup is that the tracer grid does not coincide with the physics grid, i.e. the tracer state needs to be mapped from the CSLAM grid ($pg3$) to the physics grid ($pg2$), and tracer increments computed by physics must be mapped from the physics grid back to the CSLAM grid. In order to describe the mapping algorithms between the grids some notation needs to be introduced.
 
-The mapping algorithm is applied to each element $\Omega$ (with spherical area $\Delta \Omega$) so without loss of generality consider one element. Let $\Delta A^{(pg2)}_k$ and $\Delta A^{(pg3)}_\ell$ be the spherical area of the physics grid cell $A^{(pg2)}_k$ and CSLAM control volume $A^{(pg3)}_\ell$, respectively. The physics grid cells and CSLAM cells respectively span the element, $\Omega$, without gaps or overlaps
+The mapping algorithms are applied to each element $\Omega$ (with spherical area $\Delta \Omega$) so without loss of generality consider one element. Let $\Delta A^{(pg2)}_k$ and $\Delta A^{(pg3)}_\ell$ be the spherical area of the physics grid cell $A^{(pg2)}_k$ and CSLAM control volume $A^{(pg3)}_\ell$, respectively. The physics grid cells and CSLAM cells, respectively, span the element, $\Omega$, without gaps or overlaps
 \begin{eqnarray}
-\cup_{k=1}^{pg2^2}A^{(pg2)}_k=\Omega \text{ and } A^{(pg2)}_k \cap A^{(pg2)}_\ell = \emptyset \quad \forall k\ne \ell,\\
-\cup_{k=1}^{nc^2}A^{(pg3)}_k=\Omega \text{ and } A^{(pg3)}_k \cap A^{(pg3)}_\ell = \emptyset \quad \forall k\ne \ell.
+\cup_{k=1}^{nphys^2}A^{(pg2)}_k=\Omega \text{ and } A^{(pg2)}_k \cap A^{(pg2)}_\ell = \emptyset \quad \forall k\ne \ell,\\
+\cup_{k=1}^{nc^2}A^{(pg3)}_k=\Omega \text{ and } A^{(pg3)}_k \cap A^{(pg3)}_\ell = \emptyset \quad \forall k\ne \ell,
 \end{eqnarray}
-The overlap areas between the $k$-th physics grid cell and CSLAM cells is denoted
+where $nc=3$ is the CSLAM grid resolution parameter and $nphys=2$ is the physics grid  resolution parameter (following the Fortran code base).
+The overlap areas between the $k$-th physics grid cell and $e\ll$th CSLAM cell is denoted
 \begin{equation}
 A_{k\ell}=A^{(pg2)}_k \cap A^{(pg3)}_\ell,
 \end{equation}
@@ -17,9 +18,9 @@ A_{k\ell}=A^{(pg2)}_k \cap A^{(pg3)}_\ell,
 \begin{equation}
 A^{(pg2)}_k=\cup_{l=1}^{nc^2}A_{k\ell}.
 \end{equation}
-This overlap grid is also referred to as the exchange grid.
+This overlap grid is also referred to as the {\em{exchange grid}}.
 \subsection{Mapping tracers from $A^{(pg3)}$ to $A^{(pg2)}$ (CSLAM to physics grid)}\label{sec:nctopg}
-The CSLAM and physics grids are both finite-volume grids so existing CSLAM technology can be used, i.e. perform a high-order shape-preserving reconstruction of mixing ratio $m$ and dry air mass  $\frac{1}{g}\Delta p$ per unit area inside each CSLAM control volume and integrate those reconstruction functions over the overlap areas \citep{LNU2010JCP,NL2010JCP}. This algorithm retains the properties of CSLAM: inherent mass-conservation, consistency (constant mixing ratio is preserved), mixing ratio shape-preservation and linear-correlation preservation. 
+The CSLAM and physics grids are both finite-volume grids so existing CSLAM technology can be used to map the tracer state from CSLAM to physics grid. That is, compute a high-order shape-preserving reconstruction of mixing ratio $m$ and dry air mass  $\frac{1}{g}\Delta p$ per unit area in each CSLAM control volume and integrate those reconstruction functions over the overlap areas \citep{LNU2010JCP,NL2010JCP}. This algorithm retains the properties of CSLAM: inherent mass-conservation, consistency (constant mixing ratio is preserved), mixing ratio shape-preservation and linear-correlation preservation. In mathematical terms that is:
 
 \begin{figure}[t]
 \begin{center}
@@ -29,27 +30,27 @@ The CSLAM and physics grids are both finite-volume grids so existing CSLAM techn
 \label{fig:area-schematic}
 \end{figure}
 
-Denote the known cell averaged values of dry pressure-level thickness and mixing ratio $\overline{\Delta p}^{(pg3)}$ and $\overline{m}^{(pg3)}$, respectively. The unknowns we would like to compute is the cell-averaged values of the same quantities on the physics grid; $\overline{\Delta p}^{(pg2)}$ and $\overline{m}^{(pg2)}$, respectively. The dry pressure level thickness integrated over the $k$'th physics grid cell is given by
+Denote the known cell averaged values of dry pressure-level thickness and mixing ratio $\overline{\Delta p}^{(pg3)}$ and $\overline{m}^{(pg3)}$, respectively. We consider a particular layer and for simplicity drop the layer subscript. The same procedure is applied to each layer in a column. The unknowns we would like to compute is the cell-averaged values of the same quantities on the physics grid; $\overline{\Delta p}^{(pg2)}$ and $\overline{m}^{(pg2)}$, respectively. The dry pressure level thickness integrated over the $k$'th physics grid cell is given by
 \begin{equation}
 \label{eq:p}
-\overline{\Delta p}^{(pg2)}_k=\sum_{\ell=1}^{nc^2}\overline{\delta p}_{k\ell},
+\overline{\Delta p}^{(pg2)}_k=\frac{1}{\Delta A^{(pg2)}_k}\sum_{\ell=1}^{nc^2}\left<\delta p\right>_{k\ell},
 \end{equation}
-where $\overline{\delta p}_{k\ell}$ is the average pressure-level thickness over overlap area $A_{k\ell}$. It is computed by integrating a high-order (2D polynomial of degree 2) reconstruction of pressure-level thickness in each CSLAM cell over the overlap area $A_{k\ell}$
+where $\left< \delta p\right>_{k\ell}$ is the dry mass in a layer over overlap area $A_{k\ell}$. It is computed by integrating a high-order (2D polynomial of degree 2) reconstruction of pressure-level thickness in each CSLAM cell over the overlap area $A_{k\ell}$
 \begin{equation}
 \label{eq:pg3dp}
-\overline{\delta p}_{k\ell}=\frac{1}{\delta A_{k\ell}}\int_{A_{k\ell}}\left[ \sum_{i+j\le 2}{\mathcal{P}}^{(ij)}_\ell x^{i}y^{j}\right] dA.
+\left< \delta p\right>_{k\ell}=\int_{A_{k\ell}}\left[ \sum_{i+j\le 2}{\mathcal{P}}^{(ij)}_\ell x^{i}y^{j}\right] dA.
 \end{equation}
-The reconstruction coefficients ${\mathcal{P}}^{(ij)}_\ell$ in CSLAM cell $\ell$ are computed from the cell average pressure level thicknesses on the CSLAM grid $\overline{\Delta p}^{(pg3)}$ and the numerical integration over overlap areas is done by line-integrals. The details are given in \cite{LNU2010JCP} and not repeated here.
+The reconstruction coefficients ${\mathcal{P}}^{(ij)}_\ell$ in CSLAM cell $\ell$ are computed from the cell average pressure level thicknesses on the CSLAM grid $\overline{\Delta p}^{(pg3)}$ and the numerical integration over overlap areas is done by line-integrals. The details of that is given in \cite{LNU2010JCP} and not repeated here.
 
 The average tracer mass per unit area on the physics grid is given by
 \begin{equation}
 \label{eq:mp}
-\overline{m\Delta p}^{(pg2)}_k=\sum_{\ell=1}^{nc^2}\overline{\left( m\delta p\right)}_{k\ell},
+\overline{m\Delta p}^{(pg2)}_k=\frac{1}{\Delta A^{(pg2)}_k}\sum_{\ell=1}^{nc^2}\left< m\delta p\right>_{k\ell},
 \end{equation}
-where $\overline{\left( m\delta p\right)}_{k\ell}$ is the average tracer mass over $A_{k\ell}$ resulting from integrating a high-order reconstruction of $\Delta p$ and $m$ combined using the approach outlined in Appendix B of \cite{NL2010JCP} over the overlap area $A_{k\ell}$
+where $\left< m\delta p\right>_{k\ell}$ is the tracer mass over $A_{k\ell}$ resulting from integrating a high-order reconstruction of $\Delta p$ and $m$ combined using the approach outlined in Appendix B of \cite{NL2010JCP} over the overlap area $A_{k\ell}$
 \begin{equation}
 \label{eq:mp2}
-\overline{\left( m\delta p\right)}_{k\ell}=\frac{1}{\delta A_{k\ell}}\int_{A_{k\ell}}\left[ \overline{\Delta p}_\ell^{(pg3)}\sum_{i+j\le 2}{\mathcal{M}}^{(ij)}_\ell x^{i}y^{j}+{\overline{m}}_\ell^{(pg3)}\sum_{i+j\le 2}{\widetilde{{\mathcal{P}}}}^{(ij)}_\ell x^{i}y^{j}\right] dA,
+\left< m\delta p\right>_{k\ell}=\int_{A_{k\ell}}\left[ \overline{\Delta p}_\ell^{(pg3)}\sum_{i+j\le 2}{\mathcal{M}}^{(ij)}_\ell x^{i}y^{j}+{\overline{m}}_\ell^{(pg3)}\sum_{i+j\le 2}{\widetilde{{\mathcal{P}}}}^{(ij)}_\ell x^{i}y^{j}\right] dA,
 \end{equation}
 where ${\widetilde{{\mathcal{P}}}}^{(00)}_\ell={\mathcal{P}}^{(00)}_\ell-\overline{\Delta p}^{(pg3)}_\ell$ and ${\widetilde{{\mathcal{P}}}}^{(ij)}_\ell={\mathcal{P}}^{(ij)}_\ell$ for $i,j>0$, and ${\mathcal{M}}^{(ij)}_\ell$ are the reconstruction coefficients for the mixing ratio in CSLAM cell $A^{(pg3)}_\ell$. A shape-preserving limiter is applied to the reconstruction of mixing ratio $m$ \citep{BJ1989} and not $\Delta p$. This way of combining the reconstruction function for $\Delta p$ and $m$ \eqref{eq:mp2} ensures that a constant mixing ratio is preserved (consistency), tracer mass is conserved, linear-correlations are preserved and tracer shape-preservation is retained. The mixing ratio on the physics grid is then
 \begin{equation}
@@ -57,15 +58,15 @@ where ${\widetilde{{\mathcal{P}}}}^{(00)}_\ell={\mathcal{P}}^{(00)}_\ell-\overli
 \end{equation}
 where $\overline{\Delta p}^{(pg2)}_k$ is given in \eqref{eq:p}. 
 
-A much more challenging problem is to map tracer increments from the physics grid to the CSLAM grid while retaining important properties.
+Perhaps surprisingly a much more challenging problem is to map tracer increments (or state) from the physics grid to the CSLAM grid while retaining important properties such as mass-conservation, consistency, and correlation preservation. Why this is the case is explained in detail in Section \ref{sec:why} after having defined important properties for mapping physics increments/tendencies.
 \subsection{Mapping tracer increments from $A^{(pg2)}$ to $A^{(pg3)}$ (physics to CSLAM grid)}\label{sec:pgtonc}
 The increments from the parameterizations are computed on the physics grid. The tracer increment in physics grid cell $k$ is denoted $\overline{f}_k^{(pg2)}$ so that the updated mixing ratio on the physics grid is ${\overline{m}}^{(pg2)}_k+\overline{f}_k^{(pg2)}$. The problem is how to map $\overline{f}_k^{(pg2)}$ to the CSLAM control volumes, to obtain ${\overline{f}}^{(pg3)}$, satisfying the following constraints:
 \begin{enumerate}
-\item {\bf{Local mass-conservation}}: Total physics mass forcing on an element computed on the physics grid should equal the element physics mass forcing on the CSLAM grid
+\item {\bf{Local mass-conservation}}: At a minimum total physics mass forcing on an element computed on the physics grid should equal the element physics mass forcing on the CSLAM grid
 \begin{equation}
 {\overline{f}}_k^{(pg2)}{\overline{\Delta p}}^{(pg2)}_k\Delta A_k^{(pg2)}=\cup_{\ell=1}^{nc^2}\left[{\overline{\Delta p}}^{(pg3)}_\ell {\overline{f}}^{(pg3)}_\ell\Delta A_{k\ell}\right],
 \end{equation}
-where $\overline{\Delta p}^{(pg2)}_k$ is the pressure level thickness in physics grid cell $k$ and similarly for $\overline{\Delta p}^{(pg3)}$.
+where $\overline{\Delta p}^{(pg2)}_k$ is the pressure level thickness in physics grid cell $k$ and similarly for $\overline{\Delta p}^{(pg3)}$. We enforce a more local constraint in which only mass-increments overlapping with a particular CSLAM cell contributes to the mass-increment in that CSLAM cell.
 \item {\bf{Local shape-preservation in mixing ratio}}: The increments mapped to the CSLAM grid and added to the previous CSLAM state should not produce values smaller than the updated physics grid mixing ratios, ${\overline{m}}^{(pg2)}_k+\overline{f}_k^{(pg2)}$, or values smaller than the existing CSLAM mixing ratios that overlap with physics grid cell $A_\ell$
 \begin{equation}
 \label{eq:min}
@@ -81,23 +82,26 @@ The nominator and denominator \eqref{eq:moverlap2} are defined in \eqref{eq:mp} 
 \label{eq:max}
 {\overline{m}}^{(pg3)}_\ell+{\overline{f}}^{(pg3)}_\ell \le \overline{m}_k^{(max)}=\max \left( {\overline{m}}^{(pg2)}_k+\overline{f}_k^{(pg2)},\left\{ {\overline{m}}_{k\ell} |\ell=1,nc^2\right\} \right),
 \end{equation}
-\item {\bf{Linear correlation preservation}}: The physics forcing must not disrupt linear tracer correlation between species on the CSLAM grid \citep[see, e.g., ][]{LT2011QJR}.
-\item {\bf{Consistency}}: A constant mixing ratio increment from physics, $cnst$, on the physics grid, $\overline{f}_k^{(pg2)}=cnst$ $\forall k$, must result in the same (constant) forcing on the CSLAM grid, $\overline{f}_\ell^{(pg3)}=\overline{f}_k^{(pg2)}=cnst$ $\forall \ell$.
+\item {\bf{Linear correlation preservation}}: The physics forcing must not disrupt linear tracer correlation between species on the CSLAM grid \citep[see, e.g., ][]{LT2011QJR}, i.e. of two tracers are linearly correlated and the physics increment preserves linear correlations on the physics grid then the tracer increment on the CSLAM grid must not disrupt linear correlations.
+\item {\bf{Consistency}}: A non-zero constant mixing ratio increment from physics, $cnst$, on the physics grid, $\overline{f}_k^{(pg2)}=cnst$ $\forall k$, must result in the same (constant) forcing on the CSLAM grid, $\overline{f}_\ell^{(pg3)}=\overline{f}_k^{(pg2)}=cnst$ $\forall \ell$.
 \end{enumerate}
 To motivate the algorithm that will simultaneously satisfy 1-4 it is informative to discuss how `standard' mapping algorithms will violate one or more of the constraints:
-\subsubsection{Why `conventional' conservative remapping won't work!}
+\subsubsection{Why `conventional' conservative remapping won't work!}\label{sec:why}
 It is helpful to analyze in detail why conventional remapping can not satisfy properties 1-4 above. Assume that one remaps the mass-increments in exactly the same way as the mapping of mixing ratio state from the CSLAM grid to the physics grid described in section \ref{sec:nctopg}. That is, replace $m$ with $f$ and map from physics grid to the CSLAM grid instead of the other way around. The mapped mass-increment is $\overline{f\Delta p}^{(pg2)}_k$ and due to the properties of the mapping algorithm the mass-increment is conserved, linear correlation between mass-increments are conserved and shape in mass-increment is preserved. The problems arise when converting from mass to mixing ratio.
 
-The issue is that the dry pressure level thickness mapped from $pg2$ to $nc$, call it $\widetilde{\overline{\Delta p}}^{(pg3)}$, differs from $\overline{\Delta p}^{(pg3)}$ since the mapping is not reversible. During physics-dynamics coupling the dry pressure level thickness should remain constant. So when converting the mass-increments to mixing ratio increments through, e.g.,
+\paragraph{Conserve mass but not consistency} 
+The fundamental issue is that the dry pressure level thickness mapped from $pg2$ to $pg3$, call it $\widetilde{\overline{\Delta p}}^{(pg3)}$, differs from $\overline{\Delta p}^{(pg3)}$ since the mapping is not reversible. During physics-dynamics coupling the dry pressure level thickness should remain constant and should not change. So one is left with a dilemma for how to convert tracer mass increment to mixing ratio increment. If ones uses the known pressure-level thickness on the CSLAM grid to convert
 \begin{equation}
 \label{eq:convert1}
-\overline{m}^{(pg3)}_k=\frac{\overline{f\Delta p}^{(pg3)}_k}{{\widetilde{\overline{\Delta p}}}^{(pg3)}_k},
+\overline{m}^{(pg3)}_k=\frac{\overline{f\Delta p}^{(pg3)}_k}{{\overline{\Delta p}}^{(pg3)}_k},
 \end{equation}
-a constant mixing ratio increment is not conserved since $\widetilde{\overline{\Delta p}}^{(pg3)}_k\ne {\overline{\Delta p}}^{(pg3)}_k$. Basically the constant increment mapped to the CSLAM grid and converted to mixing ratio increment through \eqref{eq:convert1} will no longer be constant but reflect the spurious discrepancy between $\widetilde{\overline{\Delta p}}^{(pg3)}_k$ and ${\overline{\Delta p}}^{(pg3)}_k$. A constant increment can be preserved by using
+a constant mixing ratio increment is not conserved. Basically the constant increment mapped to the CSLAM grid and converted to mixing ratio increment through \eqref{eq:convert1} will, rather than being constant, reflect the spurious discrepancy between $\widetilde{\overline{\Delta p}}^{(pg3)}_k$ and ${\overline{\Delta p}}^{(pg3)}_k$. 
+\paragraph{Consistent but not mass-conserving} 
+That said, mass will be conserved (unless the increment drives the mixing ratio negative - described in detail below). Rather than converting to mixing ratio using ${\overline{\Delta p}}^{(pg3)}_k$, a constant increment can be preserved by using
 \begin{equation}
 \overline{m}^{(pg3)}_k=\frac{\overline{f\Delta p}^{(pg3)}_k}{\widetilde{\overline{\Delta p}}^{(pg3)}_k},
 \end{equation}
-instead, but now mass-conservation is lost since, again, $\widetilde{\overline{\Delta p}}^{(pg2)}_k\ne {\overline{\Delta p}}^{(pg2)}_k$. This issue is similar to the mass-wind inconsistency found in specified dynamics applications \citep[e.g.][]{JKLSBCRE2001QJR,L2009LNCE}. 
+instead. But now mass-conservation is lost since, again, $\widetilde{\overline{\Delta p}}^{(pg2)}_k\ne {\overline{\Delta p}}^{(pg2)}_k$. This issue is similar to the mass-wind inconsistency found in specified dynamics applications \citep[e.g.][]{JKLSBCRE2001QJR,L2009LNCE}. 
 
 \begin{figure}[t]
 \begin{center}
@@ -106,8 +110,8 @@ instead, but now mass-conservation is lost since, again, $\widetilde{\overline{\
 \caption{Schematic illustration of the `negativity problem' in a single element. (a.) Initial CSLAM tracer values, (b.) mapped to $pg2$, (c) produces a tracer increment on $pg2$, (d.) with negative increments on the exchange grid overlying CSLAM cells in (a) that were initially zero and (e) driving those mixing ratios negative.}
 \label{fig:alg-schematic}
 \end{figure}
-
-Even if one could derive a reversible map for mapping $\Delta p$ from physics grid to the CSLAM grid there could still be problems with driving mixing ratios negative on the CSLAM grid (we refer to this as the `negativity problem'). This problem is depicted schematically in Figure~\ref{fig:alg-schematic}. Consider a single element of CSLAM control volumes, containing only a single cell with mixing ratio $1.0$, and $0.0$ everywhere else ($m_l$; Figure ~\ref{fig:alg-schematic}a). Assume that the mixing ratios mapped to the $pg2$ grid ($m_k$; Figure~\ref{fig:alg-schematic}b) results in a negative tracer increment from the physics ($\overline{f}_k$; Figure~\ref{fig:alg-schematic}c). The non-zero values of the increments for $pg2$ areas overlapping CSLAM grid cells originally containing a mixing ratio of zero ($\overline{f}_{k\ell}$; Figure~\ref{fig:alg-schematic}d), are driven negative by the mapped increment (Figure~\ref{fig:alg-schematic}e). 
+\paragraph{The `negativity' problem and linear correlations} 
+Even if one could derive a reversible map for mapping ${\overline{\Delta p}}^{(pg2)}$ from physics grid to the CSLAM grid, there could still be problems of the increment drives the mixing ratios negative (or overshooting occurs) on the CSLAM grid. We refer to this as the `negativity problem'. This problem is depicted schematically in Figure~\ref{fig:alg-schematic}. Consider a single element of CSLAM control volumes, containing only a single cell with mixing ratio $1.0$, and $0.0$ everywhere else ($\overline{m}^{(pg3)}_\ell$; Figure ~\ref{fig:alg-schematic}a). Assume that the mixing ratios mapped to the $pg2$ grid ($\overline{m}^{(pg2)}_k$; Figure~\ref{fig:alg-schematic}b). Now assume that physics removes all the mass from the physics cell $k$: $\overline{f}^{(pg2)}_k=-\overline{m}^{(pg2)}_k$ (Figure~\ref{fig:alg-schematic}c). Assume that the tracer increment is mapped using the piecewise constant method, i.e. using a constant value inside the $pg2$ cells the increment is mapped xxxx are The non-zero values of the increments for $pg2$ areas overlapping CSLAM grid cells originally containing a mixing ratio of zero ($\overline{f}_{k\ell}$; Figure~\ref{fig:alg-schematic}d), are driven negative by the mapped increment (Figure~\ref{fig:alg-schematic}e). 
 
 The negativity issue could be avoided if one remaps the physics updated state instead of mapping increments/tendencies. In that case a shape-preserving filter will make sure that the state on the CSLAM grid is not negative (and does not overshoot). That said, if physics does not change the state and it is mapped back to the CSLAM grid then spurious tendencies (proportional to the errors introduced by mapping state from the CSLAM grid to the physics grid and back again) are introduced. Hence it is advantageous to map increments/tendencies since any reasonable algorithm will preserve a zero function.
 
