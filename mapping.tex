@@ -86,7 +86,7 @@ The nominator and denominator \eqref{eq:moverlap2} are defined in \eqref{eq:mp} 
 \item {\bf{Consistency}}: A non-zero constant mixing ratio increment from physics, $cnst$, on the physics grid, $\overline{f}_k^{(pg2)}=cnst$ $\forall k$, must result in the same (constant) forcing on the CSLAM grid, $\overline{f}_\ell^{(pg3)}=\overline{f}_k^{(pg2)}=cnst$ $\forall \ell$.
 \end{enumerate}
 To motivate the algorithm that will simultaneously satisfy 1-4 it is informative to discuss how `standard' mapping algorithms will violate one or more of the constraints:
-\subsubsection{Why `conventional' conservative remapping won't work!}\label{sec:why}
+\subsubsection{Why `conventional' conservative remapping will not work!}\label{sec:why}
 It is helpful to analyze in detail why conventional remapping can not satisfy properties 1-4 above. Assume that one remaps the mass-increments in exactly the same way as the mapping of mixing ratio state from the CSLAM grid to the physics grid described in section \ref{sec:nctopg}. That is, replace $m$ with $f$ and map from physics grid to the CSLAM grid instead of the other way around. The mapped mass-increment is $\overline{f\Delta p}^{(pg2)}_k$ and due to the properties of the mapping algorithm the mass-increment is conserved, linear correlation between mass-increments are conserved and shape in mass-increment is preserved. The problems arise when converting from mass to mixing ratio.
 
 \paragraph{Conserve mass but not consistency} 
@@ -163,6 +163,7 @@ If the physics increment is positive (assuming ${\overline{f}}^{(pg2)}>0$) we de
 \end{equation}
 and solve
 \begin{equation}
+\label{eq:mass-fixer}
 \overline{\Delta p}_k^{(pg2)}{\overline{f}}^{(pg2)}\Delta A_k^{(pg2)}=\gamma_k \sum_\ell \left[ \Delta m^{(lack)}_{k\ell}\overline{\Delta p}_{k\ell} \delta A_{k\ell}\right],
 \end{equation}
 for $\gamma_k$ and follow the same procedure as for mass excess. Since positive and negative forcing is treated in exactly the same way, linear correlations are preserved. Note how the definition of the excess/lack function insures linear correlation preservation; for example, if one would prevent negative values and not do anything about overshoots then linear correlations would not be preserved since the minima and maxima are not treated in the same way.
