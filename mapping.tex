@@ -110,12 +110,16 @@ If ones uses the known pressure-level thickness on the CSLAM grid to convert
 \label{eq:convert1}
 \overline{m}^{(pg3)}_k=\frac{\overline{f\Delta p}^{(pg3)}_k}{{\overline{\Delta p}}^{(pg3)}_k},
 \end{equation}
+[check notation]\\
+
 a constant mixing ratio increment is not conserved. Basically the constant increment mapped to the CSLAM grid and converted to mixing ratio increment through \eqref{eq:convert1} will, rather than being constant, reflect the spurious discrepancy between $\widetilde{\overline{\Delta p}}^{(pg3)}_k$ and ${\overline{\Delta p}}^{(pg3)}_k$. That said, mass will be conserved (unless the increment drives the mixing ratio negative - described in detail below). 
 \paragraph{Consistent but not mass-conserving} 
 Rather than converting to mixing ratio using ${\overline{\Delta p}}^{(pg3)}_k$, a constant increment can be preserved by using
 \begin{equation}
 \overline{m}^{(pg3)}_k=\frac{\overline{f\Delta p}^{(pg3)}_k}{\widetilde{\overline{\Delta p}}^{(pg3)}_k},
 \end{equation}
+[check notation]\\
+
 instead. But now mass-conservation is lost since, again, $\widetilde{\overline{\Delta p}}^{(pg2)}_k\ne {\overline{\Delta p}}^{(pg2)}_k$. This issue is similar to the mass-wind inconsistency found in specified dynamics applications \citep[e.g.][]{JKLSBCRE2001QJR,L2009LNCE}. 
 
 \begin{figure}[t]
@@ -183,6 +187,20 @@ and solve
 \end{equation}
 for $\gamma_k$ and follow the same procedure as for mass excess. Since positive and negative forcing is treated in exactly the same way, linear correlations are preserved. Note how the definition of the excess/lack function insures linear correlation preservation; for example, if one would prevent negative values and not do anything about overshoots then linear correlations would not be preserved since the minima and maxima are not treated in the same way.
 
+While the above algorithm satisfies properties 1-4 in section \ref{sec:pgtonc}, it is not a high-order algorithm in terms for formal accuracy. This is illustrated in Figure \ref{fig:mapping} (row 3) where a smooth analytical tendency \citep[approximate spherical harmonic of order 32 and azimuthal wave number 16; ][]{J1999MWR}
+\begin{equation}
+f^{(pg2)}=\frac{1}{2}+\frac{1}{2}\cos(16\lambda)\sin(2\theta)^{16},
+\end{equation}
+where $(\lambda,\theta)$ is latitude-longitude, is mapped from $pg2$ to $pg3$ grid using this algorithm assuming the $m^{(pg3)}_\ell=0, \quad \forall \ell$. The errors in the mapping are not always aligned with large gradients in the analytical function as would be expected for a `traditional' interpolation algorithm. The errors are maximum on the order of 60$\%$. Therefore we perform a higher-order pre-allocation of tendencies that is not mass-conserving but satisfies properties 2,3, and 4 in section \ref{sec:pgtonc}.
+
+\begin{figure}[t]
+\begin{center}
+\noindent\includegraphics[width=30pc,angle=0]{figs/mapping.pdf}\\
+\end{center}
+\caption{}
+\label{fig:mapping}
+\end{figure}
+
 %Similarly we define a mass lack function
 
 %which is the maximum amount of mixing ratio that can be added without creating new maxima.
@@ -202,7 +220,7 @@ where the denominator is given by \eqref{eq:pg3dp}.
 
 Shape-preservation, as defined by \eqref{eq:min} and \eqref{eq:max}, is enforced by eliminating under and overshoots on the exchange grid by modifying the forcing increment $\overline{f}_{k\ell}$ so that shape-preservation is not violated in the overlap areas{\footnote{In the computation of $\overline{m}_{k\ell}$ there can be small overshoots and undershoots (due to numerical integration errors) compared to the CSLAM cell average values $\overline{m}^{(pg3)}_\ell$ that it overlaps with so we set
 \begin{equation}
-\overline{m}_k^{(min)}=\min \left( \overline{m}_k^{(min)},\left\{ \overline{m}^{(pg)}\ell)|\ell=1,nc^2\right\} \right)
+\overline{m}_k^{(min)}=\min \left( \overline{m}_k^{(min)},\left\{ \overline{m}^{(pg)}_\ell)|\ell=1,nc^2\right\} \right)
 \end{equation}}}
 \begin{equation}
 \overline{m}_k^{(min)} \le \overline{m}_{k\ell}+\widetilde{\overline{f}}_{k\ell} \le \overline{m}_k^{(max)}.
@@ -210,13 +228,7 @@ Shape-preservation, as defined by \eqref{eq:min} and \eqref{eq:max}, is enforced
 While this algorithm preserves linear correlations, shape, and is consistent, is it not mass-conservative. Hence the remaining physics increment not allocated in the algorithm above is allocated according to the mass-fixing algorithm.
 
 
-\begin{figure}[t]
-\begin{center}
-\noindent\includegraphics[width=30pc,angle=0]{figs/mapping.pdf}\\
-\end{center}
-\caption{}
-\label{fig:mapping}
-\end{figure}
+
 
 %A high-order estimate of the physics increment in the $A_{k\ell}$th overlap cell, that is not mass-conserving, can be computed as
 %\begin{equation}
