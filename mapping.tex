@@ -136,7 +136,7 @@ The negativity issue could be avoided if one remaps the physics updated state in
 
 As illustrated above a standard remapping method will NOT simultaneously satisfy 1-4 and hence a new algorithm has been derived.
 \subsection{New tendency mapping algorithm}
-Although this algorithm is explained and examined for a $pg2$ grid, it is general for any $pgX$ resolution. The problem is how to map the mass-increment on the physics grid, ${\overline{f}}^{(pg2)}\Delta A^{(pg2)}$, to the CSLAM cells that overlap with $\Delta A^{(pg2)}$. The overlap grid, $\sum_\ell \Delta A_{k\ell}$, is referred to as the exchange grid {\color{red}{edit - you equated overlap grid and exchange grid earlier}}. To maintain shape-preservation, linear correlations and to avoid the negativity problem locally, it is advantageous to define a mass excess function on the exchange grid $\Delta m_{k\ell}^{(excess)}$. It is basically the maximum amount of mixing ratio that can be removed (in the case ${\overline{f}}^{(pg2)}<0$) without producing new minima in the exchange grid mixing ratio $m_{k\ell}$
+Although this algorithm is explained and examined for a $pg2$ grid, it is general for any $pgX$ resolution. The problem is how to map the mass-increment on the physics grid, ${\overline{f}}^{(pg2)}\Delta A^{(pg2)}$, to the CSLAM cells that overlap with $\Delta A^{(pg2)}$. The overlap grid, $\sum_\ell \Delta A_{k\ell}$, is also referred to as the exchange grid. To maintain shape-preservation, linear correlations and to avoid the negativity problem locally, it is advantageous to define a mass excess function on the exchange grid $\Delta m_{k\ell}^{(excess)}$. It is basically the maximum amount of mixing ratio that can be removed (in the case ${\overline{f}}^{(pg2)}<0$) without producing new minima in the exchange grid mixing ratio $m_{k\ell}$
 \begin{equation}
 \Delta m^{(excess)}_{k\ell}=\overline{m}_{k\ell}-\overline{m}_k^{(min)},
 \end{equation}
@@ -188,7 +188,8 @@ where $(\lambda,\theta)$ is latitude-longitude, is mapped from $pg2$ to $pg3$ gr
 \begin{center}
 \noindent\includegraphics[width=30pc,angle=0]{figs/mapping.pdf}\\
 \end{center}
-\caption{Mapping of idealized functions from $pg2$ (column 1) to $pg3$ (columns 2) and errors (column 3) using the mass-fixer algorithm only (row 1 and 3) and mass-fixing algorithm with the high-order pre-allocation (row 2 and 4). Column 4 shows the errors in mapping the same distributions from  $pg3$ to $pg2$ using traditional remapping (CSLAM technology).}
+\caption{Mapping of idealized functions from $pg2$ (column 1) to $pg3$ (columns 2) and errors (column 3) using the mass-fixer algorithm only (row 1 and 3) and mass-fixing algorithm with the high-order pre-allocation (row 2 and 4). }
+%Column 4 shows the errors in mapping the same distributions from  $pg3$ to $pg2$ using traditional remapping (CSLAM technology).}
 \label{fig:mapping}
 \end{figure}
 
