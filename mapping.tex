@@ -179,6 +179,7 @@ for $\gamma_k$ and follow the same procedure as for mass excess. Since positive 
 
 While the above algorithm satisfies properties 1-4 in section \ref{sec:pgtonc}, it is not a high-order algorithm in terms for formal accuracy. This is illustrated in Figure \ref{fig:mapping} (row 3) where a smooth analytical tendency \citep[approximate spherical harmonic of order 32 and azimuthal wave number 16; ][]{J1999MWR}
 \begin{equation}
+\label{eq:Y32}
 f^{(pg2)}=\frac{1}{2}+\frac{1}{2}\cos(16\lambda)\sin(2\theta)^{16},
 \end{equation}
 where $(\lambda,\theta)$ is latitude-longitude, is mapped from $pg2$ to $pg3$ grid using this algorithm assuming the $m^{(pg3)}_\ell=0, \quad \forall \ell$. The errors in the mapping are not always aligned with large gradients in the analytical function as would be expected for a `traditional' interpolation algorithm. The errors are maximum on the order of 60$\%$. Therefore we perform a higher-order pre-allocation of tendencies that is not mass-conserving but satisfies properties 2,3, and 4 in section \ref{sec:pgtonc}.
@@ -187,7 +188,7 @@ where $(\lambda,\theta)$ is latitude-longitude, is mapped from $pg2$ to $pg3$ gr
 \begin{center}
 \noindent\includegraphics[width=30pc,angle=0]{figs/mapping.pdf}\\
 \end{center}
-\caption{}
+\caption{Mapping of idealized functions from $pg2$ (column 1) to $pg3$ (columns 2) and errors (column 3) using the mass-fixer algorithm only (row 1 and 3) and mass-fixing algorithm with the high-order pre-allocation (row 2 and 4). Column 4 shows the errors in mapping the same distributions from  $pg3$ to $pg2$ using traditional remapping (CSLAM technology).}
 \label{fig:mapping}
 \end{figure}
 
@@ -217,7 +218,7 @@ Shape-preservation, as defined by \eqref{eq:min} and \eqref{eq:max}, is enforced
 \end{equation}
 While this algorithm preserves linear correlations, shape, and is consistent, is it not mass-conservative. Hence the remaining physics increment not allocated in the algorithm above is allocated according to the mass-fixing algorithm.
 
-
+Combining the high-order pre-allocation algorithm with the mass-fixing algorithm leads to an order-of-magnitude reduction in mapping errors for a smooth function (see Figure \ref{fig:mapping} row 3 and 4) while full-filling the mass-conservation, shape-preservation, linear correlation and consistency  constraint. Mass and linear correlation preservation is illustrated in the baroclinic wave test with terminator chemistry test in Section \ref{sec:fkessler}. Shape-preservation and consistency is demonstrated in an idealized mapping test where a smooth function, see \eqref{eq:Y32}, and a slotted-cylinder \citep[see equation 12 in ][]{LSPT2012GMD} are mapped to/from the $pg2$ and $pg3$ grids. Since the background value in the mapping of the slotted-cylinder field is preserved the mapping algorithm is consistent. Since no new over- and undershoots are produced (particularly obvious in the mapping of the slotted cylinders) the mapping is shape-preserving. We also note that the mapping errors with the default algorithm (higher-order pre-allocation with mass-fixing algorithm) are similar to the errors in mapping the same field from $pg3$ to $pg2$ using traditional remapping with CSLAM technology (column 4 in Figure \ref{fig:mapping}).
 
 
 %A high-order estimate of the physics increment in the $A_{k\ell}$th overlap cell, that is not mass-conserving, can be computed as
