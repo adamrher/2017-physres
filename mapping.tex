@@ -96,30 +96,20 @@ Similar definition apply for maxima
 \item {\bf{Consistency}}: A non-zero constant mixing ratio increment from physics, $cnst$, on the physics grid, $\overline{f}_k^{(pg2)}=cnst$ $\forall k$, must result in the same (constant) forcing on the CSLAM grid, $\overline{f}_\ell^{(pg3)}=\overline{f}_k^{(pg2)}=cnst$ $\forall \ell$.
 \end{enumerate}
 To motivate the algorithm that will simultaneously satisfy 1-4 it is informative to discuss how `standard' mapping algorithms will violate one or more of the constraints:
-<<<<<<< HEAD
 \subsubsection{Why `conventional' conservative remapping will not work!}\label{sec:why}
-It is helpful to analyze in detail why conventional remapping can not satisfy properties 1-4 above. Assume that one remaps the mass-increments in exactly the same way as the mapping of mixing ratio state from the CSLAM grid to the physics grid described in section \ref{sec:nctopg}. That is, replace $m$ with $f$ and map from physics grid to the CSLAM grid instead of the other way around. The mapped mass-increment is $\overline{f\Delta p}^{(pg2)}_k$ and due to the properties of the mapping algorithm the mass-increment is conserved, linear correlation between mass-increments are conserved and shape in mass-increment is preserved. The problems arise when converting from mass to mixing ratio.
-=======
-\subsubsection{Why `conventional' conservative remapping won't work!}\label{sec:why}
-It is helpful to analyze in detail why conventional remapping can not satisfy properties 1-4 above. Assume that one remaps the mass-increments in exactly the same way as the mapping of mixing ratio state from the CSLAM grid to the physics grid described in section \ref{sec:nctopg}. That is, replace $m$ with $f$ and map from physics grid to the CSLAM grid instead of the other way around. The mapped mass-increment is $\overline{f\Delta p}^{(pg2)}_k$ and due to the properties of the mapping algorithm the mass-increment is conserved, linear correlation between mass-increments are conserved and shape in mass-increment is preserved. The problems arise when converting from mass to mixing ratio. The fundamental issue is that the dry pressure level thickness mapped from $pg2$ to $pg3$, call it $\widetilde{\overline{\Delta p}}^{(pg3)}$, differs from $\overline{\Delta p}^{(pg3)}$ since the mapping is not reversible. During physics-dynamics coupling the dry pressure level thickness should remain constant and should not change. So one is left with a dilemma on how to convert tracer mass increment to mixing ratio increment. 
->>>>>>> 428eefbde375560b08e836a4df87eec421593f25
-
+It is helpful to analyze in detail why conventional remapping can not satisfy properties 1-4 above. Assume that one remaps the mass-increments in exactly the same way as the mapping of mixing ratio state from the CSLAM grid to the physics grid described in section \ref{sec:nctopg}. That is, replace $m$ with $f$ and map from physics grid to the CSLAM grid instead of the other way around. Denote the mapped mass-increment $\widetilde{\overline{f\Delta p}}^{(pg3)}$ and due to the properties of the mapping algorithm the mass-increment is conserved, linear correlation between mass-increments are conserved and shape in mass-increment is preserved. The problems arise when converting from mass to mixing ratio.
 \paragraph{Conserve mass but not consistency} 
-If ones uses the known pressure-level thickness on the CSLAM grid to convert
+If ones uses the known pressure-level thickness on the CSLAM grid ${\overline{\Delta p}}^{(pg3)}_k$ to convert from mass-increment to mixing-ratio increment
 \begin{equation}
 \label{eq:convert1}
-\overline{m}^{(pg3)}_k=\frac{\overline{f\Delta p}^{(pg3)}_k}{{\overline{\Delta p}}^{(pg3)}_k},
+\overline{m}^{(pg3)}_k=\frac{\widetilde{\overline{f\Delta p}}^{(pg3)}_k}{{\overline{\Delta p}}^{(pg3)}_k},
 \end{equation}
-[check notation]\\
-
-a constant mixing ratio increment is not conserved. Basically the constant increment mapped to the CSLAM grid and converted to mixing ratio increment through \eqref{eq:convert1} will, rather than being constant, reflect the spurious discrepancy between $\widetilde{\overline{\Delta p}}^{(pg3)}_k$ and ${\overline{\Delta p}}^{(pg3)}_k$. That said, mass will be conserved (unless the increment drives the mixing ratio negative - described in detail below). 
+a constant mixing ratio increment is not conserved. Basically the constant increment mapped to the CSLAM grid and converted to mixing ratio increment through \eqref{eq:convert1} will, rather than being constant, reflect the spurious discrepancy between $\widetilde{\overline{\Delta p}}^{(pg3)}_k$ and ${\overline{\Delta p}}^{(pg3)}_k$, where $\widetilde{\overline{\Delta p}}^{(pg3)}_k$ is the pressure-level thickness mapped from the $pg2$ grid to the $pg3$ grid. That said, mass will be conserved since the dynamical core state has ${\overline{\Delta p}}^{(pg3)}_k$ (unless the increment drives the mixing ratio negative - described in detail below). 
 \paragraph{Consistent but not mass-conserving} 
 Rather than converting to mixing ratio using ${\overline{\Delta p}}^{(pg3)}_k$, a constant increment can be preserved by using
 \begin{equation}
 \overline{m}^{(pg3)}_k=\frac{\overline{f\Delta p}^{(pg3)}_k}{\widetilde{\overline{\Delta p}}^{(pg3)}_k},
 \end{equation}
-[check notation]\\
-
 instead. But now mass-conservation is lost since, again, $\widetilde{\overline{\Delta p}}^{(pg2)}_k\ne {\overline{\Delta p}}^{(pg2)}_k$. This issue is similar to the mass-wind inconsistency found in specified dynamics applications \citep[e.g.][]{JKLSBCRE2001QJR,L2009LNCE}. 
 
 \begin{figure}[t]
