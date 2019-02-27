@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  27 FEB 2019 14:07
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  27 FEB 2019 14:30
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1117,21 +1117,24 @@ Underfull \hbox (badness 10000) in paragraph at lines 391--391
 from the fi-nal 11 months of one-year sim-u-la-tions, and
  []
 
-[22 <./figs/panel_diags.pdf>]
-LaTeX Font Info:    Calculating math sizes for size <10.5> on input line 442.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [22 <./figs/panel_diags.pdf>]
+LaTeX Font Info:    Calculating math sizes for size <10.5> on input line 423.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
-(Font)              scaled to size 10.5pt on input line 442.
+(Font)              scaled to size 10.5pt on input line 423.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
-(Font)              scaled to size 7.66495pt on input line 442.
+(Font)              scaled to size 7.66495pt on input line 423.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
-(Font)              scaled to size 5.77502pt on input line 442.
+(Font)              scaled to size 5.77502pt on input line 423.
 <figs/bubble_test.pdf, id=354, 319.17905pt x 325.62271pt>
 File: figs/bubble_test.pdf Graphic file (type pdf)
 <use figs/bubble_test.pdf>
-Package pdftex.def Info: figs/bubble_test.pdf  used on input line 449.
+Package pdftex.def Info: figs/bubble_test.pdf  used on input line 430.
 (pdftex.def)             Requested size: 300.0pt x 306.07544pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 451--451
+Underfull \hbox (badness 10000) in paragraph at lines 432--432
 []\T1/ntxtlf/b/n/9 Figure  A.1. \T1/ntxtlf/m/n/9 The mag-ni-tude of $\OML/ntxmi
 /m/it/9 !$ \T1/ntxtlf/m/n/9 in the $\OML/ntxmi/m/it/9 pg\OT1/ntxtlf/m/n/9 3$ \T
 1/ntxtlf/m/n/9 so-lu-tions are sys-tem-at-i-cally larger than the $\OML/ntxmi/m
@@ -1139,7 +1142,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 451--451
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 451--451
+Underfull \hbox (badness 10000) in paragraph at lines 432--432
 \T1/ntxtlf/m/n/9 which is pri-mar-ily a re-sult of the damp-ing ef-fect of in-t
 e-grat-ing the ba-sis func-tions over a larger con-trol vol-
  []
@@ -1147,60 +1150,66 @@ e-grat-ing the ba-sis func-tions over a larger con-trol vol-
 <figs/panel_pdf_dtphys.pdf, id=355, 432.21745pt x 207.24084pt>
 File: figs/panel_pdf_dtphys.pdf Graphic file (type pdf)
 <use figs/panel_pdf_dtphys.pdf>
-Package pdftex.def Info: figs/panel_pdf_dtphys.pdf  used on input line 461.
+Package pdftex.def Info: figs/panel_pdf_dtphys.pdf  used on input line 442.
 (pdftex.def)             Requested size: 360.0pt x 172.62332pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 463--463
+Underfull \hbox (badness 10000) in paragraph at lines 444--444
 []\T1/ntxtlf/b/n/9 Figure  A.2. \T1/ntxtlf/m/n/9 Prob-a-bil-ity den-sity dis-tr
 i-bu-tion of up-ward $\OML/ntxmi/m/it/9 !$ \T1/ntxtlf/m/n/9 ev-ery-where in the
  model in the aqua-planets us-ing
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 463--463
+Underfull \hbox (badness 10000) in paragraph at lines 444--444
 \T1/ntxtlf/m/n/9 the $\OML/ntxmi/m/it/9 ne\OT1/ntxtlf/m/n/9 30\OML/ntxmi/m/it/9
  pg\OT1/ntxtlf/m/n/9 2$ \T1/ntxtlf/m/n/9 grid (Left) and the $\OML/ntxmi/m/it/9
  ne\OT1/ntxtlf/m/n/9 120\OML/ntxmi/m/it/9 pg\OT1/ntxtlf/m/n/9 2$ \T1/ntxtlf/m/n
 /9 grid (Right). Fig-ure com-puted for one year of 6-hourly data. The
  []
 
-[23]
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [23]
 <figs/panel_loworder.pdf, id=360, 531.40268pt x 282.21727pt>
 File: figs/panel_loworder.pdf Graphic file (type pdf)
 <use figs/panel_loworder.pdf>
-Package pdftex.def Info: figs/panel_loworder.pdf  used on input line 475.
+Package pdftex.def Info: figs/panel_loworder.pdf  used on input line 456.
 (pdftex.def)             Requested size: 360.0pt x 191.19466pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 477--477
+Underfull \hbox (badness 10000) in paragraph at lines 458--458
 []\T1/ntxtlf/b/n/9 Figure  B.1. \T1/ntxtlf/m/n/9 (Left) Wavenumber-power spec-t
 rum of the tem-per-a-ture ten-den-cies from the moist physics, at
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 477--477
+Underfull \hbox (badness 10000) in paragraph at lines 458--458
 \T1/ntxtlf/m/n/9 the 369 hPa level, and (right) prob-a-bil-ity den-sity dis-tri
 -bu-tion of up-ward $\OML/ntxmi/m/it/9 !$\T1/ntxtlf/m/n/9 , ev-ery-where in the
  model, for three
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 477--477
+Underfull \hbox (badness 10000) in paragraph at lines 458--458
 \T1/ntxtlf/m/n/9 year-long aqua-planet sim-u-la-tions. Solid lines re-fer to va
 l-ues of on the $\OML/ntxmi/m/it/9 GLL$ \T1/ntxtlf/m/n/9 grids, and dashed line
 s, the fields
  []
 
 
-Overfull \hbox (0.97023pt too wide) in paragraph at lines 481--482
+Overfull \hbox (0.97023pt too wide) in paragraph at lines 462--463
 []\T1/ntxtlf/m/n/10 The im-por-tance of the high-order map-ping can be shown wi
 th an ad-di-tional $\OML/ntxmi/m/it/10 ne\OT1/ntxtlf/m/n/10 30\OML/ntxmi/m/it/1
 0 pg\OT1/ntxtlf/m/n/10 2$ 
  []
 
-(./physres.bbl
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [24 <./figs/bubble_test.pdf>] [25 <./figs/panel_pdf_dtphys.pdf>]
+ [24 <./figs/bubble_test.pdf>] (./physres.bbl
+Underfull \vbox (badness 1226) has occurred while \output is active []
+
+ [25 <./figs/panel_pdf_dtphys.pdf>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [26 <./figs/panel_loworder.pdf>]
@@ -1211,18 +1220,15 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
  6699 strings out of 492649
  89683 string characters out of 6129622
- 151447 words of memory out of 5000000
+ 151448 words of memory out of 5000000
  10302 multiletter control sequences out of 15000+600000
  129632 words of font info for 232 fonts, out of 8000000 for 9000
  1147 hyphenation exceptions out of 8191
- 41i,10n,37p,1727b,378s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,10n,37p,1727b,370s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/base/ec.enc}{/usr/local/t
 exlive/2018/texmf-dist/fonts/enc/dvips/newtx/ntx-ec-tlf.enc}{/usr/local/texlive
 /2018/texmf-dist/fonts/enc/dvips/newtx/ntx-ot1-tlf.enc}{/usr/local/texlive/2018
@@ -1255,7 +1261,7 @@ ocal/texlive/2018/texmf-dist/fonts/type1/public/txfonts/txmia.pfb></usr/local/t
 exlive/2018/texmf-dist/fonts/type1/public/txfonts/txsyc.pfb></usr/local/texlive
 /2018/texmf-dist/fonts/type1/public/newtx/txsys.pfb></usr/local/texlive/2018/te
 xmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on physres.pdf (28 pages, 5359435 bytes).
+Output written on physres.pdf (28 pages, 5359622 bytes).
 PDF statistics:
  485 PDF objects out of 1000 (max. 8388607)
  333 compressed objects within 4 object streams
