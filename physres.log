@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  27 FEB 2019 14:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  27 FEB 2019 17:57
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -746,9 +746,6 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [3]
-
-LaTeX Warning: Reference `overview' on page 4 undefined on input line 193.
-
 (./mapping.tex
 <figs/fig-overview.pdf, id=20, 536.57887pt x 344.57072pt>
 File: figs/fig-overview.pdf Graphic file (type pdf)
@@ -772,8 +769,10 @@ LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
 LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
 (Font)              scaled to size 5.5pt on input line 30.
 
-[5 <./figs/fig-overview.pdf>]
-<figs/area-schematic.png, id=152, 1991.44pt x 948.54375pt>
+Underfull \vbox (badness 1057) has occurred while \output is active []
+
+ [5 <./figs/fig-overview.pdf>]
+<figs/area-schematic.png, id=148, 1991.44pt x 948.54375pt>
 File: figs/area-schematic.png Graphic file (type png)
 <use figs/area-schematic.png>
 Package pdftex.def Info: figs/area-schematic.png  used on input line 35.
@@ -815,7 +814,7 @@ he ex-
 Underfull \vbox (badness 5036) has occurred while \output is active []
 
  [9 <./figs/alg-schematic.png>]
-Overfull \hbox (7.43027pt too wide) in paragraph at lines 159--161
+Overfull \hbox (7.43027pt too wide) in paragraph at lines 161--163
 \T1/ntxtlf/m/n/10 to the CSLAM cells us-ing the ex-cess func-tion in-sures that
  the neg-a-tiv-ity prob-lem is avoided. 
  []
@@ -823,10 +822,10 @@ Overfull \hbox (7.43027pt too wide) in paragraph at lines 159--161
 <figs/mapping.pdf, id=174, 748.53903pt x 412.52048pt>
 File: figs/mapping.pdf Graphic file (type pdf)
 <use figs/mapping.pdf>
-Package pdftex.def Info: figs/mapping.pdf  used on input line 182.
+Package pdftex.def Info: figs/mapping.pdf  used on input line 184.
 (pdftex.def)             Requested size: 360.0pt x 198.39784pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 184--184
+Underfull \hbox (badness 10000) in paragraph at lines 186--186
 []\T1/ntxtlf/b/n/9 Figure  4. \T1/ntxtlf/m/n/9 Map-ping of ide-al-ized func-tio
 ns from $\OML/ntxmi/m/it/9 pg\OT1/ntxtlf/m/n/9 2$ \T1/ntxtlf/m/n/9 (col-umn 1) 
 to $\OML/ntxmi/m/it/9 pg\OT1/ntxtlf/m/n/9 3$ \T1/ntxtlf/m/n/9 (columns 2) and e
@@ -834,13 +833,13 @@ r-rors (col-umn 3)
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 184--184
+Underfull \hbox (badness 10000) in paragraph at lines 186--186
 \T1/ntxtlf/m/n/9 us-ing the new ten-dency al-go-rithm only (row 1 and 3) and ne
 w ten-dency al-go-rithm with the high-order pre-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 184--184
+Underfull \hbox (badness 10000) in paragraph at lines 186--186
 \T1/ntxtlf/m/n/9 allocation (row 2 and 4). Col-umn 4 shows the er-rors in map-p
 ing the same dis-tri-bu-tions from $\OML/ntxmi/m/it/9 pg\OT1/ntxtlf/m/n/9 3$ \T
 1/ntxtlf/m/n/9 to $\OML/ntxmi/m/it/9 pg\OT1/ntxtlf/m/n/9 2$ \T1/ntxtlf/m/n/9 us
@@ -849,15 +848,15 @@ ing the same dis-tri-bu-tions from $\OML/ntxmi/m/it/9 pg\OT1/ntxtlf/m/n/9 3$ \T
 
 [10]
 LaTeX Font Info:    Font shape `T1/ntxsups/m/n' will be
-(Font)              scaled to size 10.0pt on input line 205.
+(Font)              scaled to size 10.0pt on input line 207.
 
-Underfull \hbox (badness 10000) in paragraph at lines 208--208
+Underfull \hbox (badness 10000) in paragraph at lines 210--210
 | [][]\T1/ntxtlf/m/n/8 In the com-pu-ta-tion of $[][]$ there can be small over-
 shoots and un-der-shoots (due to nu-mer-i-cal in-te-gra-tion er-rors) com-
  []
 
 
-Overfull \hbox (2.24422pt too wide) in paragraph at lines 205--209
+Overfull \hbox (2.24422pt too wide) in paragraph at lines 207--211
 \T1/ntxtlf/m/n/10 and over-shoots on the ex-change grid by mod-i-fy-ing the for
 c-ing in-cre-ment $[][]$ so that shape- 
  []
@@ -1121,20 +1120,20 @@ from the fi-nal 11 months of one-year sim-u-la-tions, and
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [22 <./figs/panel_diags.pdf>]
-LaTeX Font Info:    Calculating math sizes for size <10.5> on input line 423.
+LaTeX Font Info:    Calculating math sizes for size <10.5> on input line 427.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
-(Font)              scaled to size 10.5pt on input line 423.
+(Font)              scaled to size 10.5pt on input line 427.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
-(Font)              scaled to size 7.66495pt on input line 423.
+(Font)              scaled to size 7.66495pt on input line 427.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
-(Font)              scaled to size 5.77502pt on input line 423.
+(Font)              scaled to size 5.77502pt on input line 427.
 <figs/bubble_test.pdf, id=354, 319.17905pt x 325.62271pt>
 File: figs/bubble_test.pdf Graphic file (type pdf)
 <use figs/bubble_test.pdf>
-Package pdftex.def Info: figs/bubble_test.pdf  used on input line 430.
+Package pdftex.def Info: figs/bubble_test.pdf  used on input line 434.
 (pdftex.def)             Requested size: 300.0pt x 306.07544pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 432--432
+Underfull \hbox (badness 10000) in paragraph at lines 436--436
 []\T1/ntxtlf/b/n/9 Figure  A.1. \T1/ntxtlf/m/n/9 The mag-ni-tude of $\OML/ntxmi
 /m/it/9 !$ \T1/ntxtlf/m/n/9 in the $\OML/ntxmi/m/it/9 pg\OT1/ntxtlf/m/n/9 3$ \T
 1/ntxtlf/m/n/9 so-lu-tions are sys-tem-at-i-cally larger than the $\OML/ntxmi/m
@@ -1142,25 +1141,29 @@ Underfull \hbox (badness 10000) in paragraph at lines 432--432
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 432--432
+Underfull \hbox (badness 10000) in paragraph at lines 436--436
 \T1/ntxtlf/m/n/9 which is pri-mar-ily a re-sult of the damp-ing ef-fect of in-t
 e-grat-ing the ba-sis func-tions over a larger con-trol vol-
  []
 
-<figs/panel_pdf_dtphys.pdf, id=355, 432.21745pt x 207.24084pt>
+
+Underfull \vbox (badness 1552) has occurred while \output is active []
+
+ [23]
+<figs/panel_pdf_dtphys.pdf, id=359, 432.21745pt x 207.24084pt>
 File: figs/panel_pdf_dtphys.pdf Graphic file (type pdf)
 <use figs/panel_pdf_dtphys.pdf>
-Package pdftex.def Info: figs/panel_pdf_dtphys.pdf  used on input line 442.
+Package pdftex.def Info: figs/panel_pdf_dtphys.pdf  used on input line 446.
 (pdftex.def)             Requested size: 360.0pt x 172.62332pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 444--444
+Underfull \hbox (badness 10000) in paragraph at lines 448--448
 []\T1/ntxtlf/b/n/9 Figure  A.2. \T1/ntxtlf/m/n/9 Prob-a-bil-ity den-sity dis-tr
 i-bu-tion of up-ward $\OML/ntxmi/m/it/9 !$ \T1/ntxtlf/m/n/9 ev-ery-where in the
  model in the aqua-planets us-ing
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 444--444
+Underfull \hbox (badness 10000) in paragraph at lines 448--448
 \T1/ntxtlf/m/n/9 the $\OML/ntxmi/m/it/9 ne\OT1/ntxtlf/m/n/9 30\OML/ntxmi/m/it/9
  pg\OT1/ntxtlf/m/n/9 2$ \T1/ntxtlf/m/n/9 grid (Left) and the $\OML/ntxmi/m/it/9
  ne\OT1/ntxtlf/m/n/9 120\OML/ntxmi/m/it/9 pg\OT1/ntxtlf/m/n/9 2$ \T1/ntxtlf/m/n
@@ -1168,100 +1171,93 @@ Underfull \hbox (badness 10000) in paragraph at lines 444--444
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 3128) has occurred while \output is active []
 
- [23]
-<figs/panel_loworder.pdf, id=360, 531.40268pt x 282.21727pt>
+ [24 <./figs/bubble_test.pdf>]
+<figs/panel_loworder.pdf, id=370, 531.40268pt x 282.21727pt>
 File: figs/panel_loworder.pdf Graphic file (type pdf)
 <use figs/panel_loworder.pdf>
-Package pdftex.def Info: figs/panel_loworder.pdf  used on input line 456.
+Package pdftex.def Info: figs/panel_loworder.pdf  used on input line 460.
 (pdftex.def)             Requested size: 360.0pt x 191.19466pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 458--458
+Underfull \hbox (badness 10000) in paragraph at lines 462--462
 []\T1/ntxtlf/b/n/9 Figure  B.1. \T1/ntxtlf/m/n/9 (Left) Wavenumber-power spec-t
 rum of the tem-per-a-ture ten-den-cies from the moist physics, at
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 458--458
+Underfull \hbox (badness 10000) in paragraph at lines 462--462
 \T1/ntxtlf/m/n/9 the 369 hPa level, and (right) prob-a-bil-ity den-sity dis-tri
 -bu-tion of up-ward $\OML/ntxmi/m/it/9 !$\T1/ntxtlf/m/n/9 , ev-ery-where in the
  model, for three
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 458--458
+Underfull \hbox (badness 10000) in paragraph at lines 462--462
 \T1/ntxtlf/m/n/9 year-long aqua-planet sim-u-la-tions. Solid lines re-fer to va
 l-ues of on the $\OML/ntxmi/m/it/9 GLL$ \T1/ntxtlf/m/n/9 grids, and dashed line
 s, the fields
  []
 
 
-Overfull \hbox (0.97023pt too wide) in paragraph at lines 462--463
+Overfull \hbox (0.97023pt too wide) in paragraph at lines 466--467
 []\T1/ntxtlf/m/n/10 The im-por-tance of the high-order map-ping can be shown wi
 th an ad-di-tional $\OML/ntxmi/m/it/10 ne\OT1/ntxtlf/m/n/10 30\OML/ntxmi/m/it/1
 0 pg\OT1/ntxtlf/m/n/10 2$ 
  []
 
-
+(./physres.bbl
 Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [24 <./figs/bubble_test.pdf>] (./physres.bbl
-Underfull \vbox (badness 1226) has occurred while \output is active []
 
  [25 <./figs/panel_pdf_dtphys.pdf>]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 1917) has occurred while \output is active []
 
  [26 <./figs/panel_loworder.pdf>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [27])
-[28] (./physres.aux)
-
-LaTeX Warning: There were undefined references.
-
- ) 
+[28] (./physres.aux) ) 
 Here is how much of TeX's memory you used:
- 6699 strings out of 492649
- 89683 string characters out of 6129622
- 151448 words of memory out of 5000000
- 10302 multiletter control sequences out of 15000+600000
+ 6700 strings out of 492649
+ 89702 string characters out of 6129622
+ 151468 words of memory out of 5000000
+ 10303 multiletter control sequences out of 15000+600000
  129632 words of font info for 232 fonts, out of 8000000 for 9000
  1147 hyphenation exceptions out of 8191
- 41i,10n,37p,1727b,370s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/base/ec.enc}{/usr/local/t
-exlive/2018/texmf-dist/fonts/enc/dvips/newtx/ntx-ec-tlf.enc}{/usr/local/texlive
-/2018/texmf-dist/fonts/enc/dvips/newtx/ntx-ot1-tlf.enc}{/usr/local/texlive/2018
-/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/texlive/2018/texmf-dist/fon
-ts/enc/dvips/tex-gyre/q-ts1.enc}</usr/local/texlive/2018/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmr10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmr7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmsy10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmsy7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/new
-tx/ntxsups-Regular.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/n
-ewtx/ntxsyralt.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/tex-g
-yre/qtmb.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/tex-gyre/qt
-mbi.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/tex-gyre/qtmr.pf
-b></usr/local/texlive/2018/texmf-dist/fonts/type1/public/tex-gyre/qtmri.pfb></u
-sr/local/texlive/2018/texmf-dist/fonts/type1/public/newtx/rntxbmi.pfb></usr/loc
-al/texlive/2018/texmf-dist/fonts/type1/public/newtx/rntxbmi7.pfb></usr/local/te
-xlive/2018/texmf-dist/fonts/type1/public/newtx/rntxmi.pfb></usr/local/texlive/2
-018/texmf-dist/fonts/type1/public/newtx/rntxmi5.pfb></usr/local/texlive/2018/te
-xmf-dist/fonts/type1/public/newtx/rntxmi7.pfb></usr/local/texlive/2018/texmf-di
-st/fonts/type1/public/txfonts/rtxmi.pfb></usr/local/texlive/2018/texmf-dist/fon
-ts/type1/public/newtx/rtxmi5.pfb></usr/local/texlive/2018/texmf-dist/fonts/type
-1/public/newtx/rtxmi7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/publi
-c/txfonts/rtxr.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/txfon
-ts/t1xtt.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/txfonts/txb
-mia.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/newtx/txbsys.pfb
-></usr/local/texlive/2018/texmf-dist/fonts/type1/public/newtx/txexs.pfb></usr/l
-ocal/texlive/2018/texmf-dist/fonts/type1/public/txfonts/txmia.pfb></usr/local/t
-exlive/2018/texmf-dist/fonts/type1/public/txfonts/txsyc.pfb></usr/local/texlive
-/2018/texmf-dist/fonts/type1/public/newtx/txsys.pfb></usr/local/texlive/2018/te
-xmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on physres.pdf (28 pages, 5359622 bytes).
+ 41i,10n,37p,1727b,356s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/base/
+ec.enc}{/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/newtx/ntx-ec-tlf.enc
+}{/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/newtx/ntx-ot1-tlf.enc}{/us
+r/local/texlive/2018/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/texlive
+/2018/texmf-dist/fonts/enc/dvips/tex-gyre/q-ts1.enc}</usr/local/texlive/2018/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2018/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2018/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2018/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2018/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2018/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2018/texmf-dist/fo
+nts/type1/public/newtx/ntxsups-Regular.pfb></usr/local/texlive/2018/texmf-dist/
+fonts/type1/public/newtx/ntxsyralt.pfb></usr/local/texlive/2018/texmf-dist/font
+s/type1/public/tex-gyre/qtmb.pfb></usr/local/texlive/2018/texmf-dist/fonts/type
+1/public/tex-gyre/qtmbi.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/pub
+lic/tex-gyre/qtmr.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/te
+x-gyre/qtmri.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/newtx/r
+ntxbmi.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/newtx/rntxbmi
+7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/newtx/rntxmi.pfb><
+/usr/local/texlive/2018/texmf-dist/fonts/type1/public/newtx/rntxmi5.pfb></usr/l
+ocal/texlive/2018/texmf-dist/fonts/type1/public/newtx/rntxmi7.pfb></usr/local/t
+exlive/2018/texmf-dist/fonts/type1/public/txfonts/rtxmi.pfb></usr/local/texlive
+/2018/texmf-dist/fonts/type1/public/newtx/rtxmi5.pfb></usr/local/texlive/2018/t
+exmf-dist/fonts/type1/public/newtx/rtxmi7.pfb></usr/local/texlive/2018/texmf-di
+st/fonts/type1/public/txfonts/rtxr.pfb></usr/local/texlive/2018/texmf-dist/font
+s/type1/public/txfonts/t1xtt.pfb></usr/local/texlive/2018/texmf-dist/fonts/type
+1/public/txfonts/txbmia.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/pub
+lic/newtx/txbsys.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/new
+tx/txexs.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/txfonts/txm
+ia.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/txfonts/txsyc.pfb
+></usr/local/texlive/2018/texmf-dist/fonts/type1/public/newtx/txsys.pfb></usr/l
+ocal/texlive/2018/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on physres.pdf (28 pages, 5361050 bytes).
 PDF statistics:
  485 PDF objects out of 1000 (max. 8388607)
  333 compressed objects within 4 object streams
