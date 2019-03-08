@@ -1,0 +1,47 @@
+This is BibTeX, Version 0.99d (TeX Live 2018)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: physres.aux
+The style file: agufull08.bst
+Database file #1: bib.bib
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+You've used 43 entries,
+            3076 wiz_defined-function locations,
+            1430 strings with 20059 characters,
+and the built_in function-call counts, 41890 in all, are:
+= -- 4671
+> -- 1416
+< -- 25
++ -- 657
+- -- 394
+* -- 2640
+:= -- 3975
+add.period$ -- 43
+call.type$ -- 43
+change.case$ -- 187
+chr.to.int$ -- 44
+cite$ -- 43
+duplicate$ -- 4631
+empty$ -- 2341
+format.name$ -- 534
+if$ -- 8358
+int.to.chr$ -- 2
+int.to.str$ -- 1
+missing$ -- 443
+newline$ -- 136
+num.names$ -- 172
+pop$ -- 1640
+preamble$ -- 1
+purify$ -- 144
+quote$ -- 0
+skip$ -- 2480
+stack$ -- 0
+substring$ -- 1795
+swap$ -- 3974
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 387
+warning$ -- 0
+while$ -- 211
+width$ -- 0
+write$ -- 501
