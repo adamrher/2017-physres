@@ -1,0 +1,387 @@
+;**************************************
+;FKESSLER contour plots
+;requires data on native se-grid
+;**************************************
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"   
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/esmf/ESMF_regridding.ncl"
+load "/glade/work/aherring/CESM2/arh-git-scripts/ncl/se_func_lib.ncl"
+;;load "/home/aherring/arh-git-scripts/ncl/se_func_lib.ncl"
+;**************************************
+begin
+;****************************************
+  secpday = 60.*60.*24;
+  pi = 3.14159265358979
+  g = 9.80616 ;m/s2
+  Re = 6371.22
+  cp = 1004.
+  Rd = 287.
+
+  dir = "/glade/scratch/aherring/"
+  fname1 = "physgrid_190201_FKESSLER_ne30pg3_ne30pg3_mg17_pe1800_190204"
+  fincl1 = "h1"
+  fname2 = "physgrid_190201_FKESSLER_ne30pg2_ne30pg2_mg17_pe1800_190204"
+  fincl2 = "h1"
+
+  plotvar = "CLDLIQ"
+
+  fname = (/fname1,fname2/)
+  fdate = (/".cam."+fincl1+"*",".cam."+fincl2+"*"/)
+  tname = fname
+  nfiles = dimsizes(fname)
+
+  cellfill = True
+  seover = False
+  doglobal = False
+  onemnth = False
+
+  t0 = 40 ;6-hourly indices: 36 = day9, 40 = day10, 60 = day15
+  labels = (/"ne30pg3","ne30pg2"/)
+
+  VAR = (/plotvar,plotvar,plotvar/)
+  LAT = (/"lat","lat","lat"/)
+  LON = (/"lon","lon","lon"/)
+
+  writencdf = True
+  fname_out = fname(0)+"-v-"+fname(1)+"."+plotvar+".nc"
+  VARNAM = (/plotvar+"1",plotvar+"2"/)
+  LATNAM = (/"lat1","lat2"/)
+  LONNAM = (/"lon1","lon2"/)
+
+  plotNam = "temp_" + plotvar
+  var3d = False
+  manlevs = True
+  if (VAR(0).eq."PS") then
+    cmin = 920.
+    cmax = 1020.
+    cspc = 10.
+    factor = 1.e-2
+    varNam = (/"PS (hPa)"/)
+  else if (VAR(0).eq."iCL") then
+    doglobal = True
+    cmin = 0.
+    cmax = 4.e-6
+    cspc = 0.25e-6
+    factor = 1.
+    varNam = (/"iCL (kg/kg)"/)
+  else if (VAR(0).eq."iCL2") then
+    doglobal = True
+    cmin = 0.
+    cmax = 2.e-6
+    cspc = 0.1e-6
+    factor = 1.
+    varNam = (/"iCL2 (kg/kg)"/)
+  else if (VAR(0).eq."iCLy") then
+    doglobal = True
+    cmin = 3.1e-6;;;2.7e-6
+    cmax = 4.1e-6
+    cspc = 0.05e-6;;;0.1e-6
+    ;cmin = 3.9985E-6
+    ;cmax = 4.0003E-6
+    ;cspc = 0.0002e-6
+    factor = 1.
+    varNam = (/"iCLy (kg/kg)"/)
+  else if (VAR(0).eq."PRECL") then
+    cmin = 0.
+    cmax = 60.
+    cspc = 2.
+    factor = secpday*1000.
+    varNam = (/"PRECL (mm/day)"/)
+  else if (VAR(0).eq."PTTEND") then
+    var3d = True
+    varlev = 23
+    cmin = -50.
+    cmax = 30.
+    cspc = 4.
+    factor = secpday
+    varNam = (/"PTTEND(lev="+varlev+") (K/day)"/)
+  else if (VAR(0).eq."CLDLIQ") then
+    var3d = True
+    varlev = 20
+    cmin = 0.00001
+    cmax = 0.00035
+    cspc = 0.00001
+    factor = 1.
+    varNam = (/"CLDLIQ(lev="+varlev+") (kg/kg)"/)
+  else if (VAR(0).eq."Q") then
+    var3d = True
+    varlev = 25
+    cmin = 0.
+    cmax = 0.015
+    cspc = 0.0005
+    factor = 1.
+    varNam = (/"Q(lev="+varlev+") (kg/kg)"/)
+  else if (VAR(0).eq."CL") then
+    doglobal = True
+    var3d = True
+    varlev = 25
+    cmin = 0.
+    cmax = 4.e-6
+    cspc = 0.25e-6
+    factor = 1.
+    varNam = (/"CL(lev="+varlev+") (kg/kg)"/)
+  else if (VAR(0).eq."CL2") then
+    doglobal = True
+    var3d = True
+    varlev = 25
+    cmin = 0.
+    cmax = 2.e-6
+    cspc = 0.05e-6;;;;0.1e-6
+    factor = 1.
+    varNam = (/"CL2(lev="+varlev+") (kg/kg)"/)
+  else
+    manlevs = False
+    factor = 1.
+    varNam = VAR(0)
+  end if
+  end if
+  end if
+  end if
+  end if
+  end if
+  end if
+  end if
+  end if
+  end if
+
+;************** 
+;graphics stuff
+;**************
+  wkstype = "pdf"
+  wks = gsn_open_wks(wkstype,plotNam)
+  ;;gsn_define_colormap(wks,"MPL_gist_rainbow");;"gui_default");;"MPL_gist_rainbow")
+  gsn_define_colormap(wks,"WhiteBlueGreenYellowRed")
+  ;;gsn_define_colormap(wks,"wh-bl-gr-ye-re")
+  plot = new( (/nfiles/), graphic)
+  ;wkstype@wkBackgroundOpacityF    = 0.
+  ;;gsn_reverse_colormap(wks)
+
+   res             = True
+   res@gsnMaximize = False
+   res@gsnDraw     = False      ; Will draw later, after overlaying
+   res@gsnFrame    = False      ; all plots
+
+   res@cnFillOn          = True               ; turn on color fill
+   res@cnLinesOn         = False
+   res@gsnSpreadColors   = True               ; use full range of color map
+   res@cnLineLabelsOn       = False
+   res@cnInfoLabelOn        = False
+   res@lbLabelBarOn         = False
+
+   res@mpCenterLonF = 180.
+   res@mpOutlineOn          = False    ; turn off continental outline
+   res@mpFillOn             = False
+   res@mpGridAndLimbOn   = False           ; turn on lat/lon lines
+   ;res@mpGridLatSpacingF = 10.
+   ;res@mpGridLonSpacingF = 30.
+   ;res@mpGridLineColor      = -1
+   res@mpPerimOn         = False               ; turn off perimeter
+   res@mpFillOn         = False
+   res@mpOutlineBoundarySets     = "NoBoundaries"
+
+   ;;for seover
+   if (seover) then
+     res@mpGreatCircleLinesOn=True
+     if (cellfill .and. doglobal) then
+       print("Cannot overlay se-grid when cellfill and doglobal are True")
+       print("Setting seover=False")
+       seover = False 
+     end if
+   end if
+
+   if (.not.doglobal) then
+     res@mpMaxLatF = 70.
+     res@mpMinLatF = 20.
+     res@mpMaxLonF = 210.
+     res@mpMinLonF = 30.
+   end if
+
+;Set Position and Sizes
+
+   ;res@vpXF             = 0.12
+   ;res@vpYF             = 0.94   
+   ;res@vpWidthF         = 0.50
+   ;res@vpHeightF        = 0.40
+   ;res@trYMinF          = 0.                   
+   ;res@trYMaxF          = 950.         
+
+;************
+;Main Loop
+;************
+ do n = 0,nfiles-1
+ 
+ print("begin case "+n)
+
+ ;load all files
+ files = systemfunc ("ls " + dir + fname(n) + "/run/" + fname(n) + fdate(n))
+ nf = dimsizes(files)
+ if (onemnth) then
+   nstart = 0
+   nfinish = 0
+ else
+   nstart = 0
+   nfinish = nf-1
+ end if
+
+ print("load files...")
+
+ f  = addfiles (files(nstart:nfinish),"r")
+ ListSetType(f,"cat")
+ delete(files)
+
+ if (isfilevardim(f[0],"PS","lat")) then
+   print("NETCDF is on lat-lon grid")
+   latlon = True
+   cellfill = False
+ else
+   print("NETCDF is on native se-grid")
+   latlon = False
+   ;;cellfill = True
+ end if
+
+ print("Grab var...")
+
+ if (var3d) then
+   if (latlon) then
+     var = f[:]->$VAR(n)$(t0,varlev,:,:)
+   else
+     var = f[:]->$VAR(n)$(t0,varlev,:)
+   end if
+   if (n.eq.0) then
+     hyam = f[0]->hyam
+     hybm = f[0]->hybm
+   end if
+ else
+   if (latlon) then
+     var = f[:]->$VAR(n)$(t0,:,:)
+   else
+     var = f[:]->$VAR(n)$(t0,:)
+   end if
+ end if
+
+ var = factor*var
+
+ lat1d = f[0]->$LAT(n)$
+ lon1d = f[0]->$LON(n)$
+
+ print("Plotting...")
+
+ if (cellfill) then
+   res@cnFillMode = "CellFill"
+   print("CellFill on")
+   ncol = dimsizes(lat1d)
+
+   ;;dims = getfilevardimsizes(f[0],"PSDRY_gll")
+   ncol_d = 48602;;dims(1)
+   ;;delete(dims)
+
+   vpath = get_vertices(ncol,ncol_d)
+
+   sf = addfile(vpath,"r")
+   latvert = sf->grid_corner_lat
+   lonvert = sf->grid_corner_lon
+   res@sfXCellBounds = lonvert
+   res@sfYCellBounds = latvert
+   delete([/sf,latvert,lonvert/])
+ else
+   res@cnFillMode = "AreaFill"
+ end if
+ delete(f)
+
+ delete(var@units)
+ delete(var@long_name)
+ ;;;var@long_name = tname(n)
+ if (.not.latlon) then
+   res@sfXArray = lon1d
+   res@sfYArray = lat1d
+ end if
+
+ if (manlevs) then
+   res@cnLevelSelectionMode = "ManualLevels"
+   res@cnMinLevelValF  = cmin
+   res@cnMaxLevelValF  = cmax
+   res@cnLevelSpacingF = cspc
+ else
+   print("manual levels set to False")
+   print("max var " + max(var))
+   print("min var " + min(var))
+   mxmmn = max(var)-min(var)
+   print("max - min " + mxmmn)
+ end if
+
+ print("max " + max(var))
+ print("min " + min(var))
+
+ plot(n) = gsn_csm_contour_map(wks,var,res)
+
+if (seover) then
+  overlay_se_grid(wks,plot(n),True)
+end if
+
+ if (writencdf) then
+   if (n.eq.0) then
+     system("/bin/rm -f "+fname_out)
+     ncdf = addfile(fname_out,"c")
+   end if
+
+   var!0 = (/"ncol"+tostring(n+1)/)
+   lat1d!0 = (/"ncol"+tostring(n+1)/)
+   lon1d!0 = (/"ncol"+tostring(n+1)/)
+   ncdf->$VARNAM(n)$ = var
+   ncdf->$LATNAM(n)$ = lat1d
+   ncdf->$LONNAM(n)$ = lon1d
+ end if
+
+delete(var)
+delete(lat1d)
+delete(lon1d)
+
+if (.not.latlon) then
+  delete(res@sfXArray)
+  delete(res@sfYArray)
+end if
+
+if (cellfill) then
+   delete([/res@sfXCellBounds,res@sfYCellBounds/])
+end if
+
+end do ;nfiles
+
+
+;************************************************
+; create panel
+;************************************************
+  resP                  = True                   ; modify the panel plot
+  resP@gsnFrame         = False                  ; don't advance panel plot
+
+  ;;if (plabels) then
+    resP@gsnPanelFigureStrings = labels
+    resP@gsnPanelFigureStringsFontHeightF = 0.015
+    resP@gsnPanelFigureStringsPerimOn     = True
+    resP@gsnPanelFigureStringsBackgroundFillColor = "white"
+    resP@amJust           = "TopLeft"
+  ;;end if
+
+  resP@gsnPanelLabelBar = True
+  resP@gsnPanelBottom   = 0.1
+  ;;resP@lbTitleString              = varNam
+  resP@lbTitlePosition            = "Top"
+  resP@lbTitleFontHeightF         = 0.0084
+  resP@lbLabelFontHeightF         = 0.008
+
+  resP@pmLabelBarOrthogonalPosF = -0.01
+  resP@pmLabelBarParallelPosF = 0.
+
+  ;resP@gsnPanelTop        = 0.97
+  resP@gsnPanelBottom     = 0.1
+  ;resP@gsnPanelRight     = 0.9007;
+  ;resP@gsnPanelLeft     = 0.40        ; position of left most plot
+  gsn_panel(wks,plot,(/nfiles,1/),resP)      
+
+frame(wks)
+
+end
+
+
+
