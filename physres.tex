@@ -354,12 +354,22 @@ f^{(pg2)}=\frac{1}{2}+\frac{1}{2}\cos(16\lambda)\sin(2\theta)^{16},
 \end{equation}
 where $(\lambda,\theta)$ is latitude-longitude, is mapped from $pg2$ to $pg3$ grid using this algorithm assuming $m^{(pg3)}_\ell=0, \quad \forall \ell$. The errors in the mapping are not always aligned with large gradients in the analytical function as would be expected for a `traditional' interpolation algorithm. The errors are maximum on the order of 60$\%$. To reduce errors we therefore perform a higher-order pre-allocation of tendencies that is not mass-conserving but satisfies properties 2,3, and 4 in Section \ref{sec:pgtonc}.
 
+
+
 \begin{figure}[t]
 \begin{center}
-\noindent\includegraphics[width=30pc,angle=0]{figs/mapping.pdf}\\
+\noindent\includegraphics[width=30pc,angle=0]{figs/map1.pdf}\\
 \end{center}
-\caption{Mapping of idealized functions from $pg2$ (column 1) to $pg3$ (columns 2) and errors (column 3) using the new tendency algorithm only (row 1 and 3) and new tendency algorithm with the high-order pre-allocation (row 2 and 4). Column 4 shows the errors in mapping the same distributions from  $pg3$ to $pg2$ using traditional remapping (CSLAM technology).}
-\label{fig:mapping}
+\caption{{\color{red}{(a) Smooth analytical function shown on the $pg3$ grid. Remaining plots show errors in mapping from (b) $pg3$ to $pg2$ using shape-preserving CSLAM technology and (c-d) from $pg2$ to $pg3$ grid using the default mapping algorithm without high-order pre-allocation algorithm (c) and the default algorithm that uses high-order pre-allocation (d). The Figure shows that the high-order pre-allocation algorithm used to map tendencies from the $pg2$ to $pg3$ grid drastically reduces mapping errors for a smooth function (compare plot (c) and (d)). For comparison the errors for the high-order CSLAM algorithm used to map from  $pg3$ to $pg2$ are shown in plot (b). The errors for mapping the state from the CSLAM grid to the physics grid are of similar magnitude as the mapping of tendencies from the physics grid to the CSLAM grid. In these plot the state and tendencies are the same analytical function.}}}
+\label{fig:mapping1}
+\end{figure}
+
+\begin{figure}[t]
+\begin{center}
+\noindent\includegraphics[width=30pc,angle=0]{figs/map2.pdf}\\
+\end{center}
+\caption{{\color{red}{This Figure is similar to Figure \ref{fig:mapping1} but for a rough distribution. (a) shows the slotted cylinder distributions on the $pg3$ grid. (b) and (c) shows the slotted-cylinders after being mapped to the $pg2$ grid using the default algorithm without (c) and with (d) the high-order pre-allocation algorithm. These plots show that the mapping algorithms used to map from $pg2$ to the $pg3$ grid are shape-preserving , i.e. no new extrema are created in the mapping process, and they preserve a constant.}}}
+\label{fig:mapping2}
 \end{figure}
 
 \subsection{High-order (non-conservative) pre-allocation of tracer tendencies}
@@ -384,7 +394,7 @@ Shape-preservation, as defined by \eqref{eq:min} and \eqref{eq:max}, is enforced
 \end{equation}
 While this algorithm preserves linear correlations, shape, and is consistent, is it not mass-conservative. Hence the remaining physics increment not allocated in the algorithm above is allocated using the new tendency algorithm described in Section \ref{sec:massfix}.
 
-Combining the high-order pre-allocation algorithm with the new tendency algorithm (which in this case can also be considered as a mass-fixer that does not disrupt correlation-preservation, shape and consistency) leads to an order-of-magnitude reduction in mapping errors for a smooth function (see Figure \ref{fig:mapping} row 3 and 4) while full-filling the mass-conservation, shape-preservation, linear correlation and consistency  constraint. Mass and linear correlation preservation is illustrated in the baroclinic wave test with terminator chemistry test in Section \ref{sec:fkessler}. Shape-preservation and consistency is demonstrated in an idealized mapping test where a smooth function, see \eqref{eq:Y32}, and a slotted-cylinder \citep[see equation 12 in ][]{LSPT2012GMD} are mapped to/from the $pg2$ and $pg3$ grids. Since the background value in the mapping of the slotted-cylinder field is preserved the mapping algorithm is consistent. Since no new over- and undershoots are produced (particularly obvious in the mapping of the slotted cylinders) the mapping is shape-preserving. We also note that the mapping errors with the default algorithm (higher-order pre-allocation with new tendency algorithm) are similar to the errors in mapping the same field from $pg3$ to $pg2$ using traditional remapping with CSLAM technology (column 4 in Figure \ref{fig:mapping}).
+Combining the high-order pre-allocation algorithm with the new tendency algorithm (which in this case can also be considered as a mass-fixer that does not disrupt correlation-preservation, shape and consistency) leads to an order-of-magnitude reduction in mapping errors for a smooth function (see Figure \ref{fig:mapping1}) while full-filling the mass-conservation, shape-preservation, linear correlation and consistency  constraint. Mass and linear correlation preservation is illustrated in the baroclinic wave test with terminator chemistry test in Section \ref{sec:fkessler}. Shape-preservation and consistency is demonstrated in an idealized mapping test where a smooth function, see \eqref{eq:Y32}, and a slotted-cylinder \citep[see equation 12 in ][]{LSPT2012GMD} are mapped to/from the $pg2$ and $pg3$ grids {\color{red}{(Figure \ref{fig:mapping1} and \ref{fig:mapping2})}}. Since the background value in the mapping of the slotted-cylinder field is preserved the mapping algorithm is consistent. Since no new over- and undershoots are produced (particularly obvious in the mapping of the slotted cylinders) the mapping is shape-preserving. We also note that the mapping errors with the default algorithm (higher-order pre-allocation with new tendency algorithm) are similar to the errors in mapping the same field from $pg3$ to $pg2$ using traditional remapping with CSLAM technology (column 4 in Figure \ref{fig:mapping1}).
 
 %A high-order estimate of the physics increment in the $A_{k\ell}$th overlap cell, that is not mass-conserving, can be computed as
 %\begin{equation}
