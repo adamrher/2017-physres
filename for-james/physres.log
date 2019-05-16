@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  8 MAR 2019 15:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  16 MAY 2019 19:47
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -860,106 +860,192 @@ Overfull \hbox (7.43027pt too wide) in paragraph at lines 336--338
  []
 
 [13]
-<mapping.pdf, id=188, 748.53903pt x 412.52048pt>
-File: mapping.pdf Graphic file (type pdf)
-<use mapping.pdf>
-Package pdftex.def Info: mapping.pdf  used on input line 359.
-(pdftex.def)             Requested size: 360.0pt x 198.39784pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 361--361
-[]\T1/ntxtlf/b/n/9 Figure  4. \T1/ntxtlf/m/n/9 Map-ping of ide-al-ized func-tio
-ns from $\OML/ntxmi/m/it/9 pg\OT1/ntxtlf/m/n/9 2$ \T1/ntxtlf/m/n/9 (col-umn 1) 
-to $\OML/ntxmi/m/it/9 pg\OT1/ntxtlf/m/n/9 3$ \T1/ntxtlf/m/n/9 (columns 2) and e
-r-rors (col-umn 3)
+LaTeX Warning: Reference `fig:mapping' on page 14 undefined on input line 350.
+
+<map1.pdf, id=188, 550.80267pt x 310.64307pt>
+File: map1.pdf Graphic file (type pdf)
+<use map1.pdf>
+Package pdftex.def Info: map1.pdf  used on input line 361.
+(pdftex.def)             Requested size: 360.0pt x 203.03899pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 363--363
+[]\T1/ntxtlf/b/n/9 Figure  4. \T1/ntxtlf/m/n/9 (a) Smooth an-a-lyt-i-cal func-t
+ion [ap-prox-i-mate spher-i-cal har-monic of or-der 32 and az-imuthal wave
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 361--361
-\T1/ntxtlf/m/n/9 us-ing the new ten-dency al-go-rithm only (row 1 and 3) and ne
-w ten-dency al-go-rithm with the high-order pre-
+Underfull \hbox (badness 10000) in paragraph at lines 363--363
+\T1/ntxtlf/m/n/9 num-ber 16 re-ferred to as $\OML/ntxmi/m/it/9 Y[]$\T1/ntxtlf/m
+/n/9 ;  \T1/ntxtlf/m/it/9 Jones\T1/ntxtlf/m/n/9 , 1999] plot-ted us-ing raster 
+con-tours on the $\OML/ntxmi/m/it/9 pg\OT1/ntxtlf/m/n/9 2$ \T1/ntxtlf/m/n/9 gri
+d. Re-main-ing plots
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 361--361
-\T1/ntxtlf/m/n/9 allocation (row 2 and 4). Col-umn 4 shows the er-rors in map-p
-ing the same dis-tri-bu-tions from $\OML/ntxmi/m/it/9 pg\OT1/ntxtlf/m/n/9 3$ \T
-1/ntxtlf/m/n/9 to $\OML/ntxmi/m/it/9 pg\OT1/ntxtlf/m/n/9 2$ \T1/ntxtlf/m/n/9 us
--ing
+Underfull \hbox (badness 10000) in paragraph at lines 363--363
+\T1/ntxtlf/m/n/9 show er-rors (mapped field mi-nus an-a-lyt-i-cal func-tion eva
+l-u-ated at cen-ters of grid cells). In (c) and (d) a $\OML/ntxmi/m/it/9 Y[]$
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 363--363
+\T1/ntxtlf/m/n/9 tracer ten-dency is mapped from $\OML/ntxmi/m/it/9 pg\OT1/ntxt
+lf/m/n/9 2$ \T1/ntxtlf/m/n/9 to $\OML/ntxmi/m/it/9 pg\OT1/ntxtlf/m/n/9 3$ \T1/n
+txtlf/m/n/9 grid us-ing the de-fault map-ping al-go-rithm with-out high-order
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 363--363
+\T1/ntxtlf/m/n/9 pre-allocation al-go-rithm (c) and the de-fault al-go-rithm th
+at uses high-order pre-allocation (d). The Fig-ure
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 363--363
+\T1/ntxtlf/m/n/9 shows that the high-order pre-allocation al-go-rithm used to m
+ap ten-den-cies from the $\OML/ntxmi/m/it/9 pg\OT1/ntxtlf/m/n/9 2$ \T1/ntxtlf/m
+/n/9 to $\OML/ntxmi/m/it/9 pg\OT1/ntxtlf/m/n/9 3$ \T1/ntxtlf/m/n/9 grid dras-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 363--363
+\T1/ntxtlf/m/n/9 ti-cally re-duces map-ping er-rors for a smooth func-tion (com
+-pare plot (c) and (d)). For com-par-i-son the er-rors
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 363--363
+\T1/ntxtlf/m/n/9 for the high-order CSLAM al-go-rithm used to map state from $\
+OML/ntxmi/m/it/9 pg\OT1/ntxtlf/m/n/9 3$ \T1/ntxtlf/m/n/9 to $\OML/ntxmi/m/it/9 
+pg\OT1/ntxtlf/m/n/9 2$ \T1/ntxtlf/m/n/9 are shown in plot (b). The er-rors
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 363--363
+\T1/ntxtlf/m/n/9 for map-ping the state from the CSLAM grid to the physics grid
+ are sim-i-lar in mag-ni-tude com-pared with the
+ []
+
+<map2.pdf, id=189, 765.07933pt x 138.96025pt>
+File: map2.pdf Graphic file (type pdf)
+<use map2.pdf>
+Package pdftex.def Info: map2.pdf  used on input line 369.
+(pdftex.def)             Requested size: 360.0pt x 65.38553pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 371--371
+[]\T1/ntxtlf/b/n/9 Figure  5. \T1/ntxtlf/m/n/9 This fig-ure is sim-i-lar to Fig
+-ure 4[] but for a rough dis-tri-bu-tion (slot-ted cylin-ders). (a) shows the
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 371--371
+\T1/ntxtlf/m/n/9 slot-ted cylin-der dis-tri-bu-tions on the $\OML/ntxmi/m/it/9 
+pg\OT1/ntxtlf/m/n/9 2$ \T1/ntxtlf/m/n/9 grid plot-ted us-ing raster con-tours. 
+(b) and (c) show the slotted-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 371--371
+\T1/ntxtlf/m/n/9 cylinders af-ter be-ing mapped to the $\OML/ntxmi/m/it/9 pg\OT
+1/ntxtlf/m/n/9 2$ \T1/ntxtlf/m/n/9 grid us-ing the de-fault al-go-rithm with-ou
+t (c) and with (d) the high-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 371--371
+\T1/ntxtlf/m/n/9 order pre-allocation al-go-rithm. These plots show that the ma
+p-ping al-go-rithms used to map from $\OML/ntxmi/m/it/9 pg\OT1/ntxtlf/m/n/9 2$ 
+\T1/ntxtlf/m/n/9 to the
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 371--371
+\OML/ntxmi/m/it/9 pg\OT1/ntxtlf/m/n/9 3$ \T1/ntxtlf/m/n/9 grid are shape-preser
+ving, i.e. no new ex-trema are cre-ated in the map-ping pro-cess, and they pre-
+serve a
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [14]
+[15 <./map1.pdf>]
 LaTeX Font Info:    Font shape `T1/ntxsups/m/n' will be
-(Font)              scaled to size 10.0pt on input line 378.
+(Font)              scaled to size 10.0pt on input line 388.
 
-Underfull \hbox (badness 10000) in paragraph at lines 381--381
+Underfull \hbox (badness 10000) in paragraph at lines 391--391
 | [][]\T1/ntxtlf/m/n/8 In the com-pu-ta-tion of $[][]$ there can be small over-
 shoots and un-der-shoots (due to nu-mer-i-cal in-te-gra-tion er-rors) com-
  []
 
 
-Overfull \hbox (2.24422pt too wide) in paragraph at lines 378--382
+Overfull \hbox (2.24422pt too wide) in paragraph at lines 388--392
 \T1/ntxtlf/m/n/10 and over-shoots on the ex-change grid by mod-i-fy-ing the for
 c-ing in-cre-ment $[][]$ so that shape- 
  []
 
-[15 <./mapping.pdf, page is rotated 270 degrees>] [16]
-Overfull \hbox (2.2502pt too wide) in paragraph at lines 404--405
+[16 <./map2.pdf>]
+Overfull \hbox (2.2502pt too wide) in paragraph at lines 403--404
 \T1/ntxtlf/m/n/10 o-lu-tion physics grid, a suite of aqua-planet sim-u-la-tions
  [\T1/ntxtlf/m/it/10 Neale and Hoskins\T1/ntxtlf/m/n/10 , 2000; \T1/ntxtlf/m/it
 /10 Medeiros 
  []
 
 
-Overfull \hbox (2.04521pt too wide) in paragraph at lines 404--405
+Overfull \hbox (2.04521pt too wide) in paragraph at lines 403--404
 \T1/ntxtlf/m/n/10 physics ($\OML/ntxmi/m/it/10 QPC\OT1/ntxtlf/m/n/10 6$ \T1/ntx
 tlf/m/n/10 compset). The aqua-planet is an ocean cov-ered planet in per-pet-ual
  equinox, 
  []
 
 
-Overfull \hbox (4.42027pt too wide) in paragraph at lines 404--405
+Overfull \hbox (4.42027pt too wide) in paragraph at lines 403--404
 \T1/ntxtlf/m/n/10 res-o-lu-tion ac-cord-ing to a CFL cri-te-rion, there is no e
 s-tab-lished stan-dard for how the physics 
  []
 
-[17]
-Underfull \hbox (badness 10000) in paragraph at lines 418--418
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [17]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [18]
+Underfull \hbox (badness 10000) in paragraph at lines 419--419
 | [][]\T1/ntxtlf/m/n/8 This is ap-prox-i-mate. To re-duce the co-ef-fi-cients b
 y ex-actly an or-der of mag-ni-tude for each dou-bling of the res-o-lu-tion, th
 e
  []
 
-<temp_CLDLIQ.pdf, id=274, 538.08168pt x 366.12012pt>
+<temp_CLDLIQ.pdf, id=1458, 538.08168pt x 366.12012pt>
 File: temp_CLDLIQ.pdf Graphic file (type pdf)
 <use temp_CLDLIQ.pdf>
-Package pdftex.def Info: temp_CLDLIQ.pdf  used on input line 428.
+Package pdftex.def Info: temp_CLDLIQ.pdf  used on input line 429.
 (pdftex.def)             Requested size: 360.0pt x 244.95284pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 430--430
-[]\T1/ntxtlf/b/n/9 Figure  5. \T1/ntxtlf/m/n/9 Snap-shot of the cloud liq-uid f
+Underfull \hbox (badness 10000) in paragraph at lines 431--431
+[]\T1/ntxtlf/b/n/9 Figure  6. \T1/ntxtlf/m/n/9 Snap-shot of the cloud liq-uid f
 ield in kg kg$[]$ near the $\OT1/ntxtlf/m/n/9 700\OML/ntxmi/m/it/9 hPa$ \T1/ntx
 tlf/m/n/9 level, on day 10 of the moist
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 430--430
+Underfull \hbox (badness 10000) in paragraph at lines 431--431
 \T1/ntxtlf/m/n/9 baro-clinic wave test in the $\OML/ntxmi/m/it/9 ne\OT1/ntxtlf/
 m/n/9 30\OML/ntxmi/m/it/9 pg\OT1/ntxtlf/m/n/9 3$ \T1/ntxtlf/m/n/9 and $\OML/ntx
 mi/m/it/9 ne\OT1/ntxtlf/m/n/9 30\OML/ntxmi/m/it/9 pg\OT1/ntxtlf/m/n/9 2$ \T1/nt
 xtlf/m/n/9 con-fig-u-ra-tions, dis-played on the up-per and lower pan-els,
  []
 
-<temp_terminator.pdf, id=275, 426.71475pt x 495.24535pt>
+<temp_terminator.pdf, id=1459, 426.71475pt x 495.24535pt>
 File: temp_terminator.pdf Graphic file (type pdf)
 <use temp_terminator.pdf>
-Package pdftex.def Info: temp_terminator.pdf  used on input line 438.
+Package pdftex.def Info: temp_terminator.pdf  used on input line 439.
 (pdftex.def)             Requested size: 360.0pt x 417.83955pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 440--440
-[]\T1/ntxtlf/b/n/9 Figure  6. $\LMS/ntxsy/m/n/9 h\OML/ntxmi/m/it/9 CLy\LMS/ntxs
+Underfull \hbox (badness 10000) in paragraph at lines 441--441
+[]\T1/ntxtlf/b/n/9 Figure  7. $\LMS/ntxsy/m/n/9 h\OML/ntxmi/m/it/9 CLy\LMS/ntxs
 y/m/n/9 i$ \T1/ntxtlf/m/n/9 in kg kg$[]$ on day 15 of the moist baro-clinic wav
 e test in the $\OML/ntxmi/m/it/9 ne\OT1/ntxtlf/m/n/9 30\OML/ntxmi/m/it/9 np\OT1
 /ntxtlf/m/n/9 4$ \T1/ntxtlf/m/n/9 and $\OML/ntxmi/m/it/9 ne\OT1/ntxtlf/m/n/9 30
@@ -967,36 +1053,33 @@ e test in the $\OML/ntxmi/m/it/9 ne\OT1/ntxtlf/m/n/9 30\OML/ntxmi/m/it/9 np\OT1
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 440--440
+Underfull \hbox (badness 10000) in paragraph at lines 441--441
 \T1/ntxtlf/m/n/9 fig-u-ra-tions, dis-played on the up-per and lower pan-els, re
 -spec-tively. The lower panel has a sin-gle con-tour level
  []
 
-
+[19]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [18]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [19 <./temp_CLDLIQ.pdf>]
+ [20 <./temp_CLDLIQ.pdf>]
 Underfull \vbox (badness 3769) has occurred while \output is active []
 
- [20 <./temp_terminator.pdf>]
-<fhstopo_ne30pg2-v-ne30pg3-v-10Xnudiv.pdf, id=300, 546.14795pt x 390.19397pt>
+ [21 <./temp_terminator.pdf>]
+<fhstopo_ne30pg2-v-ne30pg3-v-10Xnudiv.pdf, id=1484, 546.14795pt x 390.19397pt>
 File: fhstopo_ne30pg2-v-ne30pg3-v-10Xnudiv.pdf Graphic file (type pdf)
 <use fhstopo_ne30pg2-v-ne30pg3-v-10Xnudiv.pdf>
 Package pdftex.def Info: fhstopo_ne30pg2-v-ne30pg3-v-10Xnudiv.pdf  used on inpu
-t line 455.
+t line 456.
 (pdftex.def)             Requested size: 360.0pt x 257.20729pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 457--457
-[]\T1/ntxtlf/b/n/9 Figure  7. \T1/ntxtlf/m/n/9 Mean $\OML/ntxmi/m/it/9 !$ \T1/n
+Underfull \hbox (badness 10000) in paragraph at lines 458--458
+[]\T1/ntxtlf/b/n/9 Figure  8. \T1/ntxtlf/m/n/9 Mean $\OML/ntxmi/m/it/9 !$ \T1/n
 txtlf/m/n/9 at two model lev-els in the mid-dle tro-po-sphere, in a Held-Suarez
  con-fig-u-ra-tion out-fit-ted
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 457--457
+Underfull \hbox (badness 10000) in paragraph at lines 458--458
 \T1/ntxtlf/m/n/9 with real world to-pog-ra-phy. (Left) $\OML/ntxmi/m/it/9 ne\OT
 1/ntxtlf/m/n/9 30\OML/ntxmi/m/it/9 pg\OT1/ntxtlf/m/n/9 2$ \T1/ntxtlf/m/n/9 (Mid
 -dle) $\OML/ntxmi/m/it/9 ne\OT1/ntxtlf/m/n/9 30\OML/ntxmi/m/it/9 pg\OT1/ntxtlf/
@@ -1006,23 +1089,27 @@ m/n/9 3$ \T1/ntxtlf/m/n/9 and (Right) $\OML/ntxmi/m/it/9 ne\OT1/ntxtlf/m/n/9 30
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 457--457
+Underfull \hbox (badness 10000) in paragraph at lines 458--458
 \T1/ntxtlf/m/n/9 damp-ing co-ef-fi-cient, $\OML/ntxmi/m/it/9 ^^W[]$\T1/ntxtlf/m
 /n/9 , in-creased by an or-der of mag-ni-tude. The $\OML/ntxmi/m/it/9 !$ \T1/nt
 xtlf/m/n/9 fields are com-puted from a two-year
  []
 
-<fhstopo_Divergence_ne30pg2-v-ne30pg3-v-10Xnudiv.pdf, id=301, 521.00893pt x 521
-.19388pt>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [22 <./fhstopo_ne30pg2-v-ne30pg3-v-10Xnudiv.pdf>]
+<fhstopo_Divergence_ne30pg2-v-ne30pg3-v-10Xnudiv.pdf, id=1495, 521.00893pt x 52
+1.19388pt>
 File: fhstopo_Divergence_ne30pg2-v-ne30pg3-v-10Xnudiv.pdf Graphic file (type pd
 f)
 <use fhstopo_Divergence_ne30pg2-v-ne30pg3-v-10Xnudiv.pdf>
 Package pdftex.def Info: fhstopo_Divergence_ne30pg2-v-ne30pg3-v-10Xnudiv.pdf  u
-sed on input line 465.
+sed on input line 466.
 (pdftex.def)             Requested size: 300.0pt x 300.10564pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 467--467
-[]\T1/ntxtlf/b/n/9 Figure  8. \T1/ntxtlf/m/n/9 Ki-netic en-ergy power spec-trum
+Underfull \hbox (badness 10000) in paragraph at lines 468--468
+[]\T1/ntxtlf/b/n/9 Figure  9. \T1/ntxtlf/m/n/9 Ki-netic en-ergy power spec-trum
  aris-ing from di-ver-gent modes in $\OML/ntxmi/m/it/9 ne\OT1/ntxtlf/m/n/9 30\O
 ML/ntxmi/m/it/9 pg\OT1/ntxtlf/m/n/9 3$\T1/ntxtlf/m/n/9 , $\OML/ntxmi/m/it/9 ne\
 OT1/ntxtlf/m/n/9 30\OML/ntxmi/m/it/9 pg\OT1/ntxtlf/m/n/9 2$ \T1/ntxtlf/m/n/9 an
@@ -1031,7 +1118,7 @@ d $\OML/ntxmi/m/it/9 ne\OT1/ntxtlf/m/n/9 30\OML/ntxmi/m/it/9 pg\OT1/ntxtlf/m/n/
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 467--467
+Underfull \hbox (badness 10000) in paragraph at lines 468--468
 \T1/ntxtlf/m/n/9 with the di-ver-gence damp-ing co-ef-fi-cient, $\OML/ntxmi/m/i
 t/9 ^^W[]$\T1/ntxtlf/m/n/9 , in-creased by an or-der of mag-ni-tude, in the Hel
 d-Suarez with
@@ -1040,14 +1127,8 @@ d-Suarez with
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [21]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [22 <./fhstopo_ne30pg2-v-ne30pg3-v-10Xnudiv.pdf>]
-Underfull \vbox (badness 6741) has occurred while \output is active []
-
- [23 <./fhstopo_Divergence_ne30pg2-v-ne30pg3-v-10Xnudiv.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 490--490
+ [23 <./fhstopo_Divergence_ne30pg2-v-ne30pg3-v-10Xnudiv.pdf>] [24]
+Underfull \hbox (badness 10000) in paragraph at lines 491--491
 []\T1/ntxtlf/b/n/9 Table 1. $\U/ntxmia/m/it/9 ^^A\OML/ntxmi/m/it/9 x$ \T1/ntxtl
 f/m/n/9 and $\U/ntxmia/m/it/9 ^^A\OML/ntxmi/m/it/9 t$ \T1/ntxtlf/m/n/9 for the 
 physics and dy-nam-ics in the low res-o-lu-tion sim-u-la-tions. $\U/ntxmia/m/it
@@ -1055,24 +1136,30 @@ physics and dy-nam-ics in the low res-o-lu-tion sim-u-la-tions. $\U/ntxmia/m/it
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [24]
-<panel_transGLL.pdf, id=328, 544.5411pt x 530.47968pt>
-File: panel_transGLL.pdf Graphic file (type pdf)
-<use panel_transGLL.pdf>
-Package pdftex.def Info: panel_transGLL.pdf  used on input line 508.
-(pdftex.def)             Requested size: 360.0pt x 350.70856pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 510--510
-[]\T1/ntxtlf/b/n/9 Figure  9. \T1/ntxtlf/m/n/9 Snap-shots in the longitude-pres
-sure plane of $\OML/ntxmi/m/it/9 ![]$ \T1/ntxtlf/m/n/9 through the ITCZ re-gion
- in the $\OML/ntxmi/m/it/9 ne\OT1/ntxtlf/m/n/9 20\OML/ntxmi/m/it/9 pg\OT1/ntxtl
-f/m/n/9 3$\T1/ntxtlf/m/n/9 ,
+Overfull \hbox (0.21025pt too wide) in paragraph at lines 505--506
+[]\T1/ntxtlf/m/n/10 Figure 10[] is a snap-shot of the $\OML/ntxmi/m/it/10 !$ \T
+1/ntxtlf/m/n/10 field in the Inter-Tropical Con-ver-gence Zone (ITCZ) 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 510--510
+Underfull \vbox (badness 6758) has occurred while \output is active []
+
+ [25]
+<panel_transGLL.pdf, id=1513, 544.5411pt x 530.47968pt>
+File: panel_transGLL.pdf Graphic file (type pdf)
+<use panel_transGLL.pdf>
+Package pdftex.def Info: panel_transGLL.pdf  used on input line 509.
+(pdftex.def)             Requested size: 360.0pt x 350.70856pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 511--511
+[]\T1/ntxtlf/b/n/9 Figure  10. \T1/ntxtlf/m/n/9 Snap-shots in the longitude-pre
+ssure plane of $\OML/ntxmi/m/it/9 ![]$ \T1/ntxtlf/m/n/9 through the ITCZ re-gio
+n in the $\OML/ntxmi/m/it/9 ne\OT1/ntxtlf/m/n/9 20\OML/ntxmi/m/it/9 pg\OT1/ntxt
+lf/m/n/9 3$\T1/ntxtlf/m/n/9 ,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 511--511
 \OML/ntxmi/m/it/9 ne\OT1/ntxtlf/m/n/9 30\OML/ntxmi/m/it/9 pg\OT1/ntxtlf/m/n/9 2
 $ \T1/ntxtlf/m/n/9 and $\OML/ntxmi/m/it/9 ne\OT1/ntxtlf/m/n/9 30\OML/ntxmi/m/it
 /9 pg\OT1/ntxtlf/m/n/9 3$ \T1/ntxtlf/m/n/9 con-fig-u-ra-tions, in the up-per, m
@@ -1080,7 +1167,7 @@ id-dle and lower pan-els, re-spec-tively. Black is the
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 510--510
+Underfull \hbox (badness 10000) in paragraph at lines 511--511
 \LMS/ntxsy/m/n/9 ^^F\OT1/ntxtlf/m/n/9 15\OML/ntxmi/m/it/9 K\LMS/ntxsy/m/n/9 ù\O
 ML/ntxmi/m/it/9 day$ \T1/ntxtlf/m/n/9 con-tour of the physics ten-den-cies, and
  the white con-tour is the $\OT1/ntxtlf/m/n/9 0\OML/ntxmi/m/it/9 :\OT1/ntxtlf/m
@@ -1088,30 +1175,26 @@ ML/ntxmi/m/it/9 day$ \T1/ntxtlf/m/n/9 con-tour of the physics ten-den-cies, and
 m/n/9 ù\OML/ntxmi/m/it/9 s$ \T1/ntxtlf/m/n/9 con-tour of the
  []
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [25]
-<panel_ne20pg2-ne30pg2-ne30pg3.pdf, id=333, 547.8952pt x 184.11635pt>
+<panel_ne20pg2-ne30pg2-ne30pg3.pdf, id=1514, 547.8952pt x 184.11635pt>
 File: panel_ne20pg2-ne30pg2-ne30pg3.pdf Graphic file (type pdf)
 <use panel_ne20pg2-ne30pg2-ne30pg3.pdf>
 Package pdftex.def Info: panel_ne20pg2-ne30pg2-ne30pg3.pdf  used on input line 
-518.
+519.
 (pdftex.def)             Requested size: 360.0pt x 120.97775pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 520--520
-[]\T1/ntxtlf/b/n/9 Figure  10. \T1/ntxtlf/m/n/9 (Left) Wavenumber-power spec-tr
+Underfull \hbox (badness 10000) in paragraph at lines 521--521
+[]\T1/ntxtlf/b/n/9 Figure  11. \T1/ntxtlf/m/n/9 (Left) Wavenumber-power spec-tr
 um of the tem-per-a-ture ten-den-cies from the moist physics,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 520--520
+Underfull \hbox (badness 10000) in paragraph at lines 521--521
 \T1/ntxtlf/m/n/9 near the 369 hPa level, (Mid-dle) prob-a-bil-ity den-sity dis-
 tri-bu-tion and (Right) the scaled prob-a-bil-ity den-sity
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 520--520
+Underfull \hbox (badness 10000) in paragraph at lines 521--521
 \T1/ntxtlf/m/n/9 dis-tri-bu-tion of up-ward $\OML/ntxmi/m/it/9 !$ \T1/ntxtlf/m/
 n/9 ev-ery-where in the model. The scaled dis-tri-bu-tions are scaled to $\OML/
 ntxmi/m/it/9 ne\OT1/ntxtlf/m/n/9 30\OML/ntxmi/m/it/9 pg\OT1/ntxtlf/m/n/9 3$ \T1
@@ -1119,108 +1202,127 @@ ntxmi/m/it/9 ne\OT1/ntxtlf/m/n/9 30\OML/ntxmi/m/it/9 pg\OT1/ntxtlf/m/n/9 3$ \T1
  []
 
 
-Underfull \vbox (badness 2486) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [26 <./panel_transGLL.pdf>] [27 <./panel_ne20pg2-ne30pg2-ne30pg3.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 539--539
+ [26]
+Underfull \vbox (badness 4205) has occurred while \output is active []
+
+ [27 <./panel_transGLL.pdf>]
+Underfull \vbox (badness 2932) has occurred while \output is active []
+
+ [28 <./panel_ne20pg2-ne30pg2-ne30pg3.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 540--540
 []\T1/ntxtlf/b/n/9 Table 2. $\U/ntxmia/m/it/9 ^^A\OML/ntxmi/m/it/9 x$ \T1/ntxtl
 f/m/n/9 and $\U/ntxmia/m/it/9 ^^A\OML/ntxmi/m/it/9 t$ \T1/ntxtlf/m/n/9 for the 
 physics and dy-nam-ics in the high res-o-lu-tion sim-u-la-tions. $\U/ntxmia/m/i
 t/9 ^^A\OML/ntxmi/m/it/9 x$ \T1/ntxtlf/m/n/9 is com-puted as the
  []
 
-<panel_ne80pg3_ne120pg2_ne120pg3.pdf, id=355, 546.29094pt x 183.71306pt>
+<panel_ne80pg3_ne120pg2_ne120pg3.pdf, id=1538, 546.29094pt x 183.71306pt>
 File: panel_ne80pg3_ne120pg2_ne120pg3.pdf Graphic file (type pdf)
 <use panel_ne80pg3_ne120pg2_ne120pg3.pdf>
 Package pdftex.def Info: panel_ne80pg3_ne120pg2_ne120pg3.pdf  used on input lin
-e 555.
+e 556.
 (pdftex.def)             Requested size: 360.0pt x 121.06596pt.
+[29 <./panel_ne80pg3_ne120pg2_ne120pg3.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Underfull \vbox (badness 6758) has occurred while \output is active []
-
- [28]
-Underfull \vbox (badness 5231) has occurred while \output is active []
-
- [29 <./panel_ne80pg3_ne120pg2_ne120pg3.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 570--570
+ [30]
+Underfull \hbox (badness 10000) in paragraph at lines 571--571
 []\T1/ntxtlf/b/n/9 Table 3. $\U/ntxmia/m/it/9 ^^A\OML/ntxmi/m/it/9 x$ \T1/ntxtl
 f/m/n/9 and $\U/ntxmia/m/it/9 ^^A\OML/ntxmi/m/it/9 t$ \T1/ntxtlf/m/n/9 for the 
 physics and dy-nam-ics in the high res-o-lu-tion sim-u-la-tions. $\U/ntxmia/m/i
 t/9 ^^A\OML/ntxmi/m/it/9 x$ \T1/ntxtlf/m/n/9 is com-puted as the
  []
 
-<panel_diags.pdf, id=369, 413.731pt x 148.34662pt>
+<panel_diags.pdf, id=1552, 413.731pt x 148.34662pt>
 File: panel_diags.pdf Graphic file (type pdf)
 <use panel_diags.pdf>
-Package pdftex.def Info: panel_diags.pdf  used on input line 586.
+Package pdftex.def Info: panel_diags.pdf  used on input line 587.
 (pdftex.def)             Requested size: 360.0pt x 129.08315pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 588--588
-[]\T1/ntxtlf/b/n/9 Figure  12. \T1/ntxtlf/m/n/9 Global mean, time-mean (a) up-w
+Underfull \hbox (badness 10000) in paragraph at lines 589--589
+[]\T1/ntxtlf/b/n/9 Figure  13. \T1/ntxtlf/m/n/9 Global mean, time-mean (a) up-w
 ard $\OML/ntxmi/m/it/9 !$\T1/ntxtlf/m/n/9 , (b) CLUBB pre-cip-i-ta-tion rate an
 d (c) pa-ram-e-ter-ized
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 588--588
+Underfull \hbox (badness 10000) in paragraph at lines 589--589
 \T1/ntxtlf/m/n/9 deep con-vec-tive pre-cip-i-ta-tion rate. All means com-puted 
 from the fi-nal 11 months of one-year sim-u-la-tions, and
  []
 
-[30 <./panel_diags.pdf>]
-Overfull \hbox (0.15028pt too wide) in paragraph at lines 596--597
-\T1/ntxtlf/m/n/10 The physics grid con-trol vol-umes en-com-pass a re-gion of t
-he el-e-ment such that an isotropic 
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [31]
-LaTeX Font Info:    Calculating math sizes for size <10.5> on input line 624.
-LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
-(Font)              scaled to size 10.5pt on input line 624.
-LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
-(Font)              scaled to size 7.66495pt on input line 624.
-LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
-(Font)              scaled to size 5.77502pt on input line 624.
-<bubble_test.pdf, id=384, 318.51808pt x 323.30608pt>
-File: bubble_test.pdf Graphic file (type pdf)
-<use bubble_test.pdf>
-Package pdftex.def Info: bubble_test.pdf  used on input line 631.
-(pdftex.def)             Requested size: 300.0pt x 304.5244pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 633--633
-[]\T1/ntxtlf/b/n/9 Figure  A.1. \T1/ntxtlf/m/n/9 The mag-ni-tude of $\OML/ntxmi
-/m/it/9 !$ \T1/ntxtlf/m/n/9 in the $\OML/ntxmi/m/it/9 pg\OT1/ntxtlf/m/n/9 3$ \T
-1/ntxtlf/m/n/9 so-lu-tions are sys-tem-at-i-cally larger than the $\OML/ntxmi/m
-/it/9 pg\OT1/ntxtlf/m/n/9 2$ \T1/ntxtlf/m/n/9 so-lu-tions,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 633--633
-\T1/ntxtlf/m/n/9 which is pri-mar-ily a re-sult of the damp-ing ef-fect of in-t
-e-grat-ing the ba-sis func-tions over a larger con-trol vol-
- []
-
-
+[31 <./panel_diags.pdf>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [32]
-<panel_pdf_dtphys.pdf, id=389, 432.21745pt x 207.24084pt>
+LaTeX Font Info:    Calculating math sizes for size <10.5> on input line 625.
+LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
+(Font)              scaled to size 10.5pt on input line 625.
+LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
+(Font)              scaled to size 7.66495pt on input line 625.
+LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
+(Font)              scaled to size 5.77502pt on input line 625.
+<bubble_test.pdf, id=1568, 318.51808pt x 323.30608pt>
+File: bubble_test.pdf Graphic file (type pdf)
+<use bubble_test.pdf>
+Package pdftex.def Info: bubble_test.pdf  used on input line 632.
+(pdftex.def)             Requested size: 300.0pt x 304.5244pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 634--634
+[]\T1/ntxtlf/b/n/9 Figure  A.1. \T1/ntxtlf/m/n/9 Min-i-mum $\OML/ntxmi/m/it/9 !
+$ \T1/ntxtlf/m/n/9 from a se-ries of 1-day long moist bub-ble sim-u-la-tions in
+ which the dy-nam-ics grid
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 634--634
+\T1/ntxtlf/m/n/9 spac-ing (top x-axis) and bub-ble ra-dius (bot-tom x-axis) are
+ var-ied by the same fac-tor. The cir-cles are for ex-per-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 634--634
+\T1/ntxtlf/m/n/9 i-ments where $\U/ntxmia/m/it/9 ^^A\OML/ntxmi/m/it/9 t[]$ \T1/
+ntxtlf/m/n/9 varies ac-cord-ing to equa-tion [], and the crosses for sim-u-la-t
+ions where $\U/ntxmia/m/it/9 ^^A\OML/ntxmi/m/it/9 t[]$ \T1/ntxtlf/m/n/9 is fixe
+d
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 634--634
+\T1/ntxtlf/m/n/9 at 1800 s. The grey lines are the an-a-lyt-i-cally pre-dicted 
+$\OML/ntxmi/m/it/9 !$\T1/ntxtlf/m/n/9 , af-ter equa-tion [] scaled to the low-e
+st res-o-lu-tion
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 634--634
+\T1/ntxtlf/m/n/9 so-lu-tions. The mag-ni-tude of $\OML/ntxmi/m/it/9 !$ \T1/ntxt
+lf/m/n/9 in the $\OML/ntxmi/m/it/9 pg\OT1/ntxtlf/m/n/9 3$ \T1/ntxtlf/m/n/9 so-l
+u-tions are sys-tem-at-i-cally larger than the $\OML/ntxmi/m/it/9 pg\OT1/ntxtlf
+/m/n/9 2$ \T1/ntxtlf/m/n/9 so-lu-tions, which is
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [33]
+<panel_pdf_dtphys.pdf, id=1573, 432.21745pt x 207.24084pt>
 File: panel_pdf_dtphys.pdf Graphic file (type pdf)
 <use panel_pdf_dtphys.pdf>
-Package pdftex.def Info: panel_pdf_dtphys.pdf  used on input line 643.
+Package pdftex.def Info: panel_pdf_dtphys.pdf  used on input line 644.
 (pdftex.def)             Requested size: 360.0pt x 172.62332pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 645--645
+Underfull \hbox (badness 10000) in paragraph at lines 646--646
 []\T1/ntxtlf/b/n/9 Figure  A.2. \T1/ntxtlf/m/n/9 Prob-a-bil-ity den-sity dis-tr
 i-bu-tion of up-ward $\OML/ntxmi/m/it/9 !$ \T1/ntxtlf/m/n/9 ev-ery-where in the
  model in the aqua-planets us-ing
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 645--645
+Underfull \hbox (badness 10000) in paragraph at lines 646--646
 \T1/ntxtlf/m/n/9 the $\OML/ntxmi/m/it/9 ne\OT1/ntxtlf/m/n/9 30\OML/ntxmi/m/it/9
  pg\OT1/ntxtlf/m/n/9 2$ \T1/ntxtlf/m/n/9 grid (Left) and the $\OML/ntxmi/m/it/9
  ne\OT1/ntxtlf/m/n/9 120\OML/ntxmi/m/it/9 pg\OT1/ntxtlf/m/n/9 2$ \T1/ntxtlf/m/n
@@ -1228,36 +1330,36 @@ Underfull \hbox (badness 10000) in paragraph at lines 645--645
  []
 
 
-Underfull \vbox (badness 2512) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [33 <./bubble_test.pdf>]
-<panel_loworder.pdf, id=400, 531.40268pt x 282.21727pt>
+ [34 <./bubble_test.pdf>]
+<panel_loworder.pdf, id=1584, 531.40268pt x 282.21727pt>
 File: panel_loworder.pdf Graphic file (type pdf)
 <use panel_loworder.pdf>
-Package pdftex.def Info: panel_loworder.pdf  used on input line 657.
+Package pdftex.def Info: panel_loworder.pdf  used on input line 658.
 (pdftex.def)             Requested size: 360.0pt x 191.19466pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 659--659
+Underfull \hbox (badness 10000) in paragraph at lines 660--660
 []\T1/ntxtlf/b/n/9 Figure  B.1. \T1/ntxtlf/m/n/9 (Left) Wavenumber-power spec-t
 rum of the tem-per-a-ture ten-den-cies from the moist physics, at
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 659--659
+Underfull \hbox (badness 10000) in paragraph at lines 660--660
 \T1/ntxtlf/m/n/9 the 369 hPa level, and (right) prob-a-bil-ity den-sity dis-tri
 -bu-tion of up-ward $\OML/ntxmi/m/it/9 !$\T1/ntxtlf/m/n/9 , ev-ery-where in the
  model, for three
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 659--659
+Underfull \hbox (badness 10000) in paragraph at lines 660--660
 \T1/ntxtlf/m/n/9 year-long aqua-planet sim-u-la-tions. Solid lines re-fer to va
 l-ues of on the $\OML/ntxmi/m/it/9 GLL$ \T1/ntxtlf/m/n/9 grids, and dashed line
 s, the fields
  []
 
 
-Overfull \hbox (0.97023pt too wide) in paragraph at lines 663--664
+Overfull \hbox (0.97023pt too wide) in paragraph at lines 664--665
 []\T1/ntxtlf/m/n/10 The im-por-tance of the high-order map-ping can be shown wi
 th an ad-di-tional $\OML/ntxmi/m/it/10 ne\OT1/ntxtlf/m/n/10 30\OML/ntxmi/m/it/1
 0 pg\OT1/ntxtlf/m/n/10 2$ 
@@ -1266,13 +1368,10 @@ th an ad-di-tional $\OML/ntxmi/m/it/10 ne\OT1/ntxtlf/m/n/10 30\OML/ntxmi/m/it/1
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [34 <./panel_pdf_dtphys.pdf>]
+ [35 <./panel_pdf_dtphys.pdf>]
 Underfull \vbox (badness 1917) has occurred while \output is active []
 
- [35 <./panel_loworder.pdf>] (./physres.bbl
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [36]
+ [36 <./panel_loworder.pdf>] (./physres.bbl
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [37]
@@ -1281,54 +1380,61 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [38]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [39])
-[40] (./physres.aux) ) 
+ [39]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [40])
+[41] (./physres.aux)
+
+LaTeX Warning: There were undefined references.
+
+ ) 
 Here is how much of TeX's memory you used:
- 6778 strings out of 492649
- 90762 string characters out of 6129622
- 150849 words of memory out of 5000000
- 10379 multiletter control sequences out of 15000+600000
+ 6788 strings out of 492649
+ 90906 string characters out of 6129622
+ 151885 words of memory out of 5000000
+ 10388 multiletter control sequences out of 15000+600000
  132629 words of font info for 233 fonts, out of 8000000 for 9000
  1147 hyphenation exceptions out of 8191
  41i,10n,37p,1707b,396s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/base/
-ec.enc}{/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/newtx/ntx-ec-tlf.enc
-}{/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/newtx/ntx-ot1-tlf.enc}{/us
-r/local/texlive/2018/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/texlive
-/2018/texmf-dist/fonts/enc/dvips/tex-gyre/q-ts1.enc}{/usr/local/texlive/2018/te
-xmf-dist/fonts/enc/dvips/tex-gyre/q-ec.enc}</usr/local/texlive/2018/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2018/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2018/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2018/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2018/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2018/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1
-/public/newtx/ntxsups-Regular.pfb></usr/local/texlive/2018/texmf-dist/fonts/typ
-e1/public/newtx/ntxsyralt.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/p
-ublic/tex-gyre/qhvr.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/
-tex-gyre/qtmb.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/tex-gy
-re/qtmbi.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/tex-gyre/qt
-mr.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/tex-gyre/qtmri.pf
-b></usr/local/texlive/2018/texmf-dist/fonts/type1/public/newtx/rntxbmi.pfb></us
-r/local/texlive/2018/texmf-dist/fonts/type1/public/newtx/rntxbmi7.pfb></usr/loc
-al/texlive/2018/texmf-dist/fonts/type1/public/newtx/rntxmi.pfb></usr/local/texl
-ive/2018/texmf-dist/fonts/type1/public/newtx/rntxmi5.pfb></usr/local/texlive/20
-18/texmf-dist/fonts/type1/public/newtx/rntxmi7.pfb></usr/local/texlive/2018/tex
-mf-dist/fonts/type1/public/txfonts/rtxmi.pfb></usr/local/texlive/2018/texmf-dis
-t/fonts/type1/public/newtx/rtxmi5.pfb></usr/local/texlive/2018/texmf-dist/fonts
-/type1/public/newtx/rtxmi7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/
-public/txfonts/rtxr.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/
-txfonts/t1xtt.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/txfont
-s/txbmia.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/newtx/txbsy
-s.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/newtx/txexs.pfb></
-usr/local/texlive/2018/texmf-dist/fonts/type1/public/txfonts/txmia.pfb></usr/lo
-cal/texlive/2018/texmf-dist/fonts/type1/public/txfonts/txsyc.pfb></usr/local/te
-xlive/2018/texmf-dist/fonts/type1/public/newtx/txsys.pfb></usr/local/texlive/20
-18/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on physres.pdf (40 pages, 5395129 bytes).
+{/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/base/ec.enc}{/usr/local/t
+exlive/2018/texmf-dist/fonts/enc/dvips/newtx/ntx-ec-tlf.enc}{/usr/local/texlive
+/2018/texmf-dist/fonts/enc/dvips/newtx/ntx-ot1-tlf.enc}{/usr/local/texlive/2018
+/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/texlive/2018/texmf-dist/fon
+ts/enc/dvips/tex-gyre/q-ts1.enc}{/usr/local/texlive/2018/texmf-dist/fonts/enc/d
+vips/tex-gyre/q-ec.enc}</usr/local/texlive/2018/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmmi10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmmi7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmr10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmsy10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmsy7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/newtx/ntxsup
+s-Regular.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/newtx/ntxs
+yralt.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/tex-gyre/qhvr.
+pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/tex-gyre/qtmb.pfb></
+usr/local/texlive/2018/texmf-dist/fonts/type1/public/tex-gyre/qtmbi.pfb></usr/l
+ocal/texlive/2018/texmf-dist/fonts/type1/public/tex-gyre/qtmr.pfb></usr/local/t
+exlive/2018/texmf-dist/fonts/type1/public/tex-gyre/qtmri.pfb></usr/local/texliv
+e/2018/texmf-dist/fonts/type1/public/newtx/rntxbmi.pfb></usr/local/texlive/2018
+/texmf-dist/fonts/type1/public/newtx/rntxbmi7.pfb></usr/local/texlive/2018/texm
+f-dist/fonts/type1/public/newtx/rntxmi.pfb></usr/local/texlive/2018/texmf-dist/
+fonts/type1/public/newtx/rntxmi5.pfb></usr/local/texlive/2018/texmf-dist/fonts/
+type1/public/newtx/rntxmi7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/
+public/txfonts/rtxmi.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public
+/newtx/rtxmi5.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/newtx/
+rtxmi7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/txfonts/rtxr.
+pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb></
+usr/local/texlive/2018/texmf-dist/fonts/type1/public/txfonts/txbmia.pfb></usr/l
+ocal/texlive/2018/texmf-dist/fonts/type1/public/newtx/txbsys.pfb></usr/local/te
+xlive/2018/texmf-dist/fonts/type1/public/newtx/txexs.pfb></usr/local/texlive/20
+18/texmf-dist/fonts/type1/public/txfonts/txmia.pfb></usr/local/texlive/2018/tex
+mf-dist/fonts/type1/public/txfonts/txsyc.pfb></usr/local/texlive/2018/texmf-dis
+t/fonts/type1/public/newtx/txsys.pfb></usr/local/texlive/2018/texmf-dist/fonts/
+type1/urw/times/utmri8a.pfb>
+Output written on physres.pdf (41 pages, 19240237 bytes).
 PDF statistics:
- 530 PDF objects out of 1000 (max. 8388607)
- 365 compressed objects within 4 object streams
+ 1700 PDF objects out of 1728 (max. 8388607)
+ 1164 compressed objects within 12 object streams
  0 named destinations out of 1000 (max. 500000)
- 76 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 81 words of extra memory for PDF output out of 10000 (max. 10000000)
 

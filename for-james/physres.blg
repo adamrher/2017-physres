@@ -4,44 +4,44 @@ The top-level auxiliary file: physres.aux
 The style file: agufull08.bst
 Database file #1: bib.bib
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
-You've used 43 entries,
+You've used 44 entries,
             3076 wiz_defined-function locations,
-            1430 strings with 20059 characters,
-and the built_in function-call counts, 41890 in all, are:
-= -- 4671
-> -- 1416
-< -- 25
-+ -- 657
-- -- 394
-* -- 2640
-:= -- 3975
-add.period$ -- 43
-call.type$ -- 43
-change.case$ -- 187
-chr.to.int$ -- 44
-cite$ -- 43
-duplicate$ -- 4631
-empty$ -- 2341
-format.name$ -- 534
-if$ -- 8358
+            1437 strings with 20180 characters,
+and the built_in function-call counts, 42896 in all, are:
+= -- 4804
+> -- 1427
+< -- 26
++ -- 669
+- -- 397
+* -- 2684
+:= -- 4056
+add.period$ -- 44
+call.type$ -- 44
+change.case$ -- 191
+chr.to.int$ -- 45
+cite$ -- 44
+duplicate$ -- 4752
+empty$ -- 2398
+format.name$ -- 538
+if$ -- 8563
 int.to.chr$ -- 2
 int.to.str$ -- 1
-missing$ -- 443
-newline$ -- 136
-num.names$ -- 172
-pop$ -- 1640
+missing$ -- 451
+newline$ -- 139
+num.names$ -- 176
+pop$ -- 1681
 preamble$ -- 1
-purify$ -- 144
+purify$ -- 147
 quote$ -- 0
-skip$ -- 2480
+skip$ -- 2555
 stack$ -- 0
-substring$ -- 1795
-swap$ -- 3974
+substring$ -- 1852
+swap$ -- 4084
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 387
+type$ -- 396
 warning$ -- 0
-while$ -- 211
+while$ -- 216
 width$ -- 0
-write$ -- 501
+write$ -- 512

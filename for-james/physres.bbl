@@ -1,4 +1,4 @@
-\begin{thebibliography}{43}
+\begin{thebibliography}{44}
 \providecommand{\natexlab}[1]{#1}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
@@ -172,6 +172,10 @@ Lauritzen, P.~H., R.~Nair, A.~Herrington, P.~Callaghan, S.~Goldhaber,
   dynamical core in dry-mass vertical coordinates with comprehensive treatment
   of condensates and energy, \textit{J. Adv. Model. Earth Syst.},
   \doi{10.1029/2017MS001257}.
+
+\bibitem[{\textit{Lin}(2004)}]{L2004MWR}
+Lin, S.-J. (2004), A 'vertically {L}agrangian' finite-volume dynamical core for
+  global models, \textit{Mon. Wea. Rev.}, \textit{132}, 2293--2307.
 
 \bibitem[{\textit{Medeiros et~al.}(2016)\textit{Medeiros, Williamson, and
   Olson}}]{MWO2016JAMES}
